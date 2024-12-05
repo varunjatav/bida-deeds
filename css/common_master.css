@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/* CSS Document */
+body{ margin:0; padding: 0; font-size: 12px; color: #000;}
+.clr{ clear: both;}
+ul,li,ul li{ margin: 0; padding: 0; list-style-type: none;}
+.left{ float:left !important;}
+.right{float:right !important;}
+.posrel{ position: relative;}
+.posabsolut{ position: absolute;}
+.posfix{ position: fixed;}
+a{ text-decoration: none; color: #000;}
+p{ margin: 0; padding: 0;}
+span{margin: 0; padding: 0;}
+.text-wrapping {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.rmarg{ margin-right: 10px !important;}
+.lmarg{margin-left: 10px !important;}
+.tmarg{ margin-top: 10px;}
+.bmarg{margin-bottom: 10px;}
+.pad20{ padding: 20px}
+.alc{ text-align: center;}
+.redtxt{ color: #f00 !important;}
+.grntxt{ color: #00711D !important;}
+.ylwtxt{ color: #ff0 !important;}
+.greytxt{ color: #999 !important;}
+.bluetxt{ color: dodgerblue!important;}
+.hide{ display: none !important;}
+input{outline-style: none;}
+.bg-pastel-red{ background: #F02323;}
+.bg-pastel-blue{background: #007bff;}
+.bg-pastel-green{background: #2D9100;}
+.bg-pastel-yellow{background: #FF7F00;}
+.bg-pastel-grey{background: #717171;}
+.bg-pastel-brown{background: #B58C3E;}

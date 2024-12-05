@@ -1,0 +1,15 @@
+{
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "require": {
+        "predis/predis": "^2.2",
+        "spatie/dns": "^2.5",
+        "mailgun/mailgun-php": "^3.6",
+        "symfony/http-client": "^6.3",
+        "nyholm/psr7": "^1.8",
+        "phpoffice/phpspreadsheet": "^1.29"
+    }
+}

@@ -1,0 +1,256 @@
+/* ### sourav ### */
+
+.package-marg p{
+    margin-bottom: 4px;
+}
+.form-field-wrap{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+.info-box {
+    display: flex;
+    gap: 20px;
+}
+
+.info-text{
+    display: flex;
+    gap: 10px;
+    width: 330px;
+}
+
+.info-text h3{
+    margin:0px;
+}
+
+.full-text-box {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.right-border-box {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.right-border-box>.right-text-inner-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    line-height: 23px;
+
+}
+
+.left-text-box {
+    padding: 24px;
+}
+
+.pre-auth-description {
+    background-color: #a0f5a0c2;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+.dropdown {
+    display: inline-block;
+    position: relative;
+    border: 1px solid gray;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.dd-button {
+    display: inline-block;
+    padding: 10px 30px 10px 20px;
+    background-color: #ffffff;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+}
+
+.dd-button:hover {
+    background-color: #eeeeee;
+}
+.dd-input {
+    display: none;
+}
+
+.dd-menu {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin: 2px 0 0 0;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    list-style-type: none;
+    width: 100%;
+}
+
+.dd-input+.dd-menu {
+    display: none;
+}
+
+.dd-input:checked+.dd-menu {
+    display: block;
+}
+
+.dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dd-menu li:hover {
+    background-color: #f6f6f6;
+}
+
+.dd-menu li a {
+    display: block;
+    margin: -10px -20px;
+    padding: 10px 20px;
+}
+.dd-menu li.divider {
+    padding: 0;
+    border-bottom: 1px solid #cccccc;
+}
+.package-info {
+    display: flex;
+    gap: 85px;
+}
+
+.package-info p {
+    font-size: 15px;
+}
+
+.id-bold{
+    font-weight: 600;
+}
+
+.h-discription textarea {
+    width: 78%;
+    resize: none;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 10px;
+    font-size: 16px;
+}
+.file-input {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.upload-btn {
+    display: block;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #9e4784;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+}
+
+.submit-aproval {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.submit-aproval a {
+    background: #9e4784;
+    padding: 10px 50px 10px 50px;
+    color: #fff;
+    border-radius: 10px;
+}
+.right-text-box{
+    width: 30%;
+}
+.info-box-hospital {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.hospital-document {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.hospital-chips-info {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.hospital-chips-info p {
+    background-color: rgb(202, 201, 201);
+    color: #000;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.effect-img{
+    width: 214px;
+    height: 135px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.effect-img:hover{
+    transform: scale(1.2);
+}
+
+.column-head-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-btn a{
+    background: #590275;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.edit-btn a:hover{
+    background: #3c0174;
+}
+
+.pan-hover:hover::before {
+    content: attr(pan_no);
+    position: absolute;
+    background: white;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+    font-size: 15px;
+}

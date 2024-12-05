@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+
+/*VALIDATION CSS START*/
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
+.posrel{
+    position: relative;
+}
+.posfix{
+    position: fixed;
+}
+.posabsolut{
+    position: absolute;
+}
+.act_btn_ovrly{
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 2;
+}
+
+input.frm-error{
+    border-bottom: 2px solid #d20000 !important;
+}
+.frm-er-msg{
+    font-size: 12px;
+    color: #d20000;
+    font-weight: 400;
+}
+input.frm-focus{
+    border-bottom: 2px solid #8C2722;
+}
+
+.text-wrapping {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.toast_wrapper {
+    padding: 15px;
+    left: 1%;
+    bottom: 5%;
+    border-radius: 8px;
+}
+
+.toast-msg {
+    margin: 0px 10px;
+    max-width: 350px;
+}
+
+.toast_cta a {
+    padding: 10px;
+}
+
+.toast-grn {
+    background: rgb(210, 255, 209);
+    color: green;
+}
+
+.toast-red {
+    background: rgb(253, 221, 221);
+    color: red;
+}
+/*VALIDATION CSS END*/
+
+
+
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    min-height: 100vh;
+    width: 100%;
+    /* padding: 0 10px; */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../img/schlogin.jpg), #000;
+    background-position: center;
+    background-size: cover;
+}
+
+.sbody::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../img/studlogin.jpg), #000;
+    background-position: center;
+    background-size: cover;
+}
+
+.wrapper {
+    width: 350px;
+    /* width: calc(100% - 66%); */
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(192, 190, 190, 0.5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(9px);
+    margin-right: 150px;
+    background-color: #e0e0e045;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin-bottom: 0px;
+    color: #292929;
+    text-align: left;
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.input-field {
+    position: relative;
+    border-bottom: 2px solid #ccc;
+    margin: 15px 0;
+}
+
+.input-field label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.15s ease;
+}
+
+.input-field input {
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+}
+
+.input-field input:focus~label,
+.input-field input:valid~label {
+    font-size: 0.8rem;
+    top: 10px;
+    transform: translateY(-120%);
+}
+
+.forget {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 10px 0 10px 0;
+    color: #fff;
+}
+
+#remember {
+    accent-color: #fff;
+}
+
+.forget label {
+    display: flex;
+    align-items: center;
+}
+
+.forget label p {
+    margin-left: 8px;
+}
+
+.wrapper a {
+    color: #6f0b0c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.wrapper a:hover {
+    text-decoration: underline;
+}
+
+.button a {
+    background: #6f0d0c;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    border: 2px solid transparent;
+    transition: 0.3s ease;
+    display: block;
+}
+
+.button a:hover {
+    color: #fff;
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.register {
+    text-align: center;
+    margin-top: 30px;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    body::before {
+        background-size: auto;
+    }
+
+    .wrapper {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .input-field label {
+        font-size: 14px;
+    }
+
+    .input-field input {
+        font-size: 14px;
+        height: 35px;
+    }
+
+    .forget {
+        margin: 15px 0 25px 0;
+    }
+
+    button a {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .register {
+        margin-top: 20px;
+    }
+}
