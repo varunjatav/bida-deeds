@@ -61,7 +61,13 @@ $land_data_url_array = array("landdatalist");
                     <div class="clr"></div>
                 </a>
             </li>
-
+            <li>
+                <a href="userlists" class="<?php if (in_array($urlStr, $rtk_fasli_url_array)) { ?>active<?php } ?>">
+                    <span class="acticn"><img src="img/report.svg" alt="" height="18px" width="18px"></span>
+                    <span class="actnme text-wrapping left">User</span>
+                    <div class="clr"></div>
+                </a>
+            </li>
              <!-- <li>
                 <a href="villagelist" class="<?php if (in_array($urlStr, $village_module_url_array)) { ?>active<?php } ?>">
                     <span class="acticn"><img src="img/report.svg" alt="" height="18px" width="18px"></span>
