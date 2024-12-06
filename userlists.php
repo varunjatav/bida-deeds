@@ -52,7 +52,7 @@ include_once 'languages/' . $lang_file;
                     </div>
                     <div class="master-creation right">
                         <div class="posabsolut act_btn_ovrly"></div>
-                        <a style="cursor:pointer;" class="add_new_data">
+                        <a style="cursor:pointer;" class="add_new_user">
                             <span class="crticn"><img src="img/plus.svg" alt="" width="16px"></span>
                             <span class="crtxt"><?php echo "Add New User"; ?></span>
                             <div class="clr"></div>
@@ -61,7 +61,7 @@ include_once 'languages/' . $lang_file;
                     <div class="clr"></div>
                 </div>
                 <div class="clr"></div>
-                <div class="filter-div">
+                <div class="filter-div"> 
                     <div class="tbl-data right" title="Show Columns">
                         <a style="cursor:pointer;" id="columnFilter">
                             <img src="img/table.svg" height="22px">
@@ -266,7 +266,7 @@ include_once 'languages/' . $lang_file;
 <script src="scripts/jquery-ui.min.js"></script>
 <script src="scripts/jquery.confirm.js"></script>
 <script src="scripts/common.js"></script>
-<script src="scripts/landdatalist.js"></script>
+<script src="scripts/userlists.js"></script>
 <script>
     $(document).ready(function() {
         $('.full-column').on('click', '.paginate', function() {

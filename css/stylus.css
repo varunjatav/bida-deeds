@@ -1877,6 +1877,8 @@ input.checkbox{
 .form-type {
     position: relative;
 }
+
+
 .frm-txtbox {
     width: 96%;
     padding: 1%;
@@ -4694,7 +4696,7 @@ input.indvrmrk{
 }
 .select{
     margin-bottom:0px !important;
-    min-width: 200px;
+    width:100%;
 }
 .vital-unit{
     background: #e3f8ff;

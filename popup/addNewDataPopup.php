@@ -124,7 +124,7 @@
                      <div class="form-field-wrap posrel">
                         <div class="posabsolut frm-lbl-actv">4) खाता नंबर*</div>
                         <div class="form-type dev_req_msg">
-                           <input type="text" class="frm-txtbox dept-frm-input integer fldrequired"name="khata_no"
+                           <input type="text" class="frm-txtbox dept-frm-input integer fldrequired" name="khata_no"
                               maxlength="20" placeholder="खाता नंबर*" autocomplete="off">
                         </div>
                         <div class="frm-er-msg"></div>
