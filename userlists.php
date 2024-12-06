@@ -100,41 +100,41 @@ include_once 'languages/' . $lang_file;
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo $land_data_list['name']; ?></p>
+                                <p><?php echo 'Name'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(2, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo $land_data_list['mahal_name']; ?></p>
+                                <p><?php echo 'User Name'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(3, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo $land_data_list['shreni']; ?></p>
+                                <p><?php echo 'Email'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(4, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo $land_data_list['khata_no']; ?></p>
+                                <p><?php echo 'Mobile Number'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(5, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo $land_data_list['kashtkar_darj_stithi']; ?></p>
+                                <p><?php echo 'Designation'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(6, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo $land_data_list['gata_no']; ?></p>
+                                <p><?php echo 'Address'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(7, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader ">
-                                <p><?php echo $land_data_list['rakba']; ?></p>
+                                <p><?php echo 'Gender'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(8, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
-                            <div class="cellDivHeader ">
+                            <!-- <div class="cellDivHeader ">
                                 <p><?php echo $land_data_list['rakba_hect']; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(9, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
@@ -147,7 +147,7 @@ include_once 'languages/' . $lang_file;
                             <div class="cellDivHeader">
                                 <p><?php echo $land_data_list['action']; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(11, '');"></a>
-                            </div>
+                            </div> -->
                         </div>
                         <div id="main-body" style="display: contents;">
                             <div id="paginate-body" style="display: contents;">
@@ -155,8 +155,8 @@ include_once 'languages/' . $lang_file;
                                 $srno = 0;
                                 while ($row = $sql->fetch()) {
                                     $srno++;
-                                    $village_name = $row['VillageName'] ? $row['VillageName'] : '--';
-                                    $gata_no = $row['GataNo'] ? $row['GataNo'] : '--';
+                                    $name = $row['Name'] ? $row['Name'] : '--';
+                                    $user_name = $row['User_Name'] ? $row['User_Name'] : '--';
                                     $khata_no = $row['KhataNo'] ? $row['KhataNo'] : '--';
                                     $area = $row['Area'] ? $row['Area'] : '--';
                                     $rakba_h = $row['RakbaH'] ? $row['RakbaH'] : '--';
@@ -172,10 +172,10 @@ include_once 'languages/' . $lang_file;
                                             <?php echo $srno; ?>
                                         </div>
                                         <div class="cellDiv col2">
-                                            <?php echo $village_name; ?>
+                                            <?php echo $name; ?>
                                         </div>
                                         <div class="cellDiv col3">
-                                            <?php echo $mahal_ka_name; ?>
+                                            <?php echo $user_name; ?>
                                         </div>
                                         <div class="cellDiv col4">
                                             <?php echo $shreni; ?>

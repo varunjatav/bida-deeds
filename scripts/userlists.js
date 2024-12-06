@@ -111,14 +111,14 @@ $(document).ready(function () {
             });
             return false;
         } else {
-            $('#pfrm').find('.frm_hidden_data').html('');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="add_land_data" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/deedAction" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#add_land_data" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_name" value="Save" autocomplete="off">');
+            $('#userfrm').find('.frm_hidden_data').html('');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="add_user_data" autocomplete="off">');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/userDataAction" autocomplete="off">');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#add_user_data" autocomplete="off">');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_name" value="Save" autocomplete="off">');
             $('#frm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_action" value="reload" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_redirect" value="" autocomplete="off">');
-            $('#pfrm').submit();
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_redirect" value="" autocomplete="off">');
+            $('#userfrm').submit();
         }
     });
 

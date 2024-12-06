@@ -87,8 +87,8 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel" >
                                 <div class="posabsolut frm-lbl-actv">1) Name*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="text" class="frm-txtbox integer fldrequired" name="name"
-                                     maxlength="100"   placeholder="Your Name*" autocomplete="off" >
+                                    <input type="text" class="frm-txtbox fldrequired" name="name"
+                                     maxlength="100"  placeholder="Your Name*" autocomplete="off" >
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -96,8 +96,8 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">2) User Name*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="text" class="frm-txtbox  integer fldrequired" name="user_name"
-                                      maxlength="100"  placeholder="Your User Name*" autocomplete="off">
+                                <input type="text" class="frm-txtbox fldrequired" name="user_name"
+                                maxlength="100" placeholder="Your User Name*" autocomplete="off">
 
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -106,7 +106,7 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">3) Email*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="email" class="frm-txtbox integer fldrequired" name="email"
+                                    <input type="email" class="frm-txtbox fldrequired" name="email"
                                         maxlength="20" placeholder="Your Email*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -134,7 +134,7 @@ include_once '../languages/' . $lang_file;
                         <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">6) Mobile No*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="text" class="frm-txtbox dept-frm-input integer fldrequired" name="mobile_no"
+                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no"
                                         maxlength="10" placeholder="Your Mobile No*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -143,7 +143,7 @@ include_once '../languages/' . $lang_file;
                         <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">7) Designation</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="email" class="frm-txtbox dept-frm-input integer fldrequired" name="designation"
+                                    <input type="text" class="frm-txtbox dept-frm-input  fldrequired" name="designation"
                                         maxlength="20" placeholder="Your Designation*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -161,7 +161,7 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel left">
                                 <div class="posabsolut frm-lbl-actv">9) Gender*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <select name="kashtkar" class="form-select fldrequired" id="">
+                                    <select name="gender" class="form-select fldrequired" id="">
                                         <option value="">Choose Your Gender*</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
