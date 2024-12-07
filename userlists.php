@@ -46,7 +46,7 @@ include_once 'languages/' . $lang_file;
                             <img src="img/back.svg" alt="" width="18px">
                         </a>
                         <div class="col-pagename left">
-                            <?php echo $master_data_list['title']; ?>(<tCount><?php echo $total_count; ?></tCount>)
+                            Total User(<tCount><?php echo $total_count; ?></tCount>)
                         </div>
                         <div class="clr"></div>
                     </div>
@@ -54,7 +54,7 @@ include_once 'languages/' . $lang_file;
                         <div class="posabsolut act_btn_ovrly"></div>
                         <a style="cursor:pointer;" class="add_new_user">
                             <span class="crticn"><img src="img/plus.svg" alt="" width="16px"></span>
-                            <span class="crtxt"><?php echo 'Add New User'; ?></span>
+                            <span class="crtxt">Add New User</span>
                             <div class="clr"></div>
                         </a>
                     </div>
@@ -95,43 +95,43 @@ include_once 'languages/' . $lang_file;
                     <div class="containerDiv">
                         <div class="rowDivHeader">
                             <div class="cellDivHeader">
-                                <p><?php echo 'Sr No.'; ?></p>
+                                <p>Sr No.</p>
                                 <a style="cursor:pointer;" onclick="sort_name(1, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Name'; ?></p>
+                                <p>Name</p>
                                 <a style="cursor:pointer;" onclick="sort_name(2, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'User Name'; ?></p>
+                                <p>User Name</p>
                                 <a style="cursor:pointer;" onclick="sort_name(3, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Email'; ?></p>
-                                <a style="cursor:pointer;" onclick="sort_name(4, 'numeric');"><img
+                                <p>Email</p>
+                                <a style="cursor:pointer;" onclick="sort_name(4, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Designation'; ?></p>
-                                <a style="cursor:pointer;" onclick="sort_name(5, 'numeric');"><img
+                                <p>Designation</p>
+                                <a style="cursor:pointer;" onclick="sort_name(5, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Address'; ?></p>
+                                <p>Address</p>
                                 <a style="cursor:pointer;" onclick="sort_name(6, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Gender'; ?></p>
+                                <p>Gender</p>
                                 <a style="cursor:pointer;" onclick="sort_name(7, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader ">
-                                <p><?php echo 'Mobile No'; ?></p>
-                                <a style="cursor:pointer;" onclick="sort_name(8, 'numeric');"><img
+                                <p>Mobile No</p>
+                                <a style="cursor:pointer;" onclick="sort_name(8, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                            

@@ -400,7 +400,7 @@ $(document).ready(function () {
     $("#popup").on('submit', '#ffrm', function (e) {
         var postData = new FormData(this);
         postData.append('action', 'filter_applied');
-        var formURL = "ajax/filterLandData.php";
+        var formURL = "ajax/filterUserData.php";
         setFilterHTML();
         $.ajax({
             url: formURL,

@@ -28,6 +28,7 @@ $rtk_fasli_url_array = array("rtkfaslidatalist");
 $misc_url_array = array('syndata', 'ebasta', 'reports', 'misdashboard', 'misreport', 'feedbacks', 'eoffice', 'lekhpalreport', 'lekhpalreportview', 'lekhpalappreport', 'lekhpalappreportview', 'sahmatilist');
 $village_module_url_array = array("villagelist","villagelistdatadetails");
 $land_data_url_array = array("landdatalist");
+$userlist_url_array = array("userlists");
 ?>
 
 <div class="sidebar left">
@@ -62,7 +63,7 @@ $land_data_url_array = array("landdatalist");
                 </a>
             </li>
             <li>
-                <a href="userlists" class="<?php if (in_array($urlStr, $rtk_fasli_url_array)) { ?>active<?php } ?>">
+                <a href="userlists" class="<?php if (in_array($urlStr, $userlist_url_array)) { ?>active<?php } ?>">
                     <span class="acticn"><img src="img/report.svg" alt="" height="18px" width="18px"></span>
                     <span class="actnme text-wrapping left">User</span>
                     <div class="clr"></div>

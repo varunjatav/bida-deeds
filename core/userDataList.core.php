@@ -29,37 +29,36 @@ if ($action == 'filter_applied') {
     // $explode_data = explode('@', $decrypt_data);
     // $mahal_name = $explode_data[0];
 
-    $name = trim($_REQUEST['Name']) > '%';
-    $user_name = trim($_REQUEST['User_Name']) > '%';
-    $email = trim($_REQUEST['Email']) > '%';
-    $designation = trim($_REQUEST['Designation']) > '%';
-    $address = trim($_REQUEST['Address']) > '%';
-    $gender = trim($_REQUEST['Gender']) > '%';
-    $mobile_no = trim($_REQUEST['Mobie_NO']) > '%';
+    $name = trim($_REQUEST['name']) . '%';
+    $user_name = trim($_REQUEST['user_name']) . '%';
+    $email = trim($_REQUEST['email']) . '%';
+    $designation = trim($_REQUEST['designation']) . '%';
+    $address = trim($_REQUEST['address']) . '%';
+    $gender = trim($_REQUEST['gender']);
+    $mobile_no = trim($_REQUEST['mobie_no']) . '%';
 }
 
-$village_code_list = implode("','", $village_names_code_array);
 
-$sql = "SELECT Name,User_Name,Email,Mobile_NO,Designation,Address,Gender FROM `user_info` WHERE 1";
-if ($_REQUEST['Name']) {
-    $sql .= " AND Name = ?";
+$sql = "SELECT Name, User_Name, Email, Mobile_NO, Designation, Address, Gender FROM user_info WHERE 1 = 1";
+if ($_REQUEST['name']) {
+    $sql .= " AND Name Like ?";
 }
-if ($_REQUEST['User_Name']) {
+if ($_REQUEST['user_name']) {
     $sql .= " AND User_Name Like ?";
 }
-if ($_REQUEST['Email']) {
-    $sql .= " AND Email = ?";
+if ($_REQUEST['email']) {
+    $sql .= " AND Email Like ?";
 }
-if ($_REQUEST['Mobile_NO']) {
+if ($_REQUEST['mobile_no']) {
     $sql .= " AND Mobile_NO Like ?";
 }
-if ($_REQUEST['Designation']) {
+if ($_REQUEST['designation']) {
     $sql .= " AND Designation Like ?";
 }
-if ($_REQUEST['Address']) {
-    $sql .= " AND Address = ?";
+if ($_REQUEST['address']) {
+    $sql .= " AND Address Like ?";
 }
-if ($_REQUEST['Gender']) {
+if ($_REQUEST['gender']) {
     $sql .= " AND Gender = ?";
 }
 
@@ -70,27 +69,29 @@ if ($exportlist != 'export') {
 }
 $i = 1;
 $sql = $db->prepare($sql);
-if ($_REQUEST['id']) {
-    $sql->bindParam($i++, $msg_id);
+// if ($_REQUEST['ID']) {
+//     $sql ->bindParam($i++,$msg_id);
+// }
+if ($_REQUEST['name']) {
+    $sql ->bindParam($i++,$name);
 }
-if ($_REQUEST['khata_no']) {
-    $sql->bindParam($i++, $khata_no);
+if ($_REQUEST['user_name']) {
+    $sql ->bindParam($i++,$user_name);
 }
-if ($_REQUEST['village_code']) {
-    $sql->bindParam($i++, $village_code);
+if ($_REQUEST['email']) {
+    $sql ->bindParam($i++,$email);
 }
-if ($_REQUEST['village_gata']) {
-    $sql->bindParam($i++, $gata_no);
+if ($_REQUEST['mobile_no']) {
+    $sql ->bindParam($i++,$mobile_no);
 }
-if ($_REQUEST['shreni']) {
-    $sql->bindParam($i++, $shreni);
+if ($_REQUEST['designation']) {
+    $sql ->bindParam($i++,$designation);
 }
-if ($_REQUEST['board_approved']) {
-    $sql->bindParam($i++, $board_approved);
+if ($_REQUEST['address']) {
+    $sql ->bindParam($i++,$address);
 }
-if ($_REQUEST['mahal_name'] && $_REQUEST['select_village_with_gata']) {
-    $sql->bindParam($i++, $mahal_name);
-    $sql->bindParam($i++, $select_village_with_gata);
+if ($_REQUEST['gender']) {
+    $sql ->bindParam($i++,$gender);
 }
 $sql->execute();
 $rs1 = $db->query('SELECT FOUND_ROWS()');

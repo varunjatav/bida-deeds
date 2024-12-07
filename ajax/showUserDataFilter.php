@@ -25,51 +25,36 @@ include_once '../languages/' . $lang_file;
                 <form id="ffrm">
                     <div class="filter-box">
                         <div class="filter-tabber left">
-                            <a style="cursor:pointer;" id="1" class="ftab active"><?php echo 'Name'; ?></a>
-                            <a style="cursor:pointer;" id="2" class="ftab"><?php echo 'User Name'; ?></a>
-                            <a style="cursor:pointer;" id="3" class="ftab"><?php echo 'Email'; ?></a>
-                            <a style="cursor:pointer;" id="4" class="ftab"><?php echo 'Mobile No'; ?></a>
-                            <a style="cursor:pointer;" id="5" class="ftab"><?php echo 'Designation'; ?></a>
-                            <a style="cursor:pointer;" id="6" class="ftab"><?php echo 'Address'; ?></a>
-                            <a style="cursor:pointer;" id="7" class="ftab"><?php echo 'Gender'; ?></a>
+                            <a style="cursor:pointer;" id="1" class="ftab active">Name</a>
+                            <a style="cursor:pointer;" id="2" class="ftab">User Name</a>
+                            <a style="cursor:pointer;" id="3" class="ftab">Email</a>
+                            <a style="cursor:pointer;" id="4" class="ftab">Gender</a>
+                            <a style="cursor:pointer;" id="5" class="ftab">Designation</a>
+                            <a style="cursor:pointer;" id="6" class="ftab">Address</a>
+                            <a style="cursor:pointer;" id="7" class="ftab">Mobile No</a>
                         </div>
 
                         <div class="left filter-taboptions">
                             <div class="tab1" id="stab_1" style="border: none;">
-                                <div class="frm-lbl-actv"><?php echo 'Name'; ?>:</div>
-                                <input type="text" name="Name" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="<?php echo 'Name'; ?>" autocomplete="off">
+                                <div class="frm-lbl-actv">Name :</div>
+                                <input type="text" name="name" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="Name" autocomplete="off">
                             </div>
 
                             <div class="tab1" id="stab_2" style="display:none; border: none;">
-                                <div class="frm-lbl-actv"><?php echo 'User Name'; ?>:</div>
-                                <input type="text" name="User_Name" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="<?php echo 'User Name'; ?>" autocomplete="off">
+                                <div class="frm-lbl-actv">User Name :</div>
+                                <input type="text" name="user_name" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="User Name" autocomplete="off">
                             </div>
 
                             <div class="tab1" id="stab_3" style="display:none; border: none;">
-                                <div class="frm-lbl-actv"><?php echo 'Email'; ?>:</div>
-                                <input type="text" name="Email" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="<?php echo 'Email'; ?>" autocomplete="off">
+                                <div class="frm-lbl-actv">Email :</div>
+                                <input type="text" name="email" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="Email" autocomplete="off">
                             </div>
 
                             <div class="tab1" id="stab_4" style="display:none; border: none;">
-                                <div class="frm-lbl-actv"><?php echo 'Mobile No'; ?>:</div>
-                                <input type="text" name="MobileNO" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="<?php echo 'Mobile No'; ?>" autocomplete="off">
-                            </div>
-
-                            <div class="tab1" id="stab_5" style="display:none; border: none;">
-                                <div class="frm-lbl-actv"><?php echo 'Designation'; ?>:</div>
-                                <input type="text" name="Designation" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="<?php echo 'Designation'; ?>" autocomplete="off">
-                            </div>
-
-                            <div class="tab1" id="stab_6" style="display:none; border: none;">
-                                <div class="frm-lbl-actv"><?php echo 'Address'; ?>:</div>
-                                <input type="text" name="Address" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="<?php echo 'Address'; ?>" autocomplete="off">
-                            </div>
-
-                            <div class="tab1" id="stab_7" style="display:none; border: none;">
                                 <div class="filter-choice">
-                                    <div class="frm-lbl-actv" style="margin-bottom: 5px;"><?php echo "Select Gender"; ?>:</div>
+                                    <div class="frm-lbl-actv" style="margin-bottom: 5px;">Select Gender:</div>
                                     <div class="select dev_req_msg left rmarg">
-                                        <select name="Gender" id="Gender" class="apply_filter_change">
+                                        <select name="gender" id="Gender" class="apply_filter_change">
                                             <option value=""><?php echo "Select Gender"; ?></option>
                                             <option value="male"><?php echo "Male"; ?></option>
                                             <option value="female"><?php echo "Female"; ?></option>
@@ -80,7 +65,25 @@ include_once '../languages/' . $lang_file;
                                 </div>
                             </div>
 
+                           
+
                             <div class="tab1" id="stab_5" style="display:none; border: none;">
+                                <div class="frm-lbl-actv">Designation :</div>
+                                <input type="text" name="designation" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="Designation" autocomplete="off">
+                            </div>
+
+                            <div class="tab1" id="stab_6" style="display:none; border: none;">
+                                <div class="frm-lbl-actv">Address :</div>
+                                <input type="text" name="address" class="frm-txtbox dept-frm-input apply_filter_keyup" maxlenth="20" placeholder="Address" autocomplete="off">
+                            </div>
+                            <div class="tab1" id="stab_7" style="display:none; border: none;">
+                                <div class="frm-lbl-actv">Mobile No :</div>
+                                <input type="text" class="frm-txtbox dept-frm-input apply_filter_keyup" name="mobile_no"
+                                maxlength="10" placeholder="Your Mobile No*" autocomplete="off">
+                            </div>
+                           
+
+                            <!-- <div class="tab1" id="stab_5" style="display:none; border: none;">
                                 <div class="frm-lbl-actv"><?php echo $rtk_data_list['khata_1359_anusar']; ?>:</div>
                                 <input type="text" name="khata_1359_anusar" class="frm-txtbox dept-frm-input apply_filter_keyup integer" maxlenth="20" placeholder="<?php echo $rtk_data_list['khata_1359_anusar']; ?>" autocomplete="off">
                             </div>
@@ -90,7 +93,7 @@ include_once '../languages/' . $lang_file;
                                 <input type="text" name="gata_1359_anusar" class="frm-txtbox dept-frm-input apply_filter_keyup integer" maxlenth="20" placeholder="<?php echo $rtk_data_list['gata_1359_anusar']; ?>" autocomplete="off">
                             </div>
                         </div>
-                        <div class="clr"></div>
+                        <div class="clr"></div> -->
                     </div>
                     <input type="hidden" id="nav" name="status" value="<?php echo $_REQUEST['status']; ?>" autocomplete="off">
                     <input type="hidden" id="sorting_database" class="sorting_database" name="sorting_database" value="" autocomplete="off">
