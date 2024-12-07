@@ -96,7 +96,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
         rollback($db, $e->getCode(), $log_error_msg);
     }
-} else if (isset($_POST['action']) && $_POST['action'] == 'change_language') {
+} elseif (isset($_POST['action']) && $_POST['action'] == 'change_language') {
     try {
         // Begin Transaction
         $db->beginTransaction();
@@ -231,7 +231,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
         rollback($db, $e->getCode(), $log_error_msg);
     }
-} else if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
+} elseif (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
 
     try {
         // Begin Transaction

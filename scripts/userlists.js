@@ -336,7 +336,7 @@ $(document).ready(function () {
             curr.addClass('active');
             var dataString = '';
             $.ajax({
-                url: "ajax/showFasliLandDataFilter.php",
+                url: "ajax/showUserDataFilter.php",
                 type: "POST",
                 data: dataString,
                 cache: false,

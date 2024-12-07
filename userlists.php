@@ -5,7 +5,7 @@ include_once 'includes/get_time_zone.php';
 include_once 'dbcon/db_connect.php';
 include_once 'functions/common.function.php';
 include_once 'core/permission.core.php';
-include_once 'core/landDataList.core.php';
+include_once 'core/userDataList.core.php';
 include_once 'languages/' . $lang_file;
 ?>
 <!doctype html>
@@ -46,7 +46,7 @@ include_once 'languages/' . $lang_file;
                             <img src="img/back.svg" alt="" width="18px">
                         </a>
                         <div class="col-pagename left">
-                            <?php echo "Total User"; ?>(<tCount><?php echo 2; ?></tCount>)
+                            <?php echo $master_data_list['title']; ?>(<tCount><?php echo $total_count; ?></tCount>)
                         </div>
                         <div class="clr"></div>
                     </div>
@@ -54,14 +54,14 @@ include_once 'languages/' . $lang_file;
                         <div class="posabsolut act_btn_ovrly"></div>
                         <a style="cursor:pointer;" class="add_new_user">
                             <span class="crticn"><img src="img/plus.svg" alt="" width="16px"></span>
-                            <span class="crtxt"><?php echo "Add New User"; ?></span>
+                            <span class="crtxt"><?php echo 'Add New User'; ?></span>
                             <div class="clr"></div>
                         </a>
                     </div>
                     <div class="clr"></div>
                 </div>
                 <div class="clr"></div>
-                <div class="filter-div"> 
+                <div class="filter-div">
                     <div class="tbl-data right" title="Show Columns">
                         <a style="cursor:pointer;" id="columnFilter">
                             <img src="img/table.svg" height="22px">
@@ -95,7 +95,7 @@ include_once 'languages/' . $lang_file;
                     <div class="containerDiv">
                         <div class="rowDivHeader">
                             <div class="cellDivHeader">
-                                <p><?php echo $land_data_list['sr']; ?></p>
+                                <p><?php echo 'Sr No.'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(1, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
@@ -115,39 +115,30 @@ include_once 'languages/' . $lang_file;
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Mobile Number'; ?></p>
+                                <p><?php echo 'Designation'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(5, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Designation'; ?></p>
+                                <p><?php echo 'Address'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(6, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader">
-                                <p><?php echo 'Address'; ?></p>
+                                <p><?php echo 'Gender'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(7, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
                             <div class="cellDivHeader ">
-                                <p><?php echo 'Gender'; ?></p>
+                                <p><?php echo 'Mobile No'; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(8, 'numeric');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
-                            <!-- <div class="cellDivHeader ">
-                                <p><?php echo $land_data_list['rakba_hect']; ?></p>
-                                <a style="cursor:pointer;" onclick="sort_name(9, 'numeric');"><img
-                                        src="img/sorting.svg" alt="" height="24px"></a>
-                            </div>
-                            <div class="cellDivHeader ">
-                                <p><?php echo $land_data_list['vivran']; ?></p>
-                                <a style="cursor:pointer;" onclick="sort_name(10, '');"><img
-                                        src="img/sorting.svg" alt="" height="24px"></a>
-                            </div>
+                           
                             <div class="cellDivHeader">
                                 <p><?php echo $land_data_list['action']; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(11, '');"></a>
-                            </div> -->
+                            </div>
                         </div>
                         <div id="main-body" style="display: contents;">
                             <div id="paginate-body" style="display: contents;">
@@ -156,16 +147,12 @@ include_once 'languages/' . $lang_file;
                                 while ($row = $sql->fetch()) {
                                     $srno++;
                                     $name = $row['Name'] ? $row['Name'] : '--';
-                                    $user_name = $row['User_Name'] ? $row['User_Name'] : '--';
-                                    $khata_no = $row['KhataNo'] ? $row['KhataNo'] : '--';
-                                    $area = $row['Area'] ? $row['Area'] : '--';
-                                    $rakba_h = $row['RakbaH'] ? $row['RakbaH'] : '--';
-                                    $shreni = $row['Shreni'] ? $row['Shreni'] : '--';
-                                    $mahal_ka_name = $row['MahalKaName'] ? $row['MahalKaName'] : '--';
-                                    $village_code = $row['VillageCode'] ? $row['VillageCode'] : '--';
-                                    $kashtkar_darj_stithi = $row['KashtkarDarjStithi'] ? $row['KashtkarDarjStithi'] : '--';
-                                    $unique_id = $row['UniqueID'] ? $row['UniqueID'] : '--';
-                                    $vivran = $row['Vivran'] ? $row['Vivran'] : '--';
+                                    $username = $row['User_Name'] ? $row['User_Name'] : '--';
+                                    $email = $row['Email'] ? $row['Email'] : '--';
+                                    $designation = $row['Designation'] ? $row['Designation'] : '--';
+                                    $address = $row['Address'] ? $row['Address'] : '--';
+                                    $gender = $row['Gender'] ? $row['Gender'] : '--';
+                                    $mobile_no = $row['Mobile_NO'] ? $row['Mobile_NO'] : '--';
                                 ?>
                                     <div class="rowDiv <?php echo $validate_color; ?>">
                                         <div class="cellDiv col1" name="<?php echo $srno; ?>">
@@ -175,29 +162,24 @@ include_once 'languages/' . $lang_file;
                                             <?php echo $name; ?>
                                         </div>
                                         <div class="cellDiv col3">
-                                            <?php echo $user_name; ?>
+                                            <?php echo $username; ?>
                                         </div>
                                         <div class="cellDiv col4">
-                                            <?php echo $shreni; ?>
+                                            <?php echo $email; ?>
                                         </div>
-                                        <div class="cellDiv col5" name="<?php echo $khata_no; ?>">
-                                            <?php echo $khata_no; ?>
+                                        <div class="cellDiv col5">
+                                            <?php echo $designation; ?>
                                         </div>
                                         <div class="cellDiv col6">
-                                            <?php echo $kashtkar_darj_stithi; ?>
+                                            <?php echo $address; ?>
                                         </div>
                                         <div class="cellDiv col7">
-                                            <?php echo $gata_no; ?>
+                                            <?php echo $gender; ?>
                                         </div>
-                                        <div class="cellDiv col8" name="<?php echo $row['Area']; ?>">
-                                            <?php echo $area; ?>
+                                        <div class="cellDiv col8">
+                                            <?php echo $mobile_no; ?>
                                         </div>
-                                        <div class="cellDiv col9" name="<?php echo $row['RakbaH']; ?>">
-                                            <?php echo $rakba_h; ?>
-                                        </div>
-                                        <div class="cellDiv col10">
-                                            <?php echo $vivran; ?>
-                                        </div>
+                                      
                                         <div class="cellDiv cellDivacts col10">
                                             <div class="posrel tblactns">
                                                 <a style="cursor:pointer;" class="showAction">

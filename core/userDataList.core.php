@@ -19,46 +19,51 @@ $msg_id = decryptIt($_REQUEST['id']);
 $srno = ($page - 1) * $limit;
 
 if ($action == 'filter_applied') {
-    $khata_no = trim($_REQUEST['khata_no']) . '%';
-    $village_code = trim($_REQUEST['village_code']);
-    $gata_no = trim($_REQUEST['village_gata']) . '%';
-    $shreni = trim($_REQUEST['shreni']) . '%';
-    $board_approved = trim($_REQUEST['board_approved']);
-    $select_village_with_gata = decryptIt(myUrlEncode(trim($_REQUEST['select_village_with_gata'])));
-    $decrypt_data = $_POST['mahal_name'] ? trim($_POST['mahal_name']) : '';
-    $explode_data = explode('@', $decrypt_data);
-    $mahal_name = $explode_data[0];
+    // $khata_no = trim($_REQUEST['Name']) . '%';
+    // $village_code = trim($_REQUEST['village_code']);
+    // $gata_no = trim($_REQUEST['village_gata']) . '%';
+    // $shreni = trim($_REQUEST['shreni']) . '%';
+    // $board_approved = trim($_REQUEST['board_approved']);
+    // $select_village_with_gata = decryptIt(myUrlEncode(trim($_REQUEST['select_village_with_gata'])));
+    // $decrypt_data = $_POST['mahal_name'] ? trim($_POST['mahal_name']) : '';
+    // $explode_data = explode('@', $decrypt_data);
+    // $mahal_name = $explode_data[0];
+
+    $name = trim($_REQUEST['Name']) > '%';
+    $user_name = trim($_REQUEST['User_Name']) > '%';
+    $email = trim($_REQUEST['Email']) > '%';
+    $designation = trim($_REQUEST['Designation']) > '%';
+    $address = trim($_REQUEST['Address']) > '%';
+    $gender = trim($_REQUEST['Gender']) > '%';
+    $mobile_no = trim($_REQUEST['Mobie_NO']) > '%';
 }
 
 $village_code_list = implode("','", $village_names_code_array);
 
-$sql = "SELECT SQL_CALC_FOUND_ROWS T1.ID, T1.UniqueID, T1.MahalKaName, T1.VillageCode, T1.Shreni, T1.KhataNo, T1.KashtkarDarjStithi, T1.GataNo, T1.Area, T1.DateCreated, T1.Vivran, T1.RakbaH, T2.VillageName
-        FROM lm_land_data T1
-        LEFT JOIN lm_village T2 ON T2.VillageCode = T1.VillageCode
-        WHERE T2.VillageCode NOT IN ('$village_code_list')";
-if ($_REQUEST['id']) {
-    $sql .= " AND T1.ID = ?";
+$sql = "SELECT Name,User_Name,Email,Mobile_NO,Designation,Address,Gender FROM `user_info` WHERE 1";
+if ($_REQUEST['Name']) {
+    $sql .= " AND Name = ?";
 }
-if ($_REQUEST['khata_no']) {
-    $sql .= " AND T1.KhataNo Like ?";
+if ($_REQUEST['User_Name']) {
+    $sql .= " AND User_Name Like ?";
 }
-if ($_REQUEST['village_code']) {
-    $sql .= " AND T1.VillageCode = ?";
+if ($_REQUEST['Email']) {
+    $sql .= " AND Email = ?";
 }
-if ($_REQUEST['village_gata']) {
-    $sql .= " AND T1.GataNo Like ?";
+if ($_REQUEST['Mobile_NO']) {
+    $sql .= " AND Mobile_NO Like ?";
 }
-if ($_REQUEST['shreni']) {
-    $sql .= " AND T1.Shreni Like ?";
+if ($_REQUEST['Designation']) {
+    $sql .= " AND Designation Like ?";
 }
-if ($_REQUEST['board_approved']) {
-    $sql .= " AND T1.KashtkarDarjStithi = ?";
+if ($_REQUEST['Address']) {
+    $sql .= " AND Address = ?";
 }
-if ($_REQUEST['mahal_name'] && $_REQUEST['select_village_with_gata']) {
-    $sql .= " AND T1.MahalKaName = ?";
-    $sql .= " AND T1.VillageCode = ?";
+if ($_REQUEST['Gender']) {
+    $sql .= " AND Gender = ?";
 }
-$sql .= " ORDER BY T1.ID DESC";
+
+$sql .= " ORDER BY Name DESC";
 
 if ($exportlist != 'export') {
     $sql .= " LIMIT " . $start . ", " . $limit;
