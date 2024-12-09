@@ -10,8 +10,13 @@ include_once "../functions/insert_queue.function.php";
 include_once "../functions/notification.function.php";
 include_once "../vendor/autoload.php";
 
-ini_set('display_errors', 1);
+// ini_set('display_errors', 1);
+
+// error_reporting(E_ALL);
+ini_set("display_errors", 1);
+ini_set('display_startup_errors',1);
 error_reporting(E_ALL);
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 $user_id = $_SESSION['UserID'];
@@ -253,6 +258,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $gender = __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
         $password = __fi(validateMaxLen($_POST['password'], 'Password', 20));
         $c_password = __fi(validateMaxLen($_POST['cpassword'], 'Confirm Password', 20));
+
+        echo $name;
         // $gata_no = $_POST['gata_no'];
 
         // if (count_($gata_no) == 0) {
@@ -281,46 +288,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
 
         $data_id = $db->lastInsertId();
 
-        //$name_array = array();
-        // foreach ($gata_no as $key => $unival) {
-
-        //     $uid = generate_unique_id($db, 'lm_land_data', 'UID', 1, 6); // Generate unique code per iteration
-        //     $rakba_value = isset($rakba[$key]) ? $rakba[$key] : 0; // Safeguard for rakba
-        //     $vivranString = isset($vivran[$key]) ? $vivran[$key] : '--';
-        //     $rakba_hect = round($rakba_value / 2.47, 3);
-
-        //     $insrt = $db->prepare("INSERT INTO lm_land_data (UniqueID, UID, VillageCode, MahalKaName, Shreni, KhataNo, KashtkarDarjStithi, GataNo, Area, Vivran, DateCreated, CreatedBy, RakbaH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-        //     // Bind parameters
-        //     $insrt->bindParam(1, $name);
-        //     $insrt->bindParam(2, $uid);
-        //     $insrt->bindParam(3, $village_code);
-        //     $insrt->bindParam(4, $email);
-        //     $insrt->bindParam(5, $shreni);
-        //     $insrt->bindParam(6, $khata_no);
-        //     $insrt->bindParam(7, $kastkar_status);
-        //     $insrt->bindParam(8, $unival);
-        //     $insrt->bindParam(9, $rakba_value);
-        //     $insrt->bindParam(10, $vivranString);
-        //     $insrt->bindParam(11, $timestamp);
-        //     $insrt->bindParam(12, $created_by);
-        //     $insrt->bindParam(13, $rakba_hect);
-        //     $insrt->execute();
-        // }
-
-        // foreach ($gata_no as $key => $gataval) {
-        //     $insrt2 = $db->prepare("INSERT INTO  lm_base_land_data_details (BaseLandID, GataNo, Area, Vivran) VALUES (?, ?, ?, ?)");
-
-        //     $rakba_value = isset($rakba[$key]) ? $rakba[$key] : 0; // Safeguard for rakba
-        //     $vivranString = isset($vivran[$key]) ? $vivran[$key] : '--';
-
-        //     $insrt2->bindParam(1, $data_id);
-        //     $insrt2->bindParam(2, $gataval);
-        //     $insrt2->bindParam(3, $rakba_value);
-        //     $insrt2->bindParam(4, $vivranString);
-        //     $insrt2->execute();
-        // }
-        // Commit the changes to the database
+ 
         $db_response_data = array();
         commit($db, 'User data added successfully', $db_response_data);
     } catch (\Exception $e) {
@@ -332,78 +300,102 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
         rollback($db, $e->getCode(), $log_error_msg);
     }
-} if (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
+} else if (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
+    print_r ($_POST);
+    exit();
+
     try {
         // Begin Transaction
         $db->beginTransaction();
 
-        // Validate and sanitize user input
+        // Check user input for valid data
         foreach ($_POST as $postValue) {
-            check_user_input($postValue); // Assuming this function sanitizes inputs
+            check_user_input($postValue);
         }
-
-        // Decrypt and validate the input data
         $id = __fi(validateInteger(decryptIt($_POST['id']), 'ID'));
-        $name = __fi(validateInteger(decryptIt(myUrlEncode($_POST['name'])), 'Name'));
-        $user_name = __fi(validateMaxLen(validateInteger(decryptIt(myUrlEncode($_POST['user_name'])), 'User_Name'), 8));
-        $email = __fi(validateMaxLen($_POST['email'], 'Email', 25));
-        $password = __fi(validateMaxLen($_POST['password'], 'Password', 45));
-        $confirm_password = __fi(validateMaxLen($_POST['confirm_password'], 'Confirm Password', 45));
+        $name = __fi(validateMaxLen($_POST['name'], 'Name', 100));
+        $user_name = __fi(validateMaxLen($_POST['user_name'], 'User_Name', 100));
+        $email = __fi(validateMaxLen($_POST['email'], 'Email', 100));
+        $password = __fi(validateMaxLen($_POST['password'], 'Password', 100));
+        $c_password = __fi(validateMaxLen($_POST['confirm_password'], 'Confirm_Password', 100));
         $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile_NO', 10));
-        $designation = isset($_POST['designation']) ? __fi(validateMaxLen($_POST['designation'], 255)) : '';
-        $address = isset($_POST['address']) ? __fi($_POST['address']) : '';
-        $gender = __fi($_POST['gender']);
+        $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 100));
+        $address =  __fi(validateMaxLen($_POST['address'], 'Address', 100));
+        $gender =  __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
+        $timestamp = time();
+        $created_by = $_SESSION['UserID'];
 
-        // Check if the user exists based on the ID (UniqueID)
-        $user_query = $db->prepare("SELECT * FROM user_info WHERE UniqueID = ?");
-        $user_query->bindParam(1, $id);
+        $user_query = $db->prepare("SELECT ID , NAME, USER_NAME, EMAIL, PASSWORD, CONFIRM_PASSWORD, MOBILE_NO,DESIGNATION, ADDRESS,GENDER FROM user_info WHERE 1 = 1");
+        $user_query->bindParam(1, $unique_code);
         $user_query->execute();
+        $user_query->setFetchMode(PDO::FETCH_ASSOC);
         $userInfo = $user_query->fetch();
 
-        if (!$userInfo) {
-            throw new Exception("User not found.");
-        }
-
-        // Update user data in the database
-        $update1 = $db->prepare("UPDATE user_info SET 
-            Name = ?, 
-            User_Name = ?, 
-            Email = ?, 
-            Password = ?, 
-            Confirm_Password = ?, 
-            Address = ?, 
-            Mobile_NO = ?, 
-            Gender = ?, 
-            Designation = ? 
-            WHERE ID = ?");
-        
-        // Bind the parameters correctly
+        $update1 = $db->prepare("UPDATE user_info SET Name = ?, User_Name = ?, Email = ?, PASSWORD = ?, CONFIRM_PASSWORD = ? , MOBILE_NO =?,DESIGNATION = ?,ADDRESS = ?, GENDER = ? WHERE ID = ?");
         $update1->bindParam(1, $name);
         $update1->bindParam(2, $user_name);
         $update1->bindParam(3, $email);
         $update1->bindParam(4, $password);
-        $update1->bindParam(5, $confirm_password);
-        $update1->bindParam(6, $address);
-        $update1->bindParam(7, $mobile_no);
-        $update1->bindParam(8, $gender);
-        $update1->bindParam(9, $designation);
-        $update1->bindParam(10, $id); // Make sure to bind UniqueID for updating the correct user
+        $update1->bindParam(5, $c_password);
+        $update1->bindParam(6, $mobile_no);
+        $update1->bindParam(7, $designation);
+        $update1->bindParam(8, $address);
+        $update1->bindParam(9, $gender);
+        $update1->bindParam(10, $id);
         $update1->execute();
 
-        // Commit changes to the database
-        $db->commit();
+        // $update = $db->prepare("UPDATE lm_land_data SET  VillageCode = ?, MahalKaName = ?, Shreni = ?, KhataNo = ?, KashtkarDarjStithi = ?, GataNo = ?, Area = ?, Vivran = ?, RakbaH = ?  WHERE ID = ? AND UniqueID = ?");
+        // $update->bindParam(1, $village_code);
+        // $update->bindParam(2, $mahal_name);
+        // $update->bindParam(3, $shreni);
+        // $update->bindParam(4, $khata_no);
+        // $update->bindParam(5, $kastkar_status);
+        // $update->bindParam(6, $gata_no);
+        // $update->bindParam(7, $rakba_value);
+        // $update->bindParam(8, $vivran);
+        // $update->bindParam(9, $rakba_hect);
+        // $update->bindParam(10, $id);
+        // $update->bindParam(11, $unique_code);
+        // $update->execute();
 
-        // Send success response
-        $response = array('status' => 'success', 'message' => 'User data updated successfully');
-        echo json_encode($response);
+        // $update2 = $db->prepare("UPDATE lm_base_land_data_details SET GataNo = ?, Area = ?, Vivran = ? WHERE BaseLandID = ?");
+        // $update2->bindParam(1, $gata_no);
+        // $update2->bindParam(2, $rakba_value);
+        // $update2->bindParam(3, $vivran);
+        // $update2->bindParam(4, $userInfo['ID']);
+        // $update2->execute();
+        // $details_array = array(
+        //     'VillageCode' => $village_code,
+        //     'MahalKaName' => $mahal_name,
+        //     'Shreni' => $shreni,
+        //     'KhataNo' => $khata_no,
+        //     'KashtkarDarjStithi' => $kastkar_status,
+        //     'GataNo' => $gata_no,
+        //     'Area' => $rakba_value,
+        //     'Vivran' => $vivran
+        // );
 
-    } catch (Exception $e) {
-        // Rollback transaction in case of error
-        $db->rollBack();
-        $error_response = array('status' => 'error', 'message' => $e->getMessage());
-        echo json_encode($error_response);
+        // $details = json_encode($details_array);
+
+        // $insrt2 = $db->prepare("INSERT INTO  lm_land_data_history (LandDataID, Deatails, CreatedBy, DateCreated) VALUES (?, ?, ?, ?)");
+        // $insrt2->bindParam(1, $id);
+        // $insrt2->bindParam(2, $details);
+        // $insrt2->bindParam(3, $created_by);
+        // $insrt2->bindParam(4, $timestamp);
+        // $insrt2->execute();
+
+        // Commit the changes to the database
+        $db_response_data = array();
+        commit($db, 'User data updated successfully', $db_response_data);
+    } catch (\Exception $e) {
+        if ($db->inTransaction()) {
+            $db->rollback();
+        }
+
+        // return response
+        $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
+        rollback($db, $e->getCode(), $log_error_msg);
     }
-
 } else if (isset($_POST['action']) && $_POST['action'] == 'sync_village_detail_data') {
     try {
         // Begin Transaction

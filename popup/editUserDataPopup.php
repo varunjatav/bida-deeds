@@ -6,6 +6,8 @@ include_once '../dbcon/db_connect.php';
 include_once '../functions/common.function.php';
 include_once '../core/editNewUserPopup.core.php';
 include_once '../languages/' . $lang_file;
+
+
 ?>
 <style>
     .dropdown-header {
@@ -68,7 +70,10 @@ include_once '../languages/' . $lang_file;
         left: 0 !important;
     }
 </style>
+
+
 <div class="popup-overlay">
+  
     <div class="popup-wrap pp-large-x">
         <div class="popup-header" style="cursor: move;">
             <span class="popup-title text-wrapping left">User Data</span>
@@ -88,7 +93,9 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">1) Name*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox fldrequired" name="name"
-                                        maxlength="100" placeholder="Your Name*" autocomplete="off">
+                                        maxlength="100" placeholder="Your Name*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Name']) ? htmlspecialchars($userInfo['Name']) : ''; ?>">
+
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -97,8 +104,7 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">2) User Name*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox fldrequired" name="user_name"
-                                        maxlength="100" placeholder="Your User Name*" autocomplete="off">
-
+                                        maxlength="100" placeholder="Your User Name*" autocomplete="off" value="<?php echo isset($userInfo['User_Name']) ? htmlspecialchars($userInfo['User_Name']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -107,7 +113,8 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">3) Email*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="email" class="frm-txtbox fldrequired" name="email"
-                                        maxlength="20" placeholder="Your Email*" autocomplete="off">
+                                        maxlength="20" placeholder="Your Email*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Email']) ? htmlspecialchars($userInfo['Email']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
@@ -115,7 +122,8 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">4) Password*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="password" class="frm-txtbox fldrequired" name="password"
-                                        maxlength="100" placeholder="Your Password*" autocomplete="off">
+                                        maxlength="100" placeholder="Your Password*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Password']) ? htmlspecialchars($userInfo['Password']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
@@ -123,19 +131,18 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">5) Confirm Password*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="password" class="frm-txtbox dept-frm-input fldrequired" name="cpassword"
-                                        maxlength="100" placeholder="Confirm Your Password*" autocomplete="off">
+                                        maxlength="100" placeholder="Confirm Your Password*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Confirm_Password']) ? htmlspecialchars($userInfo['Confirm_Password']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
-
-
-
 
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">6) Mobile No*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no"
-                                        maxlength="10" placeholder="Your Mobile No*" autocomplete="off">
+                                        maxlength="10" placeholder="Your Mobile No*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Mobile_NO']) ? htmlspecialchars($userInfo['Mobile_NO']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -143,8 +150,9 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">7) Designation</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="text" class="frm-txtbox dept-frm-input  fldrequired" name="designation"
-                                        maxlength="20" placeholder="Your Designation*" autocomplete="off">
+                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="designation"
+                                        maxlength="20" placeholder="Your Designation*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Designation']) ? htmlspecialchars($userInfo['Designation']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -153,42 +161,48 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">8) Address*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="address"
-                                        maxlength="100" placeholder="Your Address*" autocomplete="off">
+                                        maxlength="100" placeholder="Your Address*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Address']) ? htmlspecialchars($userInfo['Address']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
 
                             <div class="form-field-wrap posrel left">
                                 <div class="posabsolut frm-lbl-actv">9) Gender*</div>
-                                <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <select name="gender" class="form-select fldrequired" id="">
-                                        <option value="">Choose Your Gender*</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                    <div class="select__arrow"></div>
+                                <div style="width: 50%; display:flex; flex-direction:column; text-align:left">
+                                    <div>
+                                        <input type="radio" name="gender" id="gender_male" value="male"
+                                            <?php echo isset($userInfo['Gender']) && $userInfo['Gender'] == 'male' ? 'checked' : ''; ?>>
+                                        <label for="gender_male">Male</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" id="gender_female" value="female"
+                                            <?php echo isset($userInfo['Gender']) && $userInfo['Gender'] == 'female' ? 'checked' : ''; ?>>
+                                        <label for="gender_female">Female</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="gender" id="gender_other" value="other"
+                                            <?php echo isset($userInfo['Gender']) && $userInfo['Gender'] == 'other' ? 'checked' : ''; ?>>
+                                        <label for="gender_other">Other</label>
+                                    </div>
                                 </div>
                             </div>
 
-
                         </div>
-                        <div class="clr"></div>
-                        <div class="property_type"></div>
-
                     </div>
-                    <div class="frm_hidden_data"></div>
-                    <div class="frm_hidden_data"></div>
-                    <input type="hidden" name="id" class="id" value="<?php echo $_REQUEST['file_id']; ?>">
-                    <input type="hidden" name="uid" class="id" value="<?php echo $_REQUEST['file_uid']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $_REQUEST['file_id']; ?>">
+                    <input type="hidden" name="uid" value="<?php echo $_REQUEST['file_uid']; ?>">
+
+                    <div class="popup-actionwrap posrel">
+                        <div class="posabsolut act_btn_ovrly"></div>
+                        <a style="cursor: pointer;" id="edit_user_data" class="pp-primact right">Save</a>
+                        <a style="cursor: pointer;" class="pp-secact right cancel_popup">Close</a>
+                        <div class="clr"></div>
+                    </div>
                 </form>
+
             </div>
-            <div class="popup-actionwrap posrel">
-                <div class="posabsolut act_btn_ovrly"></div>
-                <a style="cursor: pointer;" id="edit_user_data" class="pp-primact right">Save</a>
-                <a style="cursor: pointer;" class="pp-secact right cancel_popup">Close</a>
-                <div class="clr"></div>
-            </div>
+
         </div>
         <div id="popup_conf_msg" style="display: none;">
             <div class="popup-body cnfrm-task"></div>
@@ -196,7 +210,11 @@ include_once '../languages/' . $lang_file;
         </div>
     </div>
 </div>
-<script src="../scripts/jquery-ui.js"></script>
+<!-- <script src="../scripts/jquery-ui.js"></script> -->
+<!-- <script src="scripts/jquery-ui.min.js"></script>
+<script src="scripts/jquery.confirm.js"></script>
+<script src="scripts/common.js"></script>
+<script src="scripts/userlists.js"></script> -->
 <script>
     $(document).ready(function() {
         function initializeDropdownListeners() {

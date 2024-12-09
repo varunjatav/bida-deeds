@@ -24,10 +24,11 @@ $(document).ready(function () {
 
     // edit user data
     $('.full-column').on('click', '.edit_file', function () {
+    //   console.log($(this));
       
         var file_id = $(this).attr('id');
+        console.log(file_id);
         file_id =  +file_id;
-        console.log("This: ",$(this));
         console.log(typeof(file_id));
         
         $('#popup').load('popup/editUserDataPopup.php?file_id=' + file_id , function () {
@@ -91,6 +92,7 @@ $(document).ready(function () {
 
     // add new user data
     $('#popup').on('click', '#add_user_data', function () {
+
         var check = 0;
         var fldrequired_index_arr = [];
         $(".fldrequired").each(function (index) {
@@ -116,6 +118,7 @@ $(document).ready(function () {
             });
             return false;
         } else {
+           
             $('#userfrm').find('.frm_hidden_data').html('');
             $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="add_user_data" autocomplete="off">');
             $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/userDataAction" autocomplete="off">');
@@ -127,7 +130,7 @@ $(document).ready(function () {
         }
     });
 
-    //edit fasli new data
+    //edit user data
     $('#popup').on('click', '#edit_user_data', function () {
         var check = 0;
         var fldrequired_index_arr = [];
@@ -165,13 +168,18 @@ $(document).ready(function () {
         }
     });
 
-    $("#popup").on('submit', '#pfrm', function (e) {
+    $("#popup").on('submit', '#userfrm', function (e) {
+        
         var postData = new FormData(this);
+        console.log(this);
+        console.log(postData);
+        
         var action_btn_id = $('input[name="action_btn_id"]').val();
         var action_btn_name = $('input[name="action_btn_name"]').val();
         var action_url = $('input[name="action_url"]').val();
         var after_success_action = $('input[name="after_success_action"]').val();
         var after_success_redirect = $('input[name="after_success_redirect"]').val();
+    
         var formURL = action_url;
 
         $('.act_btn_ovrly').show();
@@ -182,8 +190,12 @@ $(document).ready(function () {
             data: postData,
             processData: false,
             contentType: false,
+            
             success: function (data, textStatus, jqXHR) {
+               
                 $(action_btn_id).text(action_btn_name);
+                console.log(data);
+                
                 var response_data = JSON.parse(data);
                 if (response_data['status'] === '-1') {
                     $('#popupDiv').hide();

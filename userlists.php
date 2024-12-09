@@ -153,10 +153,9 @@ include_once 'languages/' . $lang_file;
                                     $address = $row['Address'] ? $row['Address'] : '--';
                                     $gender = $row['Gender'] ? $row['Gender'] : '--';
                                     $mobile_no = $row['Mobile_NO'] ? $row['Mobile_NO'] : '--';
-                                    echo $row['ID'];
                                 ?>
 
-                              
+
                                     <div class="rowDiv <?php echo $validate_color; ?>">
                                         <div class="cellDiv col1" name="<?php echo $srno; ?>">
                                             <?php echo $srno; ?>
@@ -189,8 +188,9 @@ include_once 'languages/' . $lang_file;
                                                     <img src="img/more-vertical-dark.svg" alt="" height="18px">
                                                 </a>
                                                 <div class="posabsolut nwactdrops" style="display:none;">
-                                                    <a style="cursor:pointer;" class="edit_file" id="<?php echo $srno; ?>">
+                                                    <a style="cursor:pointer;" class="edit_file" id="<?php echo $row['ID']; ?>">
                                                         <?php echo $master_data_details['edit']; ?>
+                                                        <?php echo $row['ID']; ?>
                                                     </a>
                                                 </div>
                                             </div>

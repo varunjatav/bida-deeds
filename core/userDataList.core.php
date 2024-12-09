@@ -30,7 +30,10 @@ if ($action == 'filter_applied') {
 }
 
 
-$sql = "SELECT Name, User_Name, Email, Mobile_NO, Designation, Address, Gender FROM user_info WHERE 1 = 1";
+$sql = "SELECT ID, Name, User_Name, Email, Mobile_NO, Designation, Address, Gender FROM user_info WHERE 1 = 1";
+if($_Request["id"]){
+    $sql .=" AND ID LIKE ?";
+}
 if ($_REQUEST['name']) {
     $sql .= " AND Name Like ?";
 }
@@ -60,7 +63,7 @@ if ($exportlist != 'export') {
 }
 $i = 1;
 $sql = $db->prepare($sql);
-if ($_REQUEST['ID']) {
+if ($_REQUEST['id']) {
     $sql ->bindParam($i++,$msg_id);
 }
 if ($_REQUEST['name']) {

@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        error_log("Received file_id: " . print_r($_POST['file_id'], true)); // Log the value of file_id
 
        $file_id = (int) htmlspecialchars($_POST['file_id']);
-       $file_uid = htmlspecialchars($_POST['file_uid']);
-       $file_vcode = htmlspecialchars($_POST['file_vcode']);
+       // $file_uid = htmlspecialchars($_POST['file_uid']);
+       // $file_vcode = htmlspecialchars($_POST['file_vcode']);
        $name = htmlspecialchars($_POST['name']);
        $user_name = htmlspecialchars($_POST["user_name"]);
        $email = htmlspecialchars($_POST['email']);
@@ -50,3 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               echo "Error: " . $e->getMessage();
        }
 }
+
+
+if (isset($_REQUEST['file_id'])) {
+   echo  $userId = $_REQUEST['file_id'];
+    $stmt = $db->prepare("SELECT * FROM user_info WHERE ID = ?");
+    $stmt->execute([$userId]);
+    $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+

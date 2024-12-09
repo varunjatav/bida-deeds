@@ -163,6 +163,10 @@ $(document).ready(function () {
 
     $("#popup").on('submit', '#pfrm', function (e) {
         var postData = new FormData(this);
+        console.log(this);
+        console.log(postData);
+        
+        
         var action_btn_id = $('input[name="action_btn_id"]').val();
         var action_btn_name = $('input[name="action_btn_name"]').val();
         var action_url = $('input[name="action_url"]').val();

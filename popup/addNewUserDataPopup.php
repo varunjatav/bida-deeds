@@ -84,11 +84,11 @@ include_once '../languages/' . $lang_file;
                 <form id="userfrm">
                     <div class="card_item">
                         <div style="display: flex; margin-top:10px; flex-direction:column;">
-                            <div class="form-field-wrap posrel" >
+                            <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">1) Name*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox fldrequired" name="name"
-                                     maxlength="100"  placeholder="Your Name*" autocomplete="off" >
+                                        maxlength="100" placeholder="Your Name*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -96,8 +96,8 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">2) User Name*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                <input type="text" class="frm-txtbox fldrequired" name="user_name"
-                                maxlength="100" placeholder="Your User Name*" autocomplete="off">
+                                    <input type="text" class="frm-txtbox fldrequired" name="user_name"
+                                        maxlength="100" placeholder="Your User Name*" autocomplete="off">
 
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -127,11 +127,11 @@ include_once '../languages/' . $lang_file;
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
-                           
-                            
-                           
-                     
-                        <div class="form-field-wrap posrel">
+
+
+
+
+                            <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">6) Mobile No*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no"
@@ -140,7 +140,7 @@ include_once '../languages/' . $lang_file;
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
                             </div>
-                        <div class="form-field-wrap posrel">
+                            <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">7) Designation</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox dept-frm-input  fldrequired" name="designation"
@@ -157,7 +157,7 @@ include_once '../languages/' . $lang_file;
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
-                          
+
                             <div class="form-field-wrap posrel left">
                                 <div class="posabsolut frm-lbl-actv">9) Gender*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
@@ -170,22 +170,23 @@ include_once '../languages/' . $lang_file;
                                     <div class="select__arrow"></div>
                                 </div>
                             </div>
-                            
+
 
                         </div>
                         <div class="clr"></div>
                         <div class="property_type"></div>
-                      
+
                     </div>
                     <div class="frm_hidden_data"></div>
+                    <div class="popup-actionwrap posrel">
+                        <div class="posabsolut act_btn_ovrly"></div>
+                        <a style="cursor: pointer;" id="add_user_data" class="pp-primact right">Save</a>
+                        <a style="cursor: pointer;" id="" class="pp-secact right cancel_popup">Close</a>
+                        <div class="clr"></div>
+                    </div>
                 </form>
             </div>
-            <div class="popup-actionwrap posrel">
-                <div class="posabsolut act_btn_ovrly"></div>
-                <a style="cursor: pointer;" id="add_user_data" class="pp-primact right">Save</a>
-                <a style="cursor: pointer;" id="" class="pp-secact right cancel_popup">Close</a>
-                <div class="clr"></div>
-            </div>
+
         </div>
         <div id="popup_conf_msg" style="display: none;">
             <div class="popup-body cnfrm-task"></div>
