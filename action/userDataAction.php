@@ -286,7 +286,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         // $insrt1->bindParam(11, $created_by);
         $insrt1->execute();
 
-        $data_id = $db->lastInsertId();
+        // $data_id = $db->lastInsertId();
 
  
         $db_response_data = array();
@@ -325,13 +325,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $timestamp = time();
         $created_by = $_SESSION['UserID'];
 
-        $user_query = $db->prepare("SELECT ID , NAME, USER_NAME, EMAIL, PASSWORD, CONFIRM_PASSWORD, MOBILE_NO,DESIGNATION, ADDRESS,GENDER FROM user_info WHERE 1 = 1");
-        $user_query->bindParam(1, $unique_code);
-        $user_query->execute();
-        $user_query->setFetchMode(PDO::FETCH_ASSOC);
-        $userInfo = $user_query->fetch();
+        echo $id;
+        echo $name;
 
-        $update1 = $db->prepare("UPDATE user_info SET Name = ?, User_Name = ?, Email = ?, PASSWORD = ?, CONFIRM_PASSWORD = ? , MOBILE_NO =?,DESIGNATION = ?,ADDRESS = ?, GENDER = ? WHERE ID = ?");
+        $update1 = $db->prepare("UPDATE user_info SET Name = ?, User_Name = ?, Email = ?, PASSWORD = ?, Confirm_Password = ? , Mobile_No =?,Designation = ?,Address = ?, Gender = ? FROM user_info WHERE ID = ?");
         $update1->bindParam(1, $name);
         $update1->bindParam(2, $user_name);
         $update1->bindParam(3, $email);
@@ -344,47 +341,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $update1->bindParam(10, $id);
         $update1->execute();
 
-        // $update = $db->prepare("UPDATE lm_land_data SET  VillageCode = ?, MahalKaName = ?, Shreni = ?, KhataNo = ?, KashtkarDarjStithi = ?, GataNo = ?, Area = ?, Vivran = ?, RakbaH = ?  WHERE ID = ? AND UniqueID = ?");
-        // $update->bindParam(1, $village_code);
-        // $update->bindParam(2, $mahal_name);
-        // $update->bindParam(3, $shreni);
-        // $update->bindParam(4, $khata_no);
-        // $update->bindParam(5, $kastkar_status);
-        // $update->bindParam(6, $gata_no);
-        // $update->bindParam(7, $rakba_value);
-        // $update->bindParam(8, $vivran);
-        // $update->bindParam(9, $rakba_hect);
-        // $update->bindParam(10, $id);
-        // $update->bindParam(11, $unique_code);
-        // $update->execute();
 
-        // $update2 = $db->prepare("UPDATE lm_base_land_data_details SET GataNo = ?, Area = ?, Vivran = ? WHERE BaseLandID = ?");
-        // $update2->bindParam(1, $gata_no);
-        // $update2->bindParam(2, $rakba_value);
-        // $update2->bindParam(3, $vivran);
-        // $update2->bindParam(4, $userInfo['ID']);
-        // $update2->execute();
-        // $details_array = array(
-        //     'VillageCode' => $village_code,
-        //     'MahalKaName' => $mahal_name,
-        //     'Shreni' => $shreni,
-        //     'KhataNo' => $khata_no,
-        //     'KashtkarDarjStithi' => $kastkar_status,
-        //     'GataNo' => $gata_no,
-        //     'Area' => $rakba_value,
-        //     'Vivran' => $vivran
-        // );
-
-        // $details = json_encode($details_array);
-
-        // $insrt2 = $db->prepare("INSERT INTO  lm_land_data_history (LandDataID, Deatails, CreatedBy, DateCreated) VALUES (?, ?, ?, ?)");
-        // $insrt2->bindParam(1, $id);
-        // $insrt2->bindParam(2, $details);
-        // $insrt2->bindParam(3, $created_by);
-        // $insrt2->bindParam(4, $timestamp);
-        // $insrt2->execute();
-
-        // Commit the changes to the database
         $db_response_data = array();
         commit($db, 'User data updated successfully', $db_response_data);
     } catch (\Exception $e) {

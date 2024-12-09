@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        error_log("Received file_id: " . print_r($_POST['file_id'], true)); // Log the value of file_id
 
        $file_id = (int) htmlspecialchars($_POST['file_id']);
+       // echo $file_id;
        // $file_uid = htmlspecialchars($_POST['file_uid']);
        // $file_vcode = htmlspecialchars($_POST['file_vcode']);
        $name = htmlspecialchars($_POST['name']);
@@ -26,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        try {
               // Prepare the update query
               $update_query = $db->prepare("UPDATE user_info 
-                                      SET Name = ?, USER_NAME = ?, Email = ?, Password = ?, Confirm_Password = ?, Mobile_NO = ?, 
-                                      Desingation = ?, Address = ?
+                                      SET Name = ?, User_Name = ?, Email = ?, Password = ?, Confirm_Password = ?, Mobile_NO = ?, 
+                                      Desingation = ?, Address = ?, Gender = ?
                                       WHERE ID = ?");
               $update_query->bindParam(1, $name);
               $update_query->bindParam(2, $user_name);
@@ -38,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               $update_query->bindParam(7, $designation);
               $update_query->bindParam(8, $address);
               $update_query->bindParam(9, $gender);
-              //  $update_query->bindParam(6, $file_vcode);
+              $update_query->bindParam(10, $file_id);
 
               // Execute the query
               if ($update_query->execute()) {

@@ -134,6 +134,7 @@ $(document).ready(function () {
     $('#popup').on('click', '#edit_user_data', function () {
         var check = 0;
         var fldrequired_index_arr = [];
+        alert("userfrm")
         $(".fldrequired").each(function (index) {
             $(".frm-txtbox").removeClass("frm-focus");
             if ($(this).val() === "") {
@@ -157,21 +158,23 @@ $(document).ready(function () {
             });
             return false;
         } else {
-            $('#pfrm').find('.frm_hidden_data').html('');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="edit_user_data" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/userDataAction" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#edit_user_data" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_name" value="Save" autocomplete="off">');
+            alert("asdf")
+            $('#userfrm').find('.frm_hidden_data').html('');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="edit_user_data" autocomplete="off">');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/userDataAction" autocomplete="off">');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#edit_user_data" autocomplete="off">');
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_name" value="Save" autocomplete="off">');
             $('#frm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_action" value="reload" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_redirect" value="" autocomplete="off">');
-            $('#pfrm').submit();
+            $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_redirect" value="" autocomplete="off">');
+            $('#userfrm').submit();
         }
     });
 
     $("#popup").on('submit', '#userfrm', function (e) {
-        
+        alert("popup user form")
         var postData = new FormData(this);
-        console.log(this);
+       
+        alert(postData);
         console.log(postData);
         
         var action_btn_id = $('input[name="action_btn_id"]').val();
@@ -194,7 +197,7 @@ $(document).ready(function () {
             success: function (data, textStatus, jqXHR) {
                
                 $(action_btn_id).text(action_btn_name);
-                console.log(data);
+                console.log("Data --->",data);
                 
                 var response_data = JSON.parse(data);
                 if (response_data['status'] === '-1') {

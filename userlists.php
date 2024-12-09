@@ -190,7 +190,6 @@ include_once 'languages/' . $lang_file;
                                                 <div class="posabsolut nwactdrops" style="display:none;">
                                                     <a style="cursor:pointer;" class="edit_file" id="<?php echo $row['ID']; ?>">
                                                         <?php echo $master_data_details['edit']; ?>
-                                                        <?php echo $row['ID']; ?>
                                                     </a>
                                                 </div>
                                             </div>

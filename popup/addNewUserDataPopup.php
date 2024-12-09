@@ -4,7 +4,7 @@ include_once '../includes/checkSession.php';
 include_once '../includes/get_time_zone.php';
 include_once '../dbcon/db_connect.php';
 include_once '../functions/common.function.php';
-// include_once '../core/addNewDataPopup.core.php';
+include_once '../core/addNewDataPopup.core.php';
 include_once '../languages/' . $lang_file;
 ?>
 <style>

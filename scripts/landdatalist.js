@@ -164,7 +164,7 @@ $(document).ready(function () {
     $("#popup").on('submit', '#pfrm', function (e) {
         var postData = new FormData(this);
         console.log(this);
-        console.log(postData);
+        console.log("form data -->",postData);
         
         
         var action_btn_id = $('input[name="action_btn_id"]').val();
@@ -183,6 +183,8 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data, textStatus, jqXHR) {
+                console.log("data", data);
+                
                 $(action_btn_id).text(action_btn_name);
                 var response_data = JSON.parse(data);
                 if (response_data['status'] === '-1') {

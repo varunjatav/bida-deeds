@@ -86,7 +86,7 @@ include_once '../languages/' . $lang_file;
         </div>
         <div id="popupDiv">
             <div class="popup-body pp-large-y">
-                <form id="pfrm">
+                <form id="userfrm">
                     <div class="card_item">
                         <div style="display: flex; margin-top:10px; flex-direction:column;">
                             <div class="form-field-wrap posrel">
@@ -191,7 +191,7 @@ include_once '../languages/' . $lang_file;
                         </div>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $_REQUEST['file_id']; ?>">
-                    <input type="hidden" name="uid" value="<?php echo $_REQUEST['file_uid']; ?>">
+                    
 
                     <div class="popup-actionwrap posrel">
                         <div class="posabsolut act_btn_ovrly"></div>
