@@ -19,15 +19,6 @@ $msg_id = decryptIt($_REQUEST['id']);
 $srno = ($page - 1) * $limit;
 
 if ($action == 'filter_applied') {
-    // $khata_no = trim($_REQUEST['Name']) . '%';
-    // $village_code = trim($_REQUEST['village_code']);
-    // $gata_no = trim($_REQUEST['village_gata']) . '%';
-    // $shreni = trim($_REQUEST['shreni']) . '%';
-    // $board_approved = trim($_REQUEST['board_approved']);
-    // $select_village_with_gata = decryptIt(myUrlEncode(trim($_REQUEST['select_village_with_gata'])));
-    // $decrypt_data = $_POST['mahal_name'] ? trim($_POST['mahal_name']) : '';
-    // $explode_data = explode('@', $decrypt_data);
-    // $mahal_name = $explode_data[0];
 
     $name = trim($_REQUEST['name']) . '%';
     $user_name = trim($_REQUEST['user_name']) . '%';
@@ -35,7 +26,7 @@ if ($action == 'filter_applied') {
     $designation = trim($_REQUEST['designation']) . '%';
     $address = trim($_REQUEST['address']) . '%';
     $gender = trim($_REQUEST['gender']);
-    $mobile_no = trim($_REQUEST['mobie_no']) . '%';
+    $mobile_no = trim($_REQUEST['mobile_no']) . '%';
 }
 
 
@@ -69,9 +60,9 @@ if ($exportlist != 'export') {
 }
 $i = 1;
 $sql = $db->prepare($sql);
-// if ($_REQUEST['ID']) {
-//     $sql ->bindParam($i++,$msg_id);
-// }
+if ($_REQUEST['ID']) {
+    $sql ->bindParam($i++,$msg_id);
+}
 if ($_REQUEST['name']) {
     $sql ->bindParam($i++,$name);
 }

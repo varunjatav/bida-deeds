@@ -55,10 +55,10 @@ include_once '../languages/' . $lang_file;
                                     <div class="frm-lbl-actv" style="margin-bottom: 5px;">Select Gender:</div>
                                     <div class="select dev_req_msg left rmarg">
                                         <select name="gender" id="Gender" class="apply_filter_change">
-                                            <option value=""><?php echo "Select Gender"; ?></option>
-                                            <option value="male"><?php echo "Male"; ?></option>
-                                            <option value="female"><?php echo "Female"; ?></option>
-                                            <option value="other"><?php echo "Other"; ?></option>
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
                                         </select>
                                         <div class="select__arrow"></div>
                                     </div>
@@ -81,19 +81,6 @@ include_once '../languages/' . $lang_file;
                                 <input type="text" class="frm-txtbox dept-frm-input apply_filter_keyup" name="mobile_no"
                                 maxlength="10" placeholder="Your Mobile No*" autocomplete="off">
                             </div>
-                           
-
-                            <!-- <div class="tab1" id="stab_5" style="display:none; border: none;">
-                                <div class="frm-lbl-actv"><?php echo $rtk_data_list['khata_1359_anusar']; ?>:</div>
-                                <input type="text" name="khata_1359_anusar" class="frm-txtbox dept-frm-input apply_filter_keyup integer" maxlenth="20" placeholder="<?php echo $rtk_data_list['khata_1359_anusar']; ?>" autocomplete="off">
-                            </div>
-
-                            <div class="tab1" id="stab_6" style="display:none; border: none;">
-                                <div class="frm-lbl-actv"><?php echo $rtk_data_list['gata_1359_anusar']; ?>:</div>
-                                <input type="text" name="gata_1359_anusar" class="frm-txtbox dept-frm-input apply_filter_keyup integer" maxlenth="20" placeholder="<?php echo $rtk_data_list['gata_1359_anusar']; ?>" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="clr"></div> -->
                     </div>
                     <input type="hidden" id="nav" name="status" value="<?php echo $_REQUEST['status']; ?>" autocomplete="off">
                     <input type="hidden" id="sorting_database" class="sorting_database" name="sorting_database" value="" autocomplete="off">

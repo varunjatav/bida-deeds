@@ -22,6 +22,7 @@ $(document).ready(function () {
         })
     });
     $('.full-column').on('click', '.edit_file', function () {
+      
         var file_id = $(this).attr('id');
         var file_uid = $(this).attr('uid');
         var file_vcode = $(this).attr('vicode');

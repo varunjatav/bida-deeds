@@ -21,11 +21,16 @@ $(document).ready(function () {
             makeDragable('.popup-header', '.popup-wrap');
         })
     });
+
+    // edit user data
     $('.full-column').on('click', '.edit_file', function () {
+      
         var file_id = $(this).attr('id');
-        var file_uid = $(this).attr('uid');
-        var file_vcode = $(this).attr('vicode');
-        $('#popup').load('popup/editFasliNewDataPopup.php?file_id=' + file_id + '&file_uid=' + file_uid + '&file_vcode=' + file_vcode, function () {
+        file_id =  +file_id;
+        console.log("This: ",$(this));
+        console.log(typeof(file_id));
+        
+        $('#popup').load('popup/editUserDataPopup.php?file_id=' + file_id , function () {
             $('#popup').show();
             $('body').css('overflow-y', 'hidden');
             makeDragable('.popup-header', '.popup-wrap');
@@ -123,7 +128,7 @@ $(document).ready(function () {
     });
 
     //edit fasli new data
-    $('#popup').on('click', '#edit_land_data', function () {
+    $('#popup').on('click', '#edit_user_data', function () {
         var check = 0;
         var fldrequired_index_arr = [];
         $(".fldrequired").each(function (index) {
@@ -150,9 +155,9 @@ $(document).ready(function () {
             return false;
         } else {
             $('#pfrm').find('.frm_hidden_data').html('');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="edit_land_data" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/deedAction" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#edit_land_data" autocomplete="off">');
+            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="edit_user_data" autocomplete="off">');
+            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/userDataAction" autocomplete="off">');
+            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#edit_user_data" autocomplete="off">');
             $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_name" value="Save" autocomplete="off">');
             $('#frm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_action" value="reload" autocomplete="off">');
             $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_redirect" value="" autocomplete="off">');
@@ -160,7 +165,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#popup").on('submit', '#userfrm', function (e) {
+    $("#popup").on('submit', '#pfrm', function (e) {
         var postData = new FormData(this);
         var action_btn_id = $('input[name="action_btn_id"]').val();
         var action_btn_name = $('input[name="action_btn_name"]').val();
@@ -724,9 +729,9 @@ function exportMasterData(exportlist, export_type, type) {
     if (export_type === 'excel') {
         $('.act_btn_ovrly').show();
         $('.export_kashtkar_sahmati').html('<div class="medical-spinner" style="top:0; left:20%;" id="load"></div>');
-        var formUrl = "report/export_fasli_land_data.php";
+        var formUrl = "report/export_user_data.php";
     } else if (export_type === 'pdf') {
-        var formUrl = "pdf/export_fasli_land_data.php";
+        var formUrl = "pdf/export_user_data.php";
     } else if (export_type === 'print') {
         var formUrl = "pdf/export_fasli_land_data.php";
     }

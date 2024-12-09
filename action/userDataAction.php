@@ -10,6 +10,8 @@ include_once "../functions/insert_queue.function.php";
 include_once "../functions/notification.function.php";
 include_once "../vendor/autoload.php";
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 $user_id = $_SESSION['UserID'];
@@ -29,7 +31,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $shreni_1359 = $_POST['shreni_1359'] ? __fi(validateMaxLen($_POST['shreni_1359'], 255)) : "";
         $rakba_1359 = $_POST['rakba_1359'] ? __fi(validateMaxLen($_POST['rakba_1359'], 25)) : '';
         $fasli_kism = $_POST['fasli_kism'] ? __fi(validateMaxLen($_POST['fasli_kism'], 255)) : '';
-        $kastkar_status = __fi($_POST['kastkar_status']);
+        $address = __fi($_POST['kastkar_status']);
         $lm_file_id = __fi(validateInteger(decryptIt(myUrlEncode($_POST['file_id'])), 'File ID'));
         $timestamp = time();
         $created_by = $_SESSION['UserID'];
@@ -247,10 +249,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $email = __fi(validateMaxLen($_POST['email'], 'Email', 45));
         $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile no', 10));
         $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 10));
-        $address = __fi(validateMaxLen($_POST['address'], 'Address',50));
-        $gender = __fi(validateMaxLen($_POST['gender'], 'Gender',10));
-        $password = __fi(validateMaxLen($_POST['password'], 'Password',20));
-        $c_password = __fi(validateMaxLen($_POST['cpassword'], 'Confirm Password',20));
+        $address = __fi(validateMaxLen($_POST['address'], 'Address', 50));
+        $gender = __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
+        $password = __fi(validateMaxLen($_POST['password'], 'Password', 20));
+        $c_password = __fi(validateMaxLen($_POST['cpassword'], 'Confirm Password', 20));
         // $gata_no = $_POST['gata_no'];
 
         // if (count_($gata_no) == 0) {
@@ -261,7 +263,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         // }
         $timestamp = time();
         $created_by = $_SESSION['UserID'];
-        //$unique_code = generate_unique_id($db, 'user_info', 'UniqueID', 1, 6); // Generate unique code per iteration
+        //$name = generate_unique_id($db, 'user_info', 'UniqueID', 1, 6); // Generate unique code per iteration
 
         $insrt1 = $db->prepare("INSERT INTO  user_info  (Name, User_Name, Email, Mobile_No, Designation, Address, Gender, Password, Confirm_Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)");
         $insrt1->bindParam(1, $name);
@@ -279,7 +281,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
 
         $data_id = $db->lastInsertId();
 
-        //$unique_code_array = array();
+        //$name_array = array();
         // foreach ($gata_no as $key => $unival) {
 
         //     $uid = generate_unique_id($db, 'lm_land_data', 'UID', 1, 6); // Generate unique code per iteration
@@ -290,10 +292,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         //     $insrt = $db->prepare("INSERT INTO lm_land_data (UniqueID, UID, VillageCode, MahalKaName, Shreni, KhataNo, KashtkarDarjStithi, GataNo, Area, Vivran, DateCreated, CreatedBy, RakbaH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         //     // Bind parameters
-        //     $insrt->bindParam(1, $unique_code);
+        //     $insrt->bindParam(1, $name);
         //     $insrt->bindParam(2, $uid);
         //     $insrt->bindParam(3, $village_code);
-        //     $insrt->bindParam(4, $mahal_name);
+        //     $insrt->bindParam(4, $email);
         //     $insrt->bindParam(5, $shreni);
         //     $insrt->bindParam(6, $khata_no);
         //     $insrt->bindParam(7, $kastkar_status);
@@ -330,103 +332,78 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
         rollback($db, $e->getCode(), $log_error_msg);
     }
-} else if (isset($_POST['action']) && $_POST['action'] == 'edit_land_data') {
-
+} if (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
     try {
         // Begin Transaction
         $db->beginTransaction();
 
-        // Check user input for valid data
+        // Validate and sanitize user input
         foreach ($_POST as $postValue) {
-            check_user_input($postValue);
+            check_user_input($postValue); // Assuming this function sanitizes inputs
         }
-        $id = __fi(validateInteger(decryptIt($_POST['id']), 'Village ID'));
-        $unique_code = __fi(validateInteger(decryptIt(myUrlEncode($_POST['uid'])), 'Unique ID'));
-        $village_code = __fi(validateMaxLen(validateInteger(decryptIt(myUrlEncode($_POST['village_code'])), 'Village'), 8));
-        $mahal_name = __fi(validateMaxLen($_POST['mahal_name'], 'Mahal Name', 25));
-        $shreni = __fi(validateMaxLen($_POST['shreni'], 'Shreni', 45));
-        $khata_no = __fi(validateMaxLen($_POST['khata_no'], 'Khata no', 10));
-        $kashtkar = __fi(validateMaxLen($_POST['kashtkar'], 'Kashtkar stithi', 10));
-        $fasli_kism = isset($_POST['fasli_kism']) ? __fi(validateMaxLen($_POST['fasli_kism'], 255)) : '';
-        $kastkar_status = isset($_POST['kashtkar']) ? __fi($_POST['kashtkar']) : '';
-        $rakba = __fi($_POST['rakba']);
-        $vivran = isset($_POST['vivran']) ? implode(",", $_POST['vivran']) : '--';
-        $gata_no = __fi($_POST['gata_no']);
-        $timestamp = time();
-        $created_by = $_SESSION['UserID'];
-        $rakba_value = isset($rakba) ? $rakba : 0; // Safeguard for rakba
-        $rakba_hect = round($rakba_value / 2.47, 3);
-        $village_query = $db->prepare("SELECT T1.UniqueID, T1.ID
-                                FROM lm_base_land_data T1
-                                WHERE T1.UniqueID = ?
-                                LIMIT 1
-                                ");
-        $village_query->bindParam(1, $unique_code);
-        $village_query->execute();
-        $village_query->setFetchMode(PDO::FETCH_ASSOC);
-        $landInfo = $village_query->fetch();
 
-        $update1 = $db->prepare("UPDATE lm_base_land_data SET VillageCode = ?, MahalKaName = ?, Shreni = ?, KhataNo = ?, KashtkarDarjStithi = ? WHERE UniqueID = ?");
-        $update1->bindParam(1, $village_code);
-        $update1->bindParam(2, $mahal_name);
-        $update1->bindParam(3, $shreni);
-        $update1->bindParam(4, $khata_no);
-        $update1->bindParam(5, $kastkar_status);
-        $update1->bindParam(6, $unique_code);
+        // Decrypt and validate the input data
+        $id = __fi(validateInteger(decryptIt($_POST['id']), 'ID'));
+        $name = __fi(validateInteger(decryptIt(myUrlEncode($_POST['name'])), 'Name'));
+        $user_name = __fi(validateMaxLen(validateInteger(decryptIt(myUrlEncode($_POST['user_name'])), 'User_Name'), 8));
+        $email = __fi(validateMaxLen($_POST['email'], 'Email', 25));
+        $password = __fi(validateMaxLen($_POST['password'], 'Password', 45));
+        $confirm_password = __fi(validateMaxLen($_POST['confirm_password'], 'Confirm Password', 45));
+        $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile_NO', 10));
+        $designation = isset($_POST['designation']) ? __fi(validateMaxLen($_POST['designation'], 255)) : '';
+        $address = isset($_POST['address']) ? __fi($_POST['address']) : '';
+        $gender = __fi($_POST['gender']);
+
+        // Check if the user exists based on the ID (UniqueID)
+        $user_query = $db->prepare("SELECT * FROM user_info WHERE UniqueID = ?");
+        $user_query->bindParam(1, $id);
+        $user_query->execute();
+        $userInfo = $user_query->fetch();
+
+        if (!$userInfo) {
+            throw new Exception("User not found.");
+        }
+
+        // Update user data in the database
+        $update1 = $db->prepare("UPDATE user_info SET 
+            Name = ?, 
+            User_Name = ?, 
+            Email = ?, 
+            Password = ?, 
+            Confirm_Password = ?, 
+            Address = ?, 
+            Mobile_NO = ?, 
+            Gender = ?, 
+            Designation = ? 
+            WHERE ID = ?");
+        
+        // Bind the parameters correctly
+        $update1->bindParam(1, $name);
+        $update1->bindParam(2, $user_name);
+        $update1->bindParam(3, $email);
+        $update1->bindParam(4, $password);
+        $update1->bindParam(5, $confirm_password);
+        $update1->bindParam(6, $address);
+        $update1->bindParam(7, $mobile_no);
+        $update1->bindParam(8, $gender);
+        $update1->bindParam(9, $designation);
+        $update1->bindParam(10, $id); // Make sure to bind UniqueID for updating the correct user
         $update1->execute();
 
-        $update = $db->prepare("UPDATE lm_land_data SET  VillageCode = ?, MahalKaName = ?, Shreni = ?, KhataNo = ?, KashtkarDarjStithi = ?, GataNo = ?, Area = ?, Vivran = ?, RakbaH = ?  WHERE ID = ? AND UniqueID = ?");
-        $update->bindParam(1, $village_code);
-        $update->bindParam(2, $mahal_name);
-        $update->bindParam(3, $shreni);
-        $update->bindParam(4, $khata_no);
-        $update->bindParam(5, $kastkar_status);
-        $update->bindParam(6, $gata_no);
-        $update->bindParam(7, $rakba_value);
-        $update->bindParam(8, $vivran);
-        $update->bindParam(9, $rakba_hect);
-        $update->bindParam(10, $id);
-        $update->bindParam(11, $unique_code);
-        $update->execute();
+        // Commit changes to the database
+        $db->commit();
 
-        $update2 = $db->prepare("UPDATE lm_base_land_data_details SET GataNo = ?, Area = ?, Vivran = ? WHERE BaseLandID = ?");
-        $update2->bindParam(1, $gata_no);
-        $update2->bindParam(2, $rakba_value);
-        $update2->bindParam(3, $vivran);
-        $update2->bindParam(4, $landInfo['ID']);
-        $update2->execute();
-        $details_array = array(
-            'VillageCode' => $village_code,
-            'MahalKaName' => $mahal_name,
-            'Shreni' => $shreni,
-            'KhataNo' => $khata_no,
-            'KashtkarDarjStithi' => $kastkar_status,
-            'GataNo' => $gata_no,
-            'Area' => $rakba_value,
-            'Vivran' => $vivran
-        );
+        // Send success response
+        $response = array('status' => 'success', 'message' => 'User data updated successfully');
+        echo json_encode($response);
 
-        $details = json_encode($details_array);
-
-        $insrt2 = $db->prepare("INSERT INTO  lm_land_data_history (LandDataID, Deatails, CreatedBy, DateCreated) VALUES (?, ?, ?, ?)");
-        $insrt2->bindParam(1, $id);
-        $insrt2->bindParam(2, $details);
-        $insrt2->bindParam(3, $created_by);
-        $insrt2->bindParam(4, $timestamp);
-        $insrt2->execute();
-
-        // Commit the changes to the database
-        $db_response_data = array();
-        commit($db, 'Fasli data updated successfully', $db_response_data);
-    } catch (\Exception $e) {
-        if ($db->inTransaction()) {
-            $db->rollback();
-        }
-
-        // return response
-        $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
-        rollback($db, $e->getCode(), $log_error_msg);
+    } catch (Exception $e) {
+        // Rollback transaction in case of error
+        $db->rollBack();
+        $error_response = array('status' => 'error', 'message' => $e->getMessage());
+        echo json_encode($error_response);
     }
+
 } else if (isset($_POST['action']) && $_POST['action'] == 'sync_village_detail_data') {
     try {
         // Begin Transaction
@@ -563,7 +540,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
                 $loop_size = ceil(count_($village_code) / $batch_size);
 
                 for ($i = 0; $i < $loop_size; $i++) {
-                    $query = "INSERT INTO lm_api_data (UID, VillageCode, GataNo, KhataNo, Area, OwnerNo, Shreni, SyncedOn) VALUES "; //Prequery
+                    $query = "INSERT INTO lm_api_data (UID, VillageCode, GataNo, KhataNo, Area, OwnerNo, password, SyncedOn) VALUES "; //Prequery
                     $qPart = array_fill(0, count_($chunks1[$i]), "(?, ?, ?, ?, ?, ?, ?, ?)");
                     $query .= implode(",", $qPart);
 
@@ -690,7 +667,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
                 $fasli_batch_size_count = ceil(count_($village_code_f) / $fasli_batch_size);
 
                 for ($i = 0; $i < $fasli_batch_size_count; $i++) {
-                    $fasli_query = "INSERT INTO lm_api_1359_fasli_data (VillageCode, GataNo, KhataNo, Area, OwnerNo, Shreni, kashtkar_owner_no, kashtkar_owner_name, kashtkar_owner_father, kashtkar_area, SyncedOn, OwnerAddress, PlotSeqNumber, LandPosYear, isAnsh) VALUES";; //Prequery
+                    $fasli_query = "INSERT INTO lm_api_1359_fasli_data (VillageCode, GataNo, KhataNo, Area, OwnerNo, password, kashtkar_owner_no, kashtkar_owner_name, kashtkar_owner_father, kashtkar_area, SyncedOn, OwnerAddress, PlotSeqNumber, LandPosYear, isAnsh) VALUES";; //Prequery
                     $fasli_qPart = array_fill(0, count_($fasli_chunks1[$i]), "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                     $fasli_query .= implode(",", $fasli_qPart);
 
@@ -750,15 +727,15 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         }
         $id = __fi(validateInteger(decryptIt(myUrlEncode($_POST['id'])), 'Village ID'));
         $village_code = __fi(validateMaxLen($_POST['village_id'], 'Village', 10));
-        $mahal_name = __fi(validateMaxLen($_POST['mahal_name'], 'Mahal Name', 25));
+        $email = __fi(validateMaxLen($_POST['email'], 'Mahal Name', 25));
         $khata_no = __fi(validateMaxLen($_POST['khata_no'], 'Khata no', 10));
         $village_id = __fi(validateMaxLen($_POST['village_id'], 'Village ID', 10));
-        $mahal_name = isset($_POST['mahal_name']) ? __fi(validateMaxLen($_POST['mahal_name'], 255)) : '';
+        $email = isset($_POST['email']) ? __fi(validateMaxLen($_POST['email'], 255)) : '';
         $gata = isset($_POST['gata']) ? __fi($_POST['gata']) : '';
         $timestamp = time();
 
         $update = $db->prepare("UPDATE lm_api_1359_fasli_data SET MahalName = ?, 1359_fasli_khata = ?, 1359_fasli_gata = ? WHERE ID = ? AND VillageCode = ?");
-        $update->bindParam(1, $mahal_name);
+        $update->bindParam(1, $email);
         $update->bindParam(2, $khata_no);
         $update->bindParam(3, $gata);
         $update->bindParam(4, $id);
@@ -766,7 +743,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         $update->execute();
 
         // Commit the changes to the database
-        $db_response_data = array('mahal_name' => $mahal_name, 'khata' => $khata_no, 'gata' => $gata);
+        $db_response_data = array('email' => $email, 'khata' => $khata_no, 'gata' => $gata);
         commit($db, 'Fasli data mapped successfully', $db_response_data);
     } catch (\Exception $e) {
         if ($db->inTransaction()) {
@@ -845,7 +822,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
                     $owner_father_f[] = $item_f['owner_father']; // owner father name
                     $owner_number_f[] = $item_f['owner_number']; //owner number
                     $plot_area_f[] = $item_f['plot_area']; // area
-                    $land_type_f[] = $item_f['land_type']; // shreni
+                    $land_type_f[] = $item_f['land_type']; // password
                     $bandhak_f[] = $item_f['remark']; // bandhak data
                 }
             }
@@ -856,7 +833,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
                 $fasli_chunks2 = array_chunk($plot_number_f, $fasli_batch_size); // gata number
                 $fasli_chunks3 = array_chunk($khata_number_f, $fasli_batch_size); // khata number
                 $fasli_chunks4 = array_chunk($owner_number_f, $fasli_batch_size); // owner number
-                $fasli_chunks12 = array_chunk($land_type_f, $fasli_batch_size); // shreni
+                $fasli_chunks12 = array_chunk($land_type_f, $fasli_batch_size); // password
                 $fasli_chunks13 = array_chunk($plot_area_f, $fasli_batch_size); // area
                 $fasli_chunks5 = array_chunk($owner_name_f, $fasli_batch_size); // owner name
                 $fasli_chunks6 = array_chunk($owner_father_f, $fasli_batch_size); // owner father name

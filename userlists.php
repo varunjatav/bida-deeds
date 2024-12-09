@@ -134,7 +134,7 @@ include_once 'languages/' . $lang_file;
                                 <a style="cursor:pointer;" onclick="sort_name(8, '');"><img
                                         src="img/sorting.svg" alt="" height="24px"></a>
                             </div>
-                           
+
                             <div class="cellDivHeader">
                                 <p><?php echo $land_data_list['action']; ?></p>
                                 <a style="cursor:pointer;" onclick="sort_name(11, '');"></a>
@@ -153,7 +153,10 @@ include_once 'languages/' . $lang_file;
                                     $address = $row['Address'] ? $row['Address'] : '--';
                                     $gender = $row['Gender'] ? $row['Gender'] : '--';
                                     $mobile_no = $row['Mobile_NO'] ? $row['Mobile_NO'] : '--';
+                                    echo $row['ID'];
                                 ?>
+
+                              
                                     <div class="rowDiv <?php echo $validate_color; ?>">
                                         <div class="cellDiv col1" name="<?php echo $srno; ?>">
                                             <?php echo $srno; ?>
@@ -179,16 +182,14 @@ include_once 'languages/' . $lang_file;
                                         <div class="cellDiv col8">
                                             <?php echo $mobile_no; ?>
                                         </div>
-                                      
+
                                         <div class="cellDiv cellDivacts col10">
                                             <div class="posrel tblactns">
                                                 <a style="cursor:pointer;" class="showAction">
                                                     <img src="img/more-vertical-dark.svg" alt="" height="18px">
                                                 </a>
                                                 <div class="posabsolut nwactdrops" style="display:none;">
-                                                    <a style="cursor:pointer;" class="edit_file" id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>"
-                                                        uid="<?php echo encryptIt(myUrlEncode($row['UniqueID'])); ?>"
-                                                        vicode="<?php echo encryptIt(myUrlEncode($row['VillageCode'])); ?>">
+                                                    <a style="cursor:pointer;" class="edit_file" id="<?php echo $srno; ?>">
                                                         <?php echo $master_data_details['edit']; ?>
                                                     </a>
                                                 </div>
