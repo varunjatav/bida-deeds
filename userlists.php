@@ -146,6 +146,7 @@ include_once 'languages/' . $lang_file;
                                 $srno = 0;
                                 while ($row = $sql->fetch()) {
                                     $srno++;
+                                    $id = $row['ID'] ? $row['ID'] : '--';
                                     $name = $row['Name'] ? $row['Name'] : '--';
                                     $username = $row['User_Name'] ? $row['User_Name'] : '--';
                                     $email = $row['Email'] ? $row['Email'] : '--';
@@ -157,8 +158,8 @@ include_once 'languages/' . $lang_file;
 
 
                                     <div class="rowDiv <?php echo $validate_color; ?>">
-                                        <div class="cellDiv col1" name="<?php echo $srno; ?>">
-                                            <?php echo $srno; ?>
+                                        <div class="cellDiv col1" name="<?php echo $id; ?>">
+                                            <?php echo $id; ?>
                                         </div>
                                         <div class="cellDiv col2">
                                             <?php echo $name; ?>

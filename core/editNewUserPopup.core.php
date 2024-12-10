@@ -5,10 +5,10 @@
 if (isset($_REQUEST['file_id'])) {
    
        $file_id = decryptIt(myUrlEncode($_REQUEST['file_id']));
-       echo "step 1: ",$file_id ,"<br>";
-       $user_id = $_SESSION['UserID'];
+       // echo "step 1: ",$file_id ,"<br>";
+       // $user_id = $_SESSION['UserID'];
 
-       echo "step 2: ",$user_id ,"<br>";
+       // echo "step 2: ",$user_id ,"<br>";
        // Prepare the SQL query
        $stmt = $db->prepare("SELECT * FROM user_info WHERE ID = ?");
 

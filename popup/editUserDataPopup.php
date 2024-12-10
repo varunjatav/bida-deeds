@@ -114,7 +114,7 @@ include_once '../languages/' . $lang_file;
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="email" class="frm-txtbox fldrequired" name="email"
                                         maxlength="20" placeholder="Your Email*" autocomplete="off"
-                                        value="<?php echo isset($userInfo['Email']) ? htmlspecialchars($userInfo['Email']) : ''; ?>">
+                                        value="<?php echo  isset($userInfo['Email']) ? htmlspecialchars($userInfo['Email']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
@@ -190,7 +190,8 @@ include_once '../languages/' . $lang_file;
 
                         </div>
                     </div>
-
+                    <div class="frm_hidden_data"></div>
+                    <input type="number" name="id" class="id" value="<?php echo (int) decryptIt(myUrlEncode($_REQUEST['file_id'])) ?>">
                     <div class="popup-actionwrap posrel">
                         <div class="posabsolut act_btn_ovrly"></div>
                         <a style="cursor: pointer;" id="edit_user_data" class="pp-primact right">Save</a>
