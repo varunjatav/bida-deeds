@@ -194,7 +194,7 @@ include_once '../languages/' . $lang_file;
         </div>
     </div>
 </div>
-<script src="../scripts/jquery-ui.js"></script>
+<!-- <script src="../scripts/jquery-ui.js"></script> -->
 <script>
     $(document).ready(function() {
         function initializeDropdown() {

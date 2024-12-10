@@ -58,9 +58,7 @@ if ($total_count == 0) {
                             <img src="img/more-vertical-dark.svg" alt="" height="18px">
                         </a>
                         <div class="posabsolut nwactdrops" style="display:none;">
-                            <a style="cursor:pointer;" class="edit_file" id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>"
-                                uid="<?php echo encryptIt(myUrlEncode($row['UniqueID'])); ?>"
-                                vicode="<?php echo encryptIt(myUrlEncode($row['VillageCode'])); ?>">
+                            <a style="cursor:pointer;" class="edit_file" id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>">
                                 <?php echo $master_data_details['edit']; ?>
                             </a>
                         </div>

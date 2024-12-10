@@ -28,8 +28,8 @@ $(document).ready(function () {
       
         var file_id = $(this).attr('id');
         console.log(file_id);
-        file_id =  +file_id;
-        console.log(typeof(file_id));
+        // file_/id =  +file_id;
+        // console.log(typeof(file_id));
         
         $('#popup').load('popup/editUserDataPopup.php?file_id=' + file_id , function () {
             $('#popup').show();
@@ -134,7 +134,7 @@ $(document).ready(function () {
     $('#popup').on('click', '#edit_user_data', function () {
         var check = 0;
         var fldrequired_index_arr = [];
-        alert("userfrm")
+        // alert("userfrm")
         $(".fldrequired").each(function (index) {
             $(".frm-txtbox").removeClass("frm-focus");
             if ($(this).val() === "") {
@@ -158,7 +158,7 @@ $(document).ready(function () {
             });
             return false;
         } else {
-            alert("asdf")
+            // alert("asdf")
             $('#userfrm').find('.frm_hidden_data').html('');
             $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="edit_user_data" autocomplete="off">');
             $('#userfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/userDataAction" autocomplete="off">');
@@ -171,12 +171,13 @@ $(document).ready(function () {
     });
 
     $("#popup").on('submit', '#userfrm', function (e) {
-        alert("popup user form")
+        // alert("popup user form")
         var postData = new FormData(this);
        
-        alert(postData);
-        console.log(postData);
         
+        console.log("postData --> ",postData);
+        console.log("this-->",this);
+        // alert(this);
         var action_btn_id = $('input[name="action_btn_id"]').val();
         var action_btn_name = $('input[name="action_btn_name"]').val();
         var action_url = $('input[name="action_url"]').val();

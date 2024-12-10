@@ -249,15 +249,25 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
             check_user_input($postValue);
         }
 
-        $name = __fi(validateMaxLen($_POST['name'], 'Name', 8));
-        $user_name = __fi(validateMaxLen($_POST['user_name'], 'User Name', 25));
+        // $name = __fi(validateMaxLen($_POST['name'], 'Name', 8));
+        // $user_name = __fi(validateMaxLen($_POST['user_name'], 'User Name', 25));
+        // $email = __fi(validateMaxLen($_POST['email'], 'Email', 45));
+        // $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile no', 10));
+        // $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 10));
+        // $address = __fi(validateMaxLen($_POST['address'], 'Address', 50));
+        // $gender = __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
+        // $password = __fi(validateMaxLen($_POST['password'], 'Password', 20));
+        // $c_password = __fi(validateMaxLen($_POST['cpassword'], 'Confirm Password', 20));
+
+        $name = __fi(validateMaxLen($_POST['name'], 8));
+        $user_name = __fi(validateMaxLen($_POST['user_name'],  25));
         $email = __fi(validateMaxLen($_POST['email'], 'Email', 45));
-        $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile no', 10));
-        $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 10));
-        $address = __fi(validateMaxLen($_POST['address'], 'Address', 50));
-        $gender = __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
-        $password = __fi(validateMaxLen($_POST['password'], 'Password', 20));
-        $c_password = __fi(validateMaxLen($_POST['cpassword'], 'Confirm Password', 20));
+        $mobile_no = __fi(validateMaxLen($_POST['mobile_no'],10));
+        $designation = __fi(validateMaxLen($_POST['designation'], 10));
+        $address = __fi(validateMaxLen($_POST['address'], 50));
+        $gender = __fi(validateMaxLen($_POST['gender'], 10));
+        $password = __fi(validateMaxLen($_POST['password'],20));
+        $c_password = __fi(validateMaxLen($_POST['cpassword'], 20));
 
         echo $name;
         // $gata_no = $_POST['gata_no'];
@@ -312,23 +322,37 @@ if (isset($_POST['action']) && $_POST['action'] == 'edit_master_details') {
         foreach ($_POST as $postValue) {
             check_user_input($postValue);
         }
-        $id = __fi(validateInteger(decryptIt($_POST['id']), 'ID'));
-        $name = __fi(validateMaxLen($_POST['name'], 'Name', 100));
-        $user_name = __fi(validateMaxLen($_POST['user_name'], 'User_Name', 100));
-        $email = __fi(validateMaxLen($_POST['email'], 'Email', 100));
-        $password = __fi(validateMaxLen($_POST['password'], 'Password', 100));
-        $c_password = __fi(validateMaxLen($_POST['confirm_password'], 'Confirm_Password', 100));
-        $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile_NO', 10));
-        $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 100));
-        $address =  __fi(validateMaxLen($_POST['address'], 'Address', 100));
-        $gender =  __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
+        // $id = __fi(validateInteger(decryptIt($_POST['id']), 'ID'));
+        // $name = __fi(validateMaxLen($_POST['name'], 'Name', 100));
+        // $user_name = __fi(validateMaxLen($_POST['user_name'], 'User_Name', 100));
+        // $email = __fi(validateMaxLen($_POST['email'], 'Email', 100));
+        // $password = __fi(validateMaxLen($_POST['password'], 'Password', 100));
+        // $c_password = __fi(validateMaxLen($_POST['confirm_password'], 'Confirm_Password', 100));
+        // $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile_NO', 10));
+        // $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 100));
+        // $address =  __fi(validateMaxLen($_POST['address'], 'Address', 100));
+        // $gender =  __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
+
+        $id = __fi(decryptIt($_POST['id']));
+        $name = __fi($_POST['name']);
+        $user_name = __fi($_POST['user_name']);
+        $email = __fi($_POST['email']);
+        $password = __fi($_POST['password']);
+        $c_password = __fi($_POST['confirm_password']);
+        $mobile_no = __fi($_POST['mobile_no']);
+        $designation = __fi($_POST['designation']);
+        $address =  __fi($_POST['address']);
+        $gender =  __fi($_POST['gender']);
+
+
+
         $timestamp = time();
         $created_by = $_SESSION['UserID'];
 
         echo $id;
         echo $name;
 
-        $update1 = $db->prepare("UPDATE user_info SET Name = ?, User_Name = ?, Email = ?, PASSWORD = ?, Confirm_Password = ? , Mobile_No =?,Designation = ?,Address = ?, Gender = ? FROM user_info WHERE ID = ?");
+        $update1 = $db->prepare("UPDATE user_info SET Name = ?, User_Name = ?, Email = ?, Password = ?, Confirm_Password = ? , Mobile_No =?,Designation = ?,Address = ?, Gender = ? FROM user_info WHERE ID = ?");
         $update1->bindParam(1, $name);
         $update1->bindParam(2, $user_name);
         $update1->bindParam(3, $email);

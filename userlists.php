@@ -188,7 +188,7 @@ include_once 'languages/' . $lang_file;
                                                     <img src="img/more-vertical-dark.svg" alt="" height="18px">
                                                 </a>
                                                 <div class="posabsolut nwactdrops" style="display:none;">
-                                                    <a style="cursor:pointer;" class="edit_file" id="<?php echo $row['ID']; ?>">
+                                                    <a style="cursor:pointer;" class="edit_file" id="<?php  echo encryptIt(myUrlEncode($row['ID'])); ?>">
                                                         <?php echo $master_data_details['edit']; ?>
                                                     </a>
                                                 </div>

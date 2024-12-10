@@ -165,7 +165,7 @@ $(document).ready(function () {
         var postData = new FormData(this);
         console.log(this);
         console.log("form data -->",postData);
-        
+        alert(postData);
         
         var action_btn_id = $('input[name="action_btn_id"]').val();
         var action_btn_name = $('input[name="action_btn_name"]').val();

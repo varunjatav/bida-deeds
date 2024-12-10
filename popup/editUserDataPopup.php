@@ -73,7 +73,7 @@ include_once '../languages/' . $lang_file;
 
 
 <div class="popup-overlay">
-  
+
     <div class="popup-wrap pp-large-x">
         <div class="popup-header" style="cursor: move;">
             <span class="popup-title text-wrapping left">User Data</span>
@@ -148,9 +148,9 @@ include_once '../languages/' . $lang_file;
                                 <div class="clr"></div>
                             </div>
                             <div class="form-field-wrap posrel">
-                                <div class="posabsolut frm-lbl-actv">7) Designation</div>
+                                <div class="posabsolut frm-lbl-actv">7) Designation*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="designation"
+                                    <input type="text" class="frm-txtbox dept-frm-input  fldrequired" name="designation"
                                         maxlength="20" placeholder="Your Designation*" autocomplete="off"
                                         value="<?php echo isset($userInfo['Designation']) ? htmlspecialchars($userInfo['Designation']) : ''; ?>">
                                 </div>
@@ -190,8 +190,6 @@ include_once '../languages/' . $lang_file;
 
                         </div>
                     </div>
-                    <input type="hidden" name="id" value="<?php echo $_REQUEST['file_id']; ?>">
-                    
 
                     <div class="popup-actionwrap posrel">
                         <div class="posabsolut act_btn_ovrly"></div>

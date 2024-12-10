@@ -59,6 +59,7 @@ include_once '../languages/' . $lang_file;
         left: 0 !important;
     }
 </style>
+
 <div class="popup-overlay">
     <div class="popup-wrap pp-large-x">
         <div class="popup-header" style="cursor: move;">
