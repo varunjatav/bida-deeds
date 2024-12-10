@@ -28,8 +28,8 @@ if ($total_count == 0) {
             $mobile_no = $row['Mobile_NO'] ? $row['Mobile_NO'] : '--';
         ?>
             <div class="rowDiv <?php echo $validate_color; ?>">
-                <div class="cellDiv col1" name="<?php echo $id; ?>">
-                    <?php echo $id; ?>
+                <div class="cellDiv col1" name="<?php echo $srno; ?>">
+                    <?php echo $srno; ?>
                 </div>
                 <div class="cellDiv col2">
                     <?php echo $name; ?>

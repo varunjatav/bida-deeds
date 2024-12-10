@@ -313,8 +313,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
         rollback($db, $e->getCode(), $log_error_msg);
     }
 } elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
-    //    echo "user data action file called";
-    //    exit();
 
     try {
         // Begin Transaction
@@ -324,31 +322,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
         foreach ($_POST as $postValue) {
             check_user_input($postValue);
         }
-        // $id = __fi(validateInteger(decryptIt($_POST['id']), 'ID'));
-        // $name = __fi(validateMaxLen($_POST['name'], 'Name', 100));
-        // $user_name = __fi(validateMaxLen($_POST['user_name'], 'User_Name', 100));
-        // $email = __fi(validateMaxLen($_POST['email'], 'Email', 100));
-        // $password = __fi(validateMaxLen($_POST['password'], 'Password', 100));
-        // $c_password = __fi(validateMaxLen($_POST['confirm_password'], 'Confirm_Password', 100));
-        // $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile_NO', 10));
-        // $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 100));
-        // $address =  __fi(validateMaxLen($_POST['address'], 'Address', 100));
-        // $gender =  __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
+     
 
 
-        // $id = __fi(decryptIt($_POST['id']));
-        // $name = __fi($_POST['name']);
-        // $user_name = __fi($_POST['user_name']);
-        // $email = __fi($_POST['email']);
-        // $password = __fi($_POST['password']);
-        // $c_password = __fi($_POST['confirm_password']);
-        // $mobile_no = __fi($_POST['mobile_no']);
-        // $designation = __fi($_POST['designation']);
-        // $address =  __fi($_POST['address']);
-        // $gender =  __fi($_POST['gender']);
-
-        echo  $id = __fi(validateInteger(decryptIt(myUrlEncode($_POST['id'])), 'ID'));
-        // $id = (int) 7;
+         $id = __fi(validateInteger(decryptIt(myUrlEncode($_POST['id'])), "ID")); 
 
         $name = __fi(validateMaxLen($_POST['name'], 100));
         $user_name = __fi(validateMaxLen($_POST['user_name'],  100));
@@ -365,10 +342,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
 
 
         $timestamp = time();
-        // $created_by = $_SESSION['UserID'];
-
-        // echo $id;
-        // echo $name;
 
         $update1 = $db->prepare("UPDATE user_info SET Name = ?, User_Name = ?, Email = ?, Password = ?, Confirm_Password = ? , Mobile_No = ?,Designation = ?,Address = ?, Gender = ?  WHERE ID = ?");
         $update1->bindParam(1, $name);

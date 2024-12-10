@@ -191,7 +191,7 @@ include_once '../languages/' . $lang_file;
                         </div>
                     </div>
                     <div class="frm_hidden_data"></div>
-                    <input type="number" name="id" class="id" value="<?php echo (int) decryptIt(myUrlEncode($_REQUEST['file_id'])) ?>">
+                    <input type="hidden" name="id" class="id" value="<?php echo  $_REQUEST['file_id']?>">
                     <div class="popup-actionwrap posrel">
                         <div class="posabsolut act_btn_ovrly"></div>
                         <a style="cursor: pointer;" id="edit_user_data" class="pp-primact right">Save</a>
@@ -212,8 +212,8 @@ include_once '../languages/' . $lang_file;
 <!-- <script src="../scripts/jquery-ui.js"></script> -->
 <!-- <script src="scripts/jquery-ui.min.js"></script>
 <script src="scripts/jquery.confirm.js"></script>
-<script src="scripts/common.js"></script>
-<script src="scripts/userlists.js"></script> -->
+<script src="scripts/common.js"></script> -->
+<script src="scripts/userlists.js"></script> 
 <script>
     $(document).ready(function() {
         function initializeDropdownListeners() {

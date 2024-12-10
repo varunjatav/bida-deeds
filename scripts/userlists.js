@@ -173,10 +173,7 @@ $(document).ready(function () {
     $("#popup").on('submit', '#userfrm', function (e) {
         // alert("popup user form")
         var postData = new FormData(this);
-       
-        
-        console.log("postData --> ",postData);
-        console.log("this-->",this);
+       console.log("postData -->",postData)
         // alert(this);
         var action_btn_id = $('input[name="action_btn_id"]').val();
         var action_btn_name = $('input[name="action_btn_name"]').val();
@@ -196,44 +193,62 @@ $(document).ready(function () {
             contentType: false,
             
             success: function (data, textStatus, jqXHR) {
-               
                 $(action_btn_id).text(action_btn_name);
-                console.log("Data --->",data);
-                
-                var response_data = JSON.parse(data);
-                if (response_data['status'] === '-1') {
-                    $('#popupDiv').hide();
-                    $('#popup_conf_msg').show();
-                    $('#popup_conf_msg').find('.cnfrm-task').text(response_data['message']).show();
-                    setTimeout(function () {
-                        $('#popup_conf_msg').find('.cnfrm-task').text('');
-                        $('#popup_conf_msg').hide();
-                        $('#popupDiv').show();
-                        $('.act_btn_ovrly').hide();
-                    }, 2000);
-                } else if (response_data['status'] === '1') {
-                    $('#popupDiv').hide();
-                    $('#popup_conf_msg').show();
-                    $('#popup_conf_msg').find('.cnfrm-task').text(response_data['message']).show();
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 2000);
-                } else if (response_data['status'] === '0') {
-                    $('#popupDiv').hide();
-                    $('#popup_conf_msg').show();
-                    $('#popup_conf_msg').find('.cnfrm-task').text(response_data['message']).show();
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 2000);
+                console.log("Raw Data --->", data);
+            
+                // Regular expression to match JSON object (starting with '{' and ending with '}')
+                var jsonRegex = /(\{.*\})/;
+            
+                // Use the regex to extract the JSON part from the response
+                var matchedJson = data.match(jsonRegex);
+            
+                if (matchedJson) {
+                    try {
+                        // Parse the JSON string (matchedJson[0] contains the actual JSON)
+                        var response_data = JSON.parse(matchedJson[0]);
+                        console.log("Parsed Data --->", response_data);
+            
+                        // Continue with your logic based on the response data
+                        if (response_data['status'] === '-1') {
+                            $('#popupDiv').hide();
+                            $('#popup_conf_msg').show();
+                            $('#popup_conf_msg').find('.cnfrm-task').text(response_data['message']).show();
+                            setTimeout(function () {
+                                $('#popup_conf_msg').find('.cnfrm-task').text('');
+                                $('#popup_conf_msg').hide();
+                                $('#popupDiv').show();
+                                $('.act_btn_ovrly').hide();
+                            }, 2000);
+                        } else if (response_data['status'] === '1') {
+                            $('#popupDiv').hide();
+                            $('#popup_conf_msg').show();
+                            $('#popup_conf_msg').find('.cnfrm-task').text(response_data['message']).show();
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        } else if (response_data['status'] === '0') {
+                            $('#popupDiv').hide();
+                            $('#popup_conf_msg').show();
+                            $('#popup_conf_msg').find('.cnfrm-task').text(response_data['message']).show();
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        } else {
+                            $('#popupDiv').hide();
+                            $('#popup_conf_msg').show();
+                            $('#popup_conf_msg').find('.cnfrm-task').text('Something went wrong').show();
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        }
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                    }
                 } else {
-                    $('#popupDiv').hide();
-                    $('#popup_conf_msg').show();
-                    $('#popup_conf_msg').find('.cnfrm-task').text('Something went wrong').show();
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 2000);
+                    console.error("No valid JSON found in the response");
                 }
             },
+            
             error: function (xhr, status, error) {
                 printError(handleAjaxError(xhr), 3000, after_success_action, after_success_redirect);
             }
