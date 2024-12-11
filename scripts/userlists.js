@@ -413,7 +413,7 @@ $(document).ready(function () {
     $("#srno").val($(this).text());
     $(".perPage").text($(this).text());
     $(this).closest("ul").toggle();
-    loadMoreFasliLandData(0);
+    loadMoreUserData(0);
   });
 
   $(".full-column").on("click", ".export_excel", function () {
@@ -859,7 +859,7 @@ function getAppliedFilter(html) {
   $("#popup").html(str);
 }
 
-function loadMoreFasliLandData(page) {
+function loadMoreUserData(page) {
   var fd = new FormData();
   fd.append("action", "");
   if ($(".filterchip").length) {
@@ -874,12 +874,13 @@ function loadMoreFasliLandData(page) {
     $("#popup").html("").hide();
   }
   fd.append("offset", page);
+
   fd.append("pagelimit", $("#pagelimit").val());
   fd.append("srno", $("#srno").val());
   $("#main-body").html('<div class="medical-spinner" id="load"></div>');
   $.ajax({
     type: "POST",
-    url: "ajax/loadMoreFasliLandData.php",
+    url: "ajax/loadMoreUserData.php",
     data: fd,
     contentType: false,
     processData: false,

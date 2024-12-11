@@ -7,12 +7,8 @@ include_once '../functions/common.function.php';
 include_once '../core/permission.core.php';
 include_once '../core/userDataList.core.php';
 include_once '../languages/' . $lang_file;
-if ($total_count == 0) {
+if ($total_count) {
 ?>
-    <div class="blank-widget">
-        <a>No Data Found</a>
-    </div>
-<?php } else { ?>
     <div id="paginate-body" style="display: contents;">
         <?php
         $srno = 0;
@@ -52,51 +48,48 @@ if ($total_count == 0) {
                 <div class="cellDiv col8">
                     <?php echo $mobile_no; ?>
                 </div>
-
                 <div class="cellDiv cellDivacts col10">
                     <div class="posrel tblactns">
                         <a style="cursor:pointer;" class="showAction">
                             <img src="img/more-vertical-dark.svg" alt="" height="18px">
                         </a>
                         <div class="posabsolut nwactdrops" style="display:none;">
-                            <a style="cursor:pointer;" class="edit_file" id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>">
+                            <a style="cursor:pointer;" class="edit_file" id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>"s>
                                 <?php echo $master_data_details['edit']; ?>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-    <?php }
-    }
-    ?>
+        <?php
+        }
+        ?>
     </div>
-    <?php
-    if ($output) {
-    ?>
-        <div class="pagination">
-            <div class="left rsltpp">
-                <div class="rsl-hding left">Result Per Page</div>
-                <div class="rsl-counter left posrel">
-                    <a style="cursor:pointer;" class="perPage">10</a>
-                    <ul class="posabsolut" style="display: none;">
-                        <li><a style="cursor:pointer;" class="setPage">2</a></li>
-                        <li><a style="cursor:pointer;" class="setPage">5</a></li>
-                        <li><a style="cursor:pointer;" class="setPage">10</a></li>
-                        <li><a style="cursor:pointer;" class="setPage">15</a></li>
-                        <li><a style="cursor:pointer;" class="setPage">20</a></li>
-                    </ul>
-                </div>
-                <div class="clr"></div>
+    <div class="pagination">
+        <div class="left rsltpp">
+            <div class="rsl-hding left">Result Per Page</div>
+            <div class="rsl-counter left posrel">
+                <a style="cursor:pointer;" class="perPage"><?php echo $limit; ?></a>
+                <ul class="posabsolut" style="display: none;">
+                    <li><a style="cursor:pointer;" class="setPage">2</a></li>
+                    <li><a style="cursor:pointer;" class="setPage">5</a></li>
+                    <li><a style="cursor:pointer;" class="setPage">10</a></li>
+                    <li><a style="cursor:pointer;" class="setPage">15</a></li>
+                    <li><a style="cursor:pointer;" class="setPage">20</a></li>
+                </ul>
             </div>
-            <div class="right pgntn">
-                <?php echo $output; ?>
-                <div class="clr"></div>
-            </div>
-            <input type="hidden" id="pagelimit" autocomplete="off" value="10">
-            <input type="hidden" id="srno" autocomplete="off" value="<?php echo $srno; ?>">
             <div class="clr"></div>
         </div>
-    <?php
-    }
-    ?>
-    <input type="hidden" name="total_count" id="total_count" value="<?php echo $total_count; ?>" autocomplete="off">
+        <div class="right pgntn">
+            <?php echo $output; ?>
+            <div class="clr"></div>
+        </div>
+        <input type="hidden" id="pagelimit" autocomplete="off" value="<?php echo $limit; ?>">
+        <input type="hidden" id="srno" autocomplete="off" value="<?php echo $srno; ?>">
+        <div class="clr"></div>
+    </div>
+<?php
+} else {
+    echo '';
+}
+?>

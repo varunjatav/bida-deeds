@@ -158,8 +158,8 @@ include_once 'languages/' . $lang_file;
 
 
                                     <div class="rowDiv <?php echo $validate_color; ?>">
-                                        <div class="cellDiv col1" name="<?php echo $srno; ?>">
-                                            <?php echo $srno; ?>
+                                        <div class="cellDiv col1" name="<?php echo $id; ?>">
+                                            <?php echo $id; ?>
                                         </div>
                                         <div class="cellDiv col2">
                                             <?php echo $name; ?>
@@ -202,18 +202,18 @@ include_once 'languages/' . $lang_file;
                             </div>
                             <?php
                             if ($output) {
-                            ?>
+                            ?> 
                                 <div class="pagination">
                                     <div class="left rsltpp">
                                         <div class="rsl-hding left">Result Per Page</div>
                                         <div class="rsl-counter left posrel">
-                                            <a style="cursor:pointer;" class="perPage">100</a>
+                                            <a style="cursor:pointer;" class="perPage">10</a>
                                             <ul class="posabsolut" style="display: none;">
-                                                <li><a style="cursor:pointer;" class="setPage">1000</a></li>
-                                                <li><a style="cursor:pointer;" class="setPage">500</a></li>
-                                                <li><a style="cursor:pointer;" class="setPage">200</a></li>
-                                                <li><a style="cursor:pointer;" class="setPage">100</a></li>
-                                                <li><a style="cursor:pointer;" class="setPage">50</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">2</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">5</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">10</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">15</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">20</a></li>
                                             </ul>
                                         </div>
                                         <div class="clr"></div>
@@ -222,16 +222,16 @@ include_once 'languages/' . $lang_file;
                                         <?php echo $output; ?>
                                         <div class="clr"></div>
                                     </div>
-                                    <input type="hidden" id="pagelimit" autocomplete="off" value="100">
+                                    <input type="hidden" id="pagelimit" autocomplete="off" value="10">
                                     <input type="hidden" id="srno" autocomplete="off" value="<?php echo $srno; ?>">
                                     <div class="clr"></div>
                                 </div>
                             <?php
                             } else {
-                            ?>
-                                <input type="hidden" id="pagelimit" autocomplete="off" value="100">
+                            ?> 
+                                <input type="hidden" id="pagelimit" autocomplete="off" value="10">
                                 <input type="hidden" id="srno" autocomplete="off" value="0">
-                            <?php
+                           <?php
                             }
                             ?>
                         </div>
@@ -253,16 +253,18 @@ include_once 'languages/' . $lang_file;
 <script>
     $(document).ready(function() {
         $('.full-column').on('click', '.paginate', function() {
-            loadMoreFasliLandData(parseInt($(this).text()) - 1);
+            // console.log($(this).text());
+            
+            loadMoreUserData(parseInt($(this).text()) - 1);
         });
         $('.full-column').on('click', '.paginate_next', function() {
-            loadMoreFasliLandData(parseInt($('.current').attr('id')));
+            loadMoreUserData(parseInt($('.current').attr('id')));
         });
         $('.full-column').on('click', '.paginate_prev', function() {
-            loadMoreFasliLandData(parseInt($('.current').attr('id')) - 2);
+            loadMoreUserData(parseInt($('.current').attr('id')) - 2);
         });
         $('.full-column').on('click', '.paginate_last', function() {
-            loadMoreFasliLandData(parseInt($('.paginate:last').text()) - 1);
+            loadMoreUserData(parseInt($('.paginate:last').text()) - 1);
         });
         $('.full-column').on('click', '#refresh', function() {
             let baseUrl = window.location.origin + window.location.pathname;

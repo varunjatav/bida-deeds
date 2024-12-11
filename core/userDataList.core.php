@@ -6,20 +6,19 @@ $column_head = array();
 $user_id = $_SESSION['UserID'];
 $user_type = $_SESSION['UserType'];
 $action = $_REQUEST['action'];
-$village_id = $_REQUEST['village_id'];
+// $village_id = $_REQUEST['village_id'];
 $exportlist = $_REQUEST['exportlist'];
 $column_arr = explode(',', $_REQUEST['column_arr']);
 $column_head = explode(',', $_REQUEST['column_head']);
-$limit = $_POST['pagelimit'] == '' ? 100 : $_POST['pagelimit'];
+$limit = $_POST['pagelimit'] == '' ? 10 : $_POST['pagelimit']; 
 $srno_list = $_POST['srno'];
 $offset = $_POST['offset'] == '' ? 0 : $_POST['offset'];
 $start = (int) $limit * (int) $offset;
 $page = (int) $offset + 1;
-$msg_id = decryptIt($_REQUEST['id']);
+$id = decryptIt($_REQUEST['id']);
 $srno = ($page - 1) * $limit;
 
 if ($action == 'filter_applied') {
-
     $name = trim($_REQUEST['name']) . '%';
     $user_name = trim($_REQUEST['user_name']) . '%';
     $email = trim($_REQUEST['email']) . '%';
@@ -30,8 +29,9 @@ if ($action == 'filter_applied') {
 }
 
 
-$sql = "SELECT ID, Name, User_Name, Email, Mobile_NO, Designation, Address, Gender FROM user_info WHERE 1 = 1";
-if($_Request["id"]){
+$sql = "SELECT SQL_CALC_FOUND_ROWS ID, Name, User_Name, Email, Mobile_NO, Designation, Address, Gender FROM user_info WHERE 1 = 1 ";
+
+if($_REQUEST["id"]){
     $sql .=" AND ID LIKE ?";
 }
 if ($_REQUEST['name']) {
@@ -64,7 +64,7 @@ if ($exportlist != 'export') {
 $i = 1;
 $sql = $db->prepare($sql);
 if ($_REQUEST['id']) {
-    $sql ->bindParam($i++,$msg_id);
+    $sql ->bindParam($i++,$id);
 }
 if ($_REQUEST['name']) {
     $sql ->bindParam($i++,$name);
@@ -94,7 +94,7 @@ $sql->setFetchMode(PDO::FETCH_ASSOC);
 
 if ($exportlist != 'export') {
     // start pagination
-    $total_pages = ceil($total_count / $limit);
+     $total_pages = ceil($total_count / $limit);
 
     if ($total_pages > 1) {
         if ($page == 1) {
@@ -109,7 +109,7 @@ if ($exportlist != 'export') {
             if ($page == 1) {
                 $output = $output . '<span id=1 class="paginate current">1</span>';
             } else {
-                $output = $output . '<a style="cursor:pointer;" class="paginate">1</a>';
+                $output = $output . '<a id=1  style="cursor:pointer;" class="paginate">1</a>';
             }
         }
         if (($page - 3) > 1) {
