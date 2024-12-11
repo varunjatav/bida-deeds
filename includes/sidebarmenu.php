@@ -29,6 +29,7 @@ $misc_url_array = array('syndata', 'ebasta', 'reports', 'misdashboard', 'misrepo
 $village_module_url_array = array("villagelist","villagelistdatadetails");
 $land_data_url_array = array("landdatalist");
 $userlist_url_array = array("userlists");
+$filelist_url_array = array("filedatalists");
 ?>
 
 <div class="sidebar left">
@@ -66,6 +67,13 @@ $userlist_url_array = array("userlists");
                 <a href="userlists" class="<?php if (in_array($urlStr, $userlist_url_array)) { ?>active<?php } ?>">
                     <span class="acticn"><img src="img/report.svg" alt="" height="18px" width="18px"></span>
                     <span class="actnme text-wrapping left">User</span>
+                    <div class="clr"></div>
+                </a>
+            </li>
+            <li>
+                <a href="filedatalists" class="<?php if (in_array($urlStr, $filelist_url_array)) { ?>active<?php } ?>">
+                    <span class="acticn"><img src="img/report.svg" alt="" height="18px" width="18px"></span>
+                    <span class="actnme text-wrapping left">File</span>
                     <div class="clr"></div>
                 </a>
             </li>
