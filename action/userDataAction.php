@@ -271,7 +271,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
         $password = __fi(validateMaxLen($_POST['password'], 20));
         $c_password = __fi(validateMaxLen($_POST['cpassword'], 20));
 
-        echo $name;
+       
         // $gata_no = $_POST['gata_no'];
 
         // if (count_($gata_no) == 0) {
@@ -356,7 +356,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
         $update1->bindParam(10, $id);
         $update1->execute();
 
-        echo "user data action";
+       
         $db_response_data = array();
         commit($db, 'User data updated successfully', $db_response_data);
     } catch (\Exception $e) {
