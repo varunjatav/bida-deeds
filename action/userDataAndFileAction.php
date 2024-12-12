@@ -32,65 +32,50 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
             check_user_input($postValue);
         }
 
-        // $name = __fi(validateMaxLen($_POST['name'], 'Name', 8));
-        // $user_name = __fi(validateMaxLen($_POST['user_name'], 'User Name', 25));
-        // $email = __fi(validateMaxLen($_POST['email'], 'Email', 45));
-        // $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 'Mobile no', 10));
-        // $designation = __fi(validateMaxLen($_POST['designation'], 'Designation', 10));
-        // $address = __fi(validateMaxLen($_POST['address'], 'Address', 50));
-        // $gender = __fi(validateMaxLen($_POST['gender'], 'Gender', 10));
-        // $password = __fi(validateMaxLen($_POST['password'], 'Password', 20));
-        // $c_password = __fi(validateMaxLen($_POST['cpassword'], 'Confirm Password', 20));
+     
 
         $name = __fi(validateMaxLen($_POST['name'], 100));
-        $mobile = __fi(validateMaxLen($_POST['mobile'],  10));
-        $email = __fi(validateMaxLen($_POST['email'], 100));
+        $mobile = __fi(validateMaxLen($_POST['Mobile'],  10));
+        $gender = __fi(validateMaxLen($_POST['gender'], 10));
+        // $email = __fi(validateMaxLen($_POST['email'], 100));
         $dob = __fi(validateMaxLen($_POST['dob'], 10));
         $email = __fi(validateMaxLen($_POST['email'], 100));
-        $gender = __fi(validateMaxLen($_POST['gender'], 10));
         $pan = __fi(validateMaxLen($_POST['pan'], 50));
         $adhaar = __fi(validateMaxLen($_POST['adhaar'], 50));
         $address = __fi(validateMaxLen($_POST['address'], 50));
         $city = __fi(validateMaxLen($_POST['city'], 50));
         $pincode = __fi(validateMaxLen($_POST['pincode'], 50));
-       
-        $document = __fi($_POST['document'], 50);
+        $document = __fi($_POST['document']);
         $profile = __fi($_POST['profile']);
         $branch = __fi(validateMaxLen($_POST['branch'], 50));
-        $c_password = __fi(validateMaxLen($_POST['cpassword'], 20));
 
        
-        // $gata_no = $_POST['gata_no'];
-
-        // if (count_($gata_no) == 0) {
-        //     // return response
-        //     $db_respose_data = json_encode(array('status' => '-1', 'message' => 'Please add atleast one gata'));
-        //     print_r($db_respose_data);
-        //     exit();
-        // }
+      
         $timestamp = time();
         $created_by = $_SESSION['UserID'];
-        //$name = generate_unique_id($db, 'user_info', 'UniqueID', 1, 6); // Generate unique code per iteration
 
-        $insrt1 = $db->prepare("INSERT INTO  user_info  (Name, Mobile, Gender, DOB, Email, Pan, Address, Gender, Password, Confirm_Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)");
+        $insrt1 = $db->prepare("INSERT INTO  lm_user_data_and_file  (Name, Mobile, Gender, DOB, Email, Pan, Adhaar,Address, City, Pincode, Document, Profile,Branch) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?)");
         $insrt1->bindParam(1, $name);
         $insrt1->bindParam(2, $mobile);
         $insrt1->bindParam(3, $gender);
         $insrt1->bindParam(4, $dob);
         $insrt1->bindParam(5, $email);
-        $insrt1->bindParam(6, $address);
-        $insrt1->bindParam(7, $);
-        $insrt1->bindParam(8, $password);
-        $insrt1->bindParam(9, $c_password);
-        // $insrt1->bindParam(10, $timestamp);
-        // $insrt1->bindParam(11, $created_by);
+        $insrt1->bindParam(6, $pan);
+        $insrt1->bindParam(7, $adhaar);
+        $insrt1->bindParam(8, $address);
+        $insrt1->bindParam(9, $city);
+        $insert->bindParam(10,$pincode);
+        $insert->bindParam(11,$document);
+        $insert->bindParam(12,$profile);
+        $insert->bindParam(13,$branch);
+      
         $insrt1->execute();
 
         // $data_id = $db->lastInsertId();
 
 
         $db_response_data = array();
-        commit($db, 'User data added successfully', $db_response_data);
+        commit($db, 'User data and file added successfully', $db_response_data);
     } catch (\Exception $e) {
         if ($db->inTransaction()) {
             $db->rollback();

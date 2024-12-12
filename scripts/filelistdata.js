@@ -35,7 +35,7 @@ $(document).ready(function () {
     $('#popup').on('click', '#add_more_data', function () {
         var dataString = {};
         $.ajax({
-            url: 'ajax/getNewData.php',
+            url: 'ajax/getNewFileData.php',
             data: dataString,
             type: "POST",
             beforeSend: function () {
