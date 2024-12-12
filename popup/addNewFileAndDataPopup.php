@@ -458,7 +458,7 @@ include_once '../languages/' . $lang_file;
             </div>
             <div class="popup-actionwrap posrel">
                 <div class="posabsolut act_btn_ovrly"></div>
-                <a style="cursor: pointer;" id="add_land_data" class="pp-primact right">Save</a>
+                <a style="cursor: pointer;" id="add_user_data_and_file" class="pp-primact right">Save</a>
                 <a style="cursor: pointer;" id="" class="pp-secact right cancel_popup">Close</a>
                 <div class="clr"></div>
             </div>
