@@ -20,17 +20,17 @@ include_once 'languages/' . $lang_file;
     <link rel="stylesheet" href="css/style.css">
     <script src="scripts/jquery.min.js"></script>
     <script>
-    document.write('<style type="text/css">body{display:none}</style>');
-    jQuery(function(a) {
-        a("body").css("display", "block");
-    });
+        document.write('<style type="text/css">body{display:none}</style>');
+        jQuery(function(a) {
+            a("body").css("display", "block");
+        });
     </script>
 </head>
 <style>
-.pgntn a {
-    padding: 15px;
-    color: grey;
-}
+    .pgntn a {
+        padding: 15px;
+        color: grey;
+    }
 </style>
 
 <body>
@@ -189,103 +189,107 @@ include_once 'languages/' . $lang_file;
                                     $profile = $row['Profile'] ? $row['Profile'] : '--';
                                     $document = $row['Document'] ? $row['Document'] : '--';
                                     $profile = $row['Profile'] ? $row['Profile'] : '--';
-                                    ?>
-                                <div class="rowDiv <?php echo $validate_color; ?>">
-                                    <div class="cellDiv col1" name="<?php echo $id; ?>">
-                                        <?php echo $id; ?>
-                                    </div>
-                                    <div class="cellDiv col2">
-                                        <?php echo $name; ?>
-                                    </div>
-                                    <div class="cellDiv col3">
-                                        <?php echo $mobile; ?>
-                                    </div>
-                                    <div class="cellDiv col4">
-                                        <?php echo $gender; ?>
-                                    </div>
-                                    <div class="cellDiv col5">
-                                        <?php echo $dob; ?>
-                                    </div>
-                                    <div class="cellDiv col6">
-                                        <?php echo $email; ?>
-                                    </div>
-                                    <div class="cellDiv col7">
-                                        <?php echo $pan; ?>
-                                    </div>
-                                    <div class="cellDiv col8">
-                                        <?php echo $adhaar; ?>
-                                    </div>
-                                    <div class="cellDiv col9">
-                                        <?php echo $address; ?>
-                                    </div>
-                                    <div class="cellDiv col9">
-                                        <?php echo $city; ?>
-                                    </div>
-                                    <div class="cellDiv col10">
-                                        <?php echo $pincode; ?>
-                                    </div>
+                                    $document_array = explode(',', $document);
+                                ?>
+                                    <div class="rowDiv <?php echo $validate_color; ?>">
+                                        <div class="cellDiv col1" name="<?php echo $id; ?>">
+                                            <?php echo $id; ?>
+                                        </div>
+                                        <div class="cellDiv col2">
+                                            <?php echo $name; ?>
+                                        </div>
+                                        <div class="cellDiv col3">
+                                            <?php echo $mobile; ?>
+                                        </div>
+                                        <div class="cellDiv col4">
+                                            <?php echo $gender; ?>
+                                        </div>
+                                        <div class="cellDiv col5">
+                                            <?php echo $dob; ?>
+                                        </div>
+                                        <div class="cellDiv col6">
+                                            <?php echo $email; ?>
+                                        </div>
+                                        <div class="cellDiv col7">
+                                            <?php echo $pan; ?>
+                                        </div>
+                                        <div class="cellDiv col8">
+                                            <?php echo $adhaar; ?>
+                                        </div>
+                                        <div class="cellDiv col9">
+                                            <?php echo $address; ?>
+                                        </div>
+                                        <div class="cellDiv col9">
+                                            <?php echo $city; ?>
+                                        </div>
+                                        <div class="cellDiv col10">
+                                            <?php echo $pincode; ?>
+                                        </div>
 
-                                    <div class="cellDiv col10">
-                                        <?php echo $branch; ?>
-                                    </div>
-                                    <div class="cellDiv col10">
-                                        <?php echo $document; ?>
-                                    </div>
-                                    <div class="cellDiv col10">
-                                        <img src="<?php echo $profile; ?>" alt="<?php echo $profile; ?>">
+                                        <div class="cellDiv col10">
+                                            <?php echo $branch; ?>
+                                        </div>
+                                        <div class="cellDiv col10">
+                                            <?php foreach ($document_array as $url) {
+                                                echo "<img src='./uploads/$url' alt='$url' width='50px' height='50px'/>";
+                                            } ?>
+                                        </div>
+                                        <div class="cellDiv col10">
+                                            <img src="<?php echo "./uploads/" . $profile; ?>" alt="<?php echo $profile; ?>"
+                                                width="100px" height="100px">
 
-                                    </div>
-                                    <div class="cellDiv cellDivacts col10">
-                                        <div class="posrel tblactns">
-                                            <a style="cursor:pointer;" class="showAction">
-                                                <img src="img/more-vertical-dark.svg" alt="" height="18px">
-                                            </a>
-                                            <div class="posabsolut nwactdrops" style="display:none;">
-                                                <a style="cursor:pointer;" class="edit_file"
-                                                    id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>"
-                                                    uid="<?php echo encryptIt(myUrlEncode($row['UniqueID'])); ?>"
-                                                    vicode="<?php echo encryptIt(myUrlEncode($row['VillageCode'])); ?>">
-                                                    <?php echo $master_data_details['edit']; ?>
+                                        </div>
+                                        <div class="cellDiv cellDivacts col10">
+                                            <div class="posrel tblactns">
+                                                <a style="cursor:pointer;" class="showAction">
+                                                    <img src="img/more-vertical-dark.svg" alt="" height="18px">
                                                 </a>
+                                                <div class="posabsolut nwactdrops" style="display:none;">
+                                                    <a style="cursor:pointer;" class="edit_file"
+                                                        id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>"
+                                                        uid="<?php echo encryptIt(myUrlEncode($row['UniqueID'])); ?>"
+                                                        vicode="<?php echo encryptIt(myUrlEncode($row['VillageCode'])); ?>">
+                                                        <?php echo $master_data_details['edit']; ?>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <?php
                                 }
                                 ?>
                             </div>
                             <?php
                             if ($output) {
-                                ?>
-                            <div class="pagination">
-                                <div class="left rsltpp">
-                                    <div class="rsl-hding left">Result Per Page</div>
-                                    <div class="rsl-counter left posrel">
-                                        <a style="cursor:pointer;" class="perPage">100</a>
-                                        <ul class="posabsolut" style="display: none;">
-                                            <li><a style="cursor:pointer;" class="setPage">1000</a></li>
-                                            <li><a style="cursor:pointer;" class="setPage">500</a></li>
-                                            <li><a style="cursor:pointer;" class="setPage">200</a></li>
-                                            <li><a style="cursor:pointer;" class="setPage">100</a></li>
-                                            <li><a style="cursor:pointer;" class="setPage">50</a></li>
-                                        </ul>
+                            ?>
+                                <div class="pagination">
+                                    <div class="left rsltpp">
+                                        <div class="rsl-hding left">Result Per Page</div>
+                                        <div class="rsl-counter left posrel">
+                                            <a style="cursor:pointer;" class="perPage">100</a>
+                                            <ul class="posabsolut" style="display: none;">
+                                                <li><a style="cursor:pointer;" class="setPage">1000</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">500</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">200</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">100</a></li>
+                                                <li><a style="cursor:pointer;" class="setPage">50</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="clr"></div>
                                     </div>
+                                    <div class="right pgntn">
+                                        <?php echo $output; ?>
+                                        <div class="clr"></div>
+                                    </div>
+                                    <input type="hidden" id="pagelimit" autocomplete="off" value="100">
+                                    <input type="hidden" id="srno" autocomplete="off" value="<?php echo $srno; ?>">
                                     <div class="clr"></div>
                                 </div>
-                                <div class="right pgntn">
-                                    <?php echo $output; ?>
-                                    <div class="clr"></div>
-                                </div>
-                                <input type="hidden" id="pagelimit" autocomplete="off" value="100">
-                                <input type="hidden" id="srno" autocomplete="off" value="<?php echo $srno; ?>">
-                                <div class="clr"></div>
-                            </div>
                             <?php
                             } else {
-                                ?>
-                            <input type="hidden" id="pagelimit" autocomplete="off" value="100">
-                            <input type="hidden" id="srno" autocomplete="off" value="0">
+                            ?>
+                                <input type="hidden" id="pagelimit" autocomplete="off" value="100">
+                                <input type="hidden" id="srno" autocomplete="off" value="0">
                             <?php
                             }
                             ?>
@@ -300,7 +304,7 @@ include_once 'languages/' . $lang_file;
 
 
 
-                    <div class="containerDiv">
+                    <!-- <div class="containerDiv">
                         <div class="rowDivHeader">
                             <div class="cellDivHeader">
                                 <p><?php echo $land_data_list['sr']; ?></p>
@@ -328,7 +332,7 @@ include_once 'languages/' . $lang_file;
                                     $srno++;
                                     $document = $row['Document'] ? $row['Document'] : '--';
                                     $profile = $row['Profile'] ? $row['Profile'] : '--';
-                                    ?>
+                                ?>
                                 <div class="rowDiv <?php echo $validate_color; ?>">
                                     <div class="cellDiv col1" name="<?php echo $srno; ?>">
                                         <?php echo $srno; ?>
@@ -364,7 +368,7 @@ include_once 'languages/' . $lang_file;
                             </div>
                             <?php
                             if ($output) {
-                                ?>
+                            ?>
                             <div class="pagination">
                                 <div class="left rsltpp">
                                     <div class="rsl-hding left">Result Per Page</div>
@@ -390,14 +394,14 @@ include_once 'languages/' . $lang_file;
                             </div>
                             <?php
                             } else {
-                                ?>
+                            ?>
                             <input type="hidden" id="pagelimit" autocomplete="off" value="100">
                             <input type="hidden" id="srno" autocomplete="off" value="0">
                             <?php
                             }
                             ?>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -415,51 +419,51 @@ include_once 'languages/' . $lang_file;
 <script src="scripts/common.js"></script>
 <script src="scripts/filelistdata.js"></script>
 <script>
-$(document).ready(function() {
-    $('.full-column').on('click', '.paginate', function() {
-        loadMoreFasliLandData(parseInt($(this).text()) - 1);
+    $(document).ready(function() {
+        $('.full-column').on('click', '.paginate', function() {
+            loadMoreFasliLandData(parseInt($(this).text()) - 1);
+        });
+        $('.full-column').on('click', '.paginate_next', function() {
+            loadMoreFasliLandData(parseInt($('.current').attr('id')));
+        });
+        $('.full-column').on('click', '.paginate_prev', function() {
+            loadMoreFasliLandData(parseInt($('.current').attr('id')) - 2);
+        });
+        $('.full-column').on('click', '.paginate_last', function() {
+            loadMoreFasliLandData(parseInt($('.paginate:last').text()) - 1);
+        });
+        $('.full-column').on('click', '#refresh', function() {
+            let baseUrl = window.location.origin + window.location.pathname;
+            window.location.href = baseUrl;
+        });
     });
-    $('.full-column').on('click', '.paginate_next', function() {
-        loadMoreFasliLandData(parseInt($('.current').attr('id')));
-    });
-    $('.full-column').on('click', '.paginate_prev', function() {
-        loadMoreFasliLandData(parseInt($('.current').attr('id')) - 2);
-    });
-    $('.full-column').on('click', '.paginate_last', function() {
-        loadMoreFasliLandData(parseInt($('.paginate:last').text()) - 1);
-    });
-    $('.full-column').on('click', '#refresh', function() {
-        let baseUrl = window.location.origin + window.location.pathname;
-        window.location.href = baseUrl;
-    });
-});
 
-const slider = document.querySelector('.scrl-tblwrap');
-let mouseDown = false;
-let startX, scrollLeft;
+    const slider = document.querySelector('.scrl-tblwrap');
+    let mouseDown = false;
+    let startX, scrollLeft;
 
-let startDragging = function(e) {
-    mouseDown = true;
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-};
-let stopDragging = function(event) {
-    mouseDown = false;
-};
+    let startDragging = function(e) {
+        mouseDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    };
+    let stopDragging = function(event) {
+        mouseDown = false;
+    };
 
-slider.addEventListener('mousemove', (e) => {
-    e.preventDefault();
-    if (!mouseDown) {
-        return;
-    }
-    const x = e.pageX - slider.offsetLeft;
-    const scroll = x - startX;
-    slider.scrollLeft = scrollLeft - scroll;
-});
+    slider.addEventListener('mousemove', (e) => {
+        e.preventDefault();
+        if (!mouseDown) {
+            return;
+        }
+        const x = e.pageX - slider.offsetLeft;
+        const scroll = x - startX;
+        slider.scrollLeft = scrollLeft - scroll;
+    });
 
-slider.addEventListener('mousedown', startDragging, false);
-slider.addEventListener('mouseup', stopDragging, false);
-slider.addEventListener('mouseleave', stopDragging, false);
+    slider.addEventListener('mousedown', startDragging, false);
+    slider.addEventListener('mouseup', stopDragging, false);
+    slider.addEventListener('mouseleave', stopDragging, false);
 </script>
 
 </html>
