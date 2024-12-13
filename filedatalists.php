@@ -46,7 +46,7 @@ include_once 'languages/' . $lang_file;
                             <img src="img/back.svg" alt="" width="18px">
                         </a>
                         <div class="col-pagename left">
-                            <?php echo $master_data_list['title']; ?>(<tCount><?php echo $total_count; ?></tCount>)
+                            Data and Documents of Users (<tCount><?php echo $total_count; ?></tCount>)
                         </div>
                         <div class="clr"></div>
                     </div>
@@ -236,7 +236,7 @@ include_once 'languages/' . $lang_file;
                                         </div>
                                         <div class="cellDiv col10">
                                             <img src="<?php echo "./uploads/" . $profile; ?>" alt="<?php echo $profile; ?>"
-                                                width="100px" height="100px">
+                                                width="50px" height="50px">
 
                                         </div>
                                         <div class="cellDiv cellDivacts col10">
