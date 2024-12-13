@@ -144,14 +144,14 @@
             <div class="clr"></div>
         </div>
         <div class="form-field-wrap posrel left">
-            <div class="posabsolut frm-lbl-actv">Profile*</div>
+            <div class="posabsolut frm-lbl-actv">12)Profile*</div>
             <div class="form-type dev_req_msg">
                 <input type="file" class="frm-txtbox fldrequired" name="profle" autocomplete="off">
             </div>
             <div class="frm-er-msg"></div>
         </div>
         <div class="form-field-wrap posrel left">
-            <div class="posabsolut frm-lbl-actv">Branch*</div>
+            <div class="posabsolut frm-lbl-actv">13)Branch*</div>
             <div class="select dev_req_msg left rmarg vivran_parent" id="villageDropdown">
                 <div class="dropdown-header posrel" id="dropdownHeader">Choose Branch<span
                         class="dropdown-arrow">&#9662;</span></div>
@@ -171,7 +171,7 @@
                     </div>
 
                 </div>
-                <input type="hidden" name="vivran_data[]" class="vivran_data" value="">
+                <!-- <input type="hidden" name="vivran_data[]" class="vivran_data" value=""> -->
             </div>
         </div>
     </div>

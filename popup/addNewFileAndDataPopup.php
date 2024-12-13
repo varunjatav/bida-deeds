@@ -81,8 +81,9 @@ include_once '../languages/' . $lang_file;
         </div>
         <div id="popupDiv">
             <div class="popup-body pp-large-y">
-                <form id="pfrm">
-                    <div class="card_item">
+                <form id="pfrm" enctype="multipart/form-data">
+                    <div class="card_item" style="padding-bottom:50px;">
+
                         <div style="display: flex; margin-top:10px;">
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">1) Name*</div>
@@ -98,7 +99,7 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">2) Mobile*</div>
                                 <div class="select dev_req_msg left rmarg">
-                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no"
+                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile"
                                         maxlength="10" placeholder="Your Mobile No*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -128,7 +129,7 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">4) DOB*</div>
                                 <div class="form-type dev_req_msg">
-                                    <input type="date" class="frm-txtbox dept-frm-input integer fldrequired" name="date"
+                                    <input type="date" class="frm-txtbox dept-frm-input integer fldrequired" name="dob"
                                         autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -147,7 +148,7 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">6) PAN*</div>
                                 <div class="select dev_req_msg left rmarg">
 
-                                    <input type="text" class="frm-txtbox fldrequired" name="name" maxlength="100"
+                                    <input type="text" class="frm-txtbox fldrequired" name="pan" maxlength="100"
                                         placeholder="Your PAN Card No*" autocomplete="off">
 
                                 </div>
@@ -157,7 +158,7 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">7) Adhaar*</div>
                                 <div class="select dev_req_msg left rmarg">
-                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no"
+                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="adhaar"
                                         maxlength="100" placeholder="Your Adhaar No*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -216,7 +217,7 @@ include_once '../languages/' . $lang_file;
                                 <div class="posabsolut frm-lbl-actv">11)Document*</div>
                                 <div class="form-type dev_req_msg">
 
-                                    <input type="file" class="frm-txtbox fldrequired" name="document"
+                                    <input type="file" class="frm-txtbox fldrequired" name="document[]" id="file" accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple
                                         autocomplete="off">
 
                                 </div>
@@ -224,14 +225,14 @@ include_once '../languages/' . $lang_file;
                                 <div class="clr"></div>
                             </div>
                             <div class="form-field-wrap posrel left">
-                                <div class="posabsolut frm-lbl-actv">Profile*</div>
+                                <div class="posabsolut frm-lbl-actv">12)Profile*</div>
                                 <div class="form-type dev_req_msg">
-                                    <input type="file" class="frm-txtbox fldrequired" name="profle" autocomplete="off">
+                                    <input type="file" class="frm-txtbox fldrequired" name="profile" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
                             </div>
                             <div class="form-field-wrap posrel left">
-                                <div class="posabsolut frm-lbl-actv">Branch*</div>
+                                <div class="posabsolut frm-lbl-actv">13)Branch*</div>
                                 <div class="select dev_req_msg left rmarg vivran_parent" id="villageDropdown">
                                     <div class="dropdown-header posrel" id="dropdownHeader">Choose Branch<span
                                             class="dropdown-arrow">&#9662;</span></div>
@@ -254,17 +255,18 @@ include_once '../languages/' . $lang_file;
                                         </div>
 
                                     </div>
-                                    <input type="hidden" name="vivran_data[]" class="vivran_data" value="">
+                                    <!-- <input type="hidden" name="vivran_data[]" class="vivran_data" value=""> -->
                                 </div>
                             </div>
                         </div>
-
                         <hr>
-                        
+
                         <div class="clr"></div>
                         <div class="property_type"></div>
                         <div class="left rmarg" id="add_more_hide">
-                            <a id="add_more_data" style="cursor: pointer; font-size: 14px; line-height: 40px; font-weight: 500; color: blue;">+ Add More Data</a>
+                            <a id="add_more_data"
+                                style="cursor: pointer; font-size: 14px; line-height: 40px; font-weight: 500; color: blue;">+
+                                Add More Data</a>
                         </div>
                     </div>
                     <div class="frm_hidden_data"></div>
@@ -286,7 +288,7 @@ include_once '../languages/' . $lang_file;
     </div>
 </div>
 <!-- <script src="../scripts/jquery-ui.js"></script> -->
-<script src="scripts/filelistdata.js"></script>
+<!-- <script src="scripts/filelistdata.js"></script> -->
 <script>
 $(document).ready(function() {
     function initializeDropdown() {

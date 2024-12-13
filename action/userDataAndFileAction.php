@@ -22,22 +22,21 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 $user_id = $_SESSION['UserID'];
 
 if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
-
     try {
-        // Begin Transaction
+        // Begin transaction
         $db->beginTransaction();
+     
 
         // Check user input for valid data
         foreach ($_POST as $postValue) {
             check_user_input($postValue);
         }
 
-     
 
+        // Sanitize and validate input data
         $name = __fi(validateMaxLen($_POST['name'], 100));
-        $mobile = __fi(validateMaxLen($_POST['Mobile'],  10));
+        $mobile = __fi(validateMaxLen($_POST['mobile'], 10));
         $gender = __fi(validateMaxLen($_POST['gender'], 10));
-        // $email = __fi(validateMaxLen($_POST['email'], 100));
         $dob = __fi(validateMaxLen($_POST['dob'], 10));
         $email = __fi(validateMaxLen($_POST['email'], 100));
         $pan = __fi(validateMaxLen($_POST['pan'], 50));
@@ -45,16 +44,63 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $address = __fi(validateMaxLen($_POST['address'], 50));
         $city = __fi(validateMaxLen($_POST['city'], 50));
         $pincode = __fi(validateMaxLen($_POST['pincode'], 50));
-        $document = __fi($_POST['document']);
-        $profile = __fi($_POST['profile']);
         $branch = __fi(validateMaxLen($_POST['branch'], 50));
 
-       
-      
-        $timestamp = time();
-        $created_by = $_SESSION['UserID'];
 
-        $insrt1 = $db->prepare("INSERT INTO  lm_user_data_and_file  (Name, Mobile, Gender, DOB, Email, Pan, Adhaar,Address, City, Pincode, Document, Profile,Branch) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?)");
+
+
+        
+
+        $allowed_ext = array("pdf", "jpg", "jpeg", "png", "docx", "doc"); // allowed extension
+        $uploadedDocuments = [];
+        $uploadDirectory = '../uploads/';
+
+        // Handle multiple document uploads
+        foreach ($_FILES['document']['name'] as $key => $filename) {
+            $fileTmpPath = $_FILES['document']['tmp_name'][$key];
+            $fileInfo = pathinfo($filename);
+            $fileType = strtolower($fileInfo['extension']);
+            
+            if (in_array($fileType, $allowed_ext)) {
+                $newFileName = uniqid() . '-' . basename($fileInfo['basename']);
+                $destination = $uploadDirectory . $newFileName;
+
+                if (move_uploaded_file($fileTmpPath, $destination)) {
+                    $uploadedDocuments[] = $newFileName;
+                } else {
+                    throw new Exception("Failed to upload file: " . $filename);
+                }
+            } else {
+                throw new Exception("Invalid file type for: " . $filename);
+            }
+        }
+
+        // Handle profile picture upload
+        $profilePicture = '';
+        if (!empty($_FILES['profile']['name'])) {
+            $profileFileName = $_FILES['profile']['name'];
+            $profileTmpPath = $_FILES['profile']['tmp_name'];
+            $profileInfo = pathinfo($profileFileName);
+            $profileFileType = strtolower($profileInfo['extension']);
+            
+            if (in_array($profileFileType, $allowed_ext)) {
+                $profilePicture = uniqid() . '-' . basename($profileInfo['basename']);
+                $profileDestination = $uploadDirectory . $profilePicture;
+
+                if (!move_uploaded_file($profileTmpPath, $profileDestination)) {
+                    throw new Exception("Failed to upload profile picture.");
+                }
+            } else {
+                throw new Exception("Invalid profile picture file type.");
+            }
+        }
+
+        // Insert data into the database
+        $insrt1 = $db->prepare("INSERT INTO lm_user_data_and_file 
+            (Name, Mobile, Gender, DOB, Email, Pan, Adhaar, Address, City, Pincode, Document, Profile, Branch) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+
         $insrt1->bindParam(1, $name);
         $insrt1->bindParam(2, $mobile);
         $insrt1->bindParam(3, $gender);
@@ -64,28 +110,28 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $insrt1->bindParam(7, $adhaar);
         $insrt1->bindParam(8, $address);
         $insrt1->bindParam(9, $city);
-        $insert->bindParam(10,$pincode);
-        $insert->bindParam(11,$document);
-        $insert->bindParam(12,$profile);
-        $insert->bindParam(13,$branch);
-      
+        $insrt1->bindParam(10, $pincode);
+        $insrt1->bindValue(11, implode(",", $uploadedDocuments)); // Store documents as comma-separated
+        $insrt1->bindParam(12, $profilePicture);
+        $insrt1->bindParam(13, $branch);
+
         $insrt1->execute();
-
-        // $data_id = $db->lastInsertId();
-
+        // $db->commit();
 
         $db_response_data = array();
-        commit($db, 'User data and file added successfully', $db_response_data);
-    } catch (\Exception $e) {
+        commit($db, 'User data added successfully', $db_response_data);
+    } 
+    catch (Exception $e) {
         if ($db->inTransaction()) {
             $db->rollback();
         }
-
-        // return response
-        $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
-        rollback($db, $e->getCode(), $log_error_msg);
+        error_log('Error: ' . $e->getMessage());
+        echo "Error occurred: " . $e->getMessage();
     }
-} elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
+}
+
+
+ elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
 
     try {
         // Begin Transaction
@@ -142,4 +188,3 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         rollback($db, $e->getCode(), $log_error_msg);
     }
 } 
-
