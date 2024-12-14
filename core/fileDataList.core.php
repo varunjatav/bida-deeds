@@ -34,96 +34,120 @@ if ($action == 'filter_applied') {
 }
 
 
-$sql = "SELECT SQL_CALC_FOUND_ROWS ID, Name, Mobile, Gender, DOB, Email, Pan, Adhaar, Address, City, PinCode, Document,Profile, Branch FROM lm_user_data_and_file WHERE 1 = 1 ";
+$sql = "SELECT SQL_CALC_FOUND_ROWS 
+        lm_user_data.ID, 
+        lm_user_data.Name, 
+        lm_user_data.Mobile, 
+        lm_user_data.Gender, 
+        lm_user_data.DOB, 
+        lm_user_data.Email, 
+        lm_user_data.Pan, 
+        lm_user_data.Adhaar, 
+        lm_user_data.Address, 
+        lm_user_data.City, 
+        lm_user_data.PinCode, 
+        lm_user_data.Branch,
+        lm_user_documents.document,
+        lm_user_documents.profile
+    FROM 
+        lm_user_data
+    LEFT JOIN 
+        lm_user_documents 
+    ON 
+        lm_user_data.ID = lm_user_documents.user_id
+    WHERE 
+        1 = 1
+";
 
-if($_REQUEST["id"]){
-    $sql .=" AND ID LIKE ?";
+if ($_REQUEST["id"]) {
+    $sql .= " AND lm_user_data.ID LIKE ?";
 }
 if ($_REQUEST['name']) {
-    $sql .= " AND Name Like ?";
+    $sql .= " AND lm_user_data.Name Like ?";
 }
 if ($_REQUEST['mobile']) {
-    $sql .= " AND Mobile Like ?";
+    $sql .= " AND lm_user_data.Mobile Like ?";
 }
 if ($_REQUEST['gender']) {
-    $sql .= " AND Gender Like ?";
+    $sql .= " AND lm_user_data.Gender Like ?";
 }
 if ($_REQUEST['dob']) {
-    $sql .= " AND DOB Like ?";
+    $sql .= " AND lm_user_data.DOB Like ?";
 }
 if ($_REQUEST['email']) {
-    $sql .= " AND Email Like ?";
+    $sql .= " AND lm_user_data.Email Like ?";
 }
 if ($_REQUEST['pan']) {
-    $sql .= " AND Pan Like ?";
+    $sql .= " AND lm_user_data.Pan Like ?";
 }
 if ($_REQUEST['address']) {
-    $sql .= " AND Address Like ?";
+    $sql .= " AND lm_user_data.Address Like ?";
 }
 if ($_REQUEST['adhaar']) {
-    $sql .= " AND Adhaar Like ?";
+    $sql .= " AND lm_user_data.Adhaar Like ?";
 }
 if ($_REQUEST['city']) {
-    $sql .= " AND City Like ?";
+    $sql .= " AND lm_user_data.City Like ?";
 }
 if ($_REQUEST['pincode']) {
-    $sql .= " AND PinCode Like ?";
+    $sql .= " AND lm_user_data.PinCode Like ?";
 }
 if ($_REQUEST['document']) {
-    $sql .= " AND Document Like ?";
+    $sql .= " AND lm_user_documents.document Like ?";
 }
 if ($_REQUEST['profile']) {
-    $sql .= " AND Profile Like ?";
+    $sql .= " AND lm_user_documents.profile Like ?";
 }
 if ($_REQUEST['branch']) {
-    $sql .= " AND Branch Like ?";
+    $sql .= " AND lm_user_data.Branch Like ?";
 }
 
-$sql .= " ORDER BY Name DESC";
+$sql .= " ORDER BY lm_user_data.Name DESC";
 
 if ($exportlist != 'export') {
     $sql .= " LIMIT " . $start . ", " . $limit;
 }
+
 $i = 1;
 $sql = $db->prepare($sql);
 if ($_REQUEST['id']) {
-    $sql ->bindParam($i++,$id);
+    $sql ->bindParam($i++, $id);
 }
 if ($_REQUEST['name']) {
-    $sql ->bindParam($i++,$name);
+    $sql ->bindParam($i++, $name);
 }
 if ($_REQUEST['mobile']) {
-    $sql ->bindParam($i++,$mobile);
+    $sql ->bindParam($i++, $mobile);
 }
 if ($_REQUEST['gender']) {
-    $sql ->bindParam($i++,$gender);
+    $sql ->bindParam($i++, $gender);
 }
 if ($_REQUEST['dob']) {
-    $sql ->bindParam($i++,$dob);
+    $sql ->bindParam($i++, $dob);
 }
 if ($_REQUEST['email']) {
-    $sql ->bindParam($i++,$email);
+    $sql ->bindParam($i++, $email);
 }
 if ($_REQUEST['pan']) {
-    $sql ->bindParam($i++,$pan);
+    $sql ->bindParam($i++, $pan);
 }
 if ($_REQUEST['adhaar']) {
-    $sql ->bindParam($i++,$adhaar);
+    $sql ->bindParam($i++, $adhaar);
 }
 if ($_REQUEST['address']) {
-    $sql ->bindParam($i++,$address);
+    $sql ->bindParam($i++, $address);
 }
 if ($_REQUEST['pincode']) {
-    $sql ->bindParam($i++,$pincode);
+    $sql ->bindParam($i++, $pincode);
 }
 if ($_REQUEST['document']) {
-    $sql ->bindParam($i++,$document);
+    $sql ->bindParam($i++, $document);
 }
 if ($_REQUEST['profile']) {
-    $sql ->bindParam($i++,$profile);
+    $sql ->bindParam($i++, $profile);
 }
 if ($_REQUEST['branch']) {
-    $sql ->bindParam($i++,$branch);
+    $sql ->bindParam($i++, $branch);
 }
 
 $sql->execute();

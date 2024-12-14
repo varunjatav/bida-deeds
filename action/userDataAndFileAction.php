@@ -25,13 +25,11 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
     try {
         // Begin transaction
         $db->beginTransaction();
-     
 
         // Check user input for valid data
         foreach ($_POST as $postValue) {
             check_user_input($postValue);
         }
-
 
         // Sanitize and validate input data
         $name = __fi(validateMaxLen($_POST['name'], 100));
@@ -46,12 +44,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $pincode = __fi(validateMaxLen($_POST['pincode'], 50));
         $branch = __fi(validateMaxLen($_POST['branch'], 50));
 
-
-
-
-        
-
-        $allowed_ext = array("pdf", "jpg", "jpeg", "png", "docx", "doc"); // allowed extension
+        $allowed_ext = array("pdf", "jpg", "jpeg", "png", "docx", "doc"); // allowed extensions
         $uploadedDocuments = [];
         $uploadDirectory = '../uploads/';
 
@@ -60,7 +53,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
             $fileTmpPath = $_FILES['document']['tmp_name'][$key];
             $fileInfo = pathinfo($filename);
             $fileType = strtolower($fileInfo['extension']);
-            
+
             if (in_array($fileType, $allowed_ext)) {
                 $newFileName = uniqid() . '-' . basename($fileInfo['basename']);
                 $destination = $uploadDirectory . $newFileName;
@@ -82,7 +75,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
             $profileTmpPath = $_FILES['profile']['tmp_name'];
             $profileInfo = pathinfo($profileFileName);
             $profileFileType = strtolower($profileInfo['extension']);
-            
+
             if (in_array($profileFileType, $allowed_ext)) {
                 $profilePicture = uniqid() . '-' . basename($profileInfo['basename']);
                 $profileDestination = $uploadDirectory . $profilePicture;
@@ -95,33 +88,47 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
             }
         }
 
-        // Insert data into the database
-        $insrt1 = $db->prepare("INSERT INTO lm_user_data_and_file 
-            (Name, Mobile, Gender, DOB, Email, Pan, Adhaar, Address, City, Pincode, Document, Profile, Branch) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ");
+        // Insert user data into the first table (lm_user_data)
+        $insrt1 = $db->prepare("INSERT INTO lm_user_data 
+            (Name, Mobile, Gender, DOB, Email, Pan, Adhaar, Address, City, Pincode, Branch) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        $insrt1->bindParam(1, $name);
-        $insrt1->bindParam(2, $mobile);
-        $insrt1->bindParam(3, $gender);
-        $insrt1->bindParam(4, $dob);
-        $insrt1->bindParam(5, $email);
-        $insrt1->bindParam(6, $pan);
-        $insrt1->bindParam(7, $adhaar);
-        $insrt1->bindParam(8, $address);
-        $insrt1->bindParam(9, $city);
-        $insrt1->bindParam(10, $pincode);
-        $insrt1->bindValue(11, implode(",", $uploadedDocuments)); // Store documents as comma-separated
-        $insrt1->bindParam(12, $profilePicture);
-        $insrt1->bindParam(13, $branch);
+        // Bind parameters
+        $insrt1->bindParam(1, $name, PDO::PARAM_STR);
+        $insrt1->bindParam(2, $mobile, PDO::PARAM_STR);
+        $insrt1->bindParam(3, $gender, PDO::PARAM_STR);
+        $insrt1->bindParam(4, $dob, PDO::PARAM_STR);
+        $insrt1->bindParam(5, $email, PDO::PARAM_STR);
+        $insrt1->bindParam(6, $pan, PDO::PARAM_STR);
+        $insrt1->bindParam(7, $adhaar, PDO::PARAM_STR);
+        $insrt1->bindParam(8, $address, PDO::PARAM_STR);
+        $insrt1->bindParam(9, $city, PDO::PARAM_STR);
+        $insrt1->bindParam(10, $pincode, PDO::PARAM_STR);
+        $insrt1->bindParam(11, $branch, PDO::PARAM_STR);
 
+        // Execute first query
         $insrt1->execute();
-        // $db->commit();
 
+        // Get the last inserted ID
+        $userId = $db->lastInsertId();
+
+        // Insert documents and profile picture into the second table (lm_user_documents)
+        $documentsString = implode(",", $uploadedDocuments);
+        $insrt2 = $db->prepare("INSERT INTO lm_user_documents (user_id, document, profile) VALUES (?, ?, ?)");
+
+        // Bind parameters
+        $insrt2->bindParam(1, $userId, PDO::PARAM_INT);
+        $insrt2->bindParam(2, $documentsString, PDO::PARAM_STR);
+        $insrt2->bindParam(3, $profilePicture, PDO::PARAM_STR);
+
+        // Execute second query
+        $insrt2->execute();
+
+        // Commit transaction
         $db_response_data = array();
         commit($db, 'User data added successfully', $db_response_data);
-    } 
-    catch (Exception $e) {
+        // echo "User data and files added successfully.";
+    } catch (Exception $e) {
         if ($db->inTransaction()) {
             $db->rollback();
         }
@@ -129,6 +136,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         echo "Error occurred: " . $e->getMessage();
     }
 }
+
 
 
  elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {

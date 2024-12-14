@@ -733,7 +733,7 @@ function exportMasterData(exportlist, export_type, type) {
     if (export_type === 'excel') {
         $('.act_btn_ovrly').show();
         $('.export_kashtkar_sahmati').html('<div class="medical-spinner" style="top:0; left:20%;" id="load"></div>');
-        var formUrl = "report/export_fasli_land_data.php";
+        var formUrl = "report/export_user_data_and_doc.php";
     } else if (export_type === 'pdf') {
         var formUrl = "pdf/export_fasli_land_data.php";
     } else if (export_type === 'print') {

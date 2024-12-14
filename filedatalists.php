@@ -154,10 +154,12 @@ include_once 'languages/' . $lang_file;
                                 <p>Branch</p>
                                 <a style="cursor:pointer;" onclick="sort_name(11, '');"></a>
                             </div>
+                          
                             <div class="cellDivHeader">
-                                <p>Documents</p>
+                                <p>Document</p>
                                 <a style="cursor:pointer;" onclick="sort_name(11, '');"></a>
                             </div>
+                            
                             <div class="cellDivHeader">
                                 <p>Profile</p>
                                 <a style="cursor:pointer;" onclick="sort_name(11, '');"></a>
@@ -185,10 +187,8 @@ include_once 'languages/' . $lang_file;
                                     $city = $row['City'] ? $row['City'] : '--';
                                     $pincode = $row['PinCode'] ? $row['PinCode'] : '--';
                                     $branch = $row['Branch'] ? $row['Branch'] : '--';
-                                    $document = $row['Document'] ? $row['Document'] : '--';
-                                    $profile = $row['Profile'] ? $row['Profile'] : '--';
-                                    $document = $row['Document'] ? $row['Document'] : '--';
-                                    $profile = $row['Profile'] ? $row['Profile'] : '--';
+                                    $document = $row['document'] ? $row['document'] : '--';
+                                    $profile = $row['profile'] ? $row['profile'] : '--';
                                     $document_array = explode(',', $document);
                                 ?>
                                     <div class="rowDiv <?php echo $validate_color; ?>">
@@ -300,9 +300,7 @@ include_once 'languages/' . $lang_file;
 
 
                     <!-- second table -->
-
-
-
+            
 
                     <!-- <div class="containerDiv">
                         <div class="rowDivHeader">
