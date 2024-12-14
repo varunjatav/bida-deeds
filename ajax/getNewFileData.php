@@ -1,11 +1,12 @@
 <?php
-   include_once '../config.php';
-   include_once '../includes/checkSession.php';
-   include_once '../includes/get_time_zone.php';
-   include_once '../dbcon/db_connect.php';
-   include_once '../functions/common.function.php';
-   //include_once '../core/propertType.core.php';
-   ?>
+include_once '../config.php';
+include_once '../includes/checkSession.php';
+include_once '../includes/get_time_zone.php';
+include_once '../dbcon/db_connect.php';
+include_once '../functions/common.function.php';
+//    include_once '../core/addNewDataPopup.core.php';
+//include_once '../core/propertType.core.php';
+?>
 <div class="change_tree_append" style="margin-top: 25px;">
     <div style="display: flex; margin-top:10px;">
         <div class="form-field-wrap posrel">
@@ -30,19 +31,14 @@
         </div>
         <div class="form-field-wrap posrel">
             <div class="posabsolut frm-lbl-actv">3) Gender*</div>
-            <div class="" style=" display:flex; justify-content:left; align-items:center; flex-direction:column">
-                <div style="display:flex; justify-content:left; align-items:center; width: 100px;">
-                    <input type="radio" name="gender" id="gender_male" value="male">
-                    <label for="gender_male">Male</label>
-                </div>
-                <div style=" display:flex; justify-content:left; align-items:center; width: 100px;">
-                    <input type="radio" name="gender" id="gender_female" value="female">
-                    <label for="gender_female">Female</label>
-                </div>
-                <div style=" display:flex; justify-content:left; align-items:center;  width: 100px;">
-                    <input type="radio" name="gender" id="gender_other" value="other">
-                    <label for="gender_other">Other</label>
-                </div>
+            <div class="select dev_req_msg left rmarg" style="width: 100%;">
+                <select name="gender" class="form-select fldrequired" id="">
+                    <option value="">Choose Your Gender*</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <div class="select__arrow"></div>
             </div>
             <div class="frm-er-msg"></div>
             <div class="clr"></div>
@@ -137,7 +133,9 @@
             <div class="posabsolut frm-lbl-actv">11) Document*</div>
             <div class="form-type dev_req_msg">
 
-                <input type="file" multiple class="frm-txtbox fldrequired" name="document" autocomplete="off">
+                <input type="file" class="frm-txtbox fldrequired" name="document[]" id="file"
+                    accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple autocomplete="off">
+
 
             </div>
             <div class="frm-er-msg"></div>
@@ -152,26 +150,29 @@
         </div>
         <div class="form-field-wrap posrel left">
             <div class="posabsolut frm-lbl-actv">13)Branch*</div>
-            <div class="select dev_req_msg left rmarg vivran_parent" id="villageDropdown">
+            <div class="select dev_req_msg left rmarg branch_parent" id="branchDropDown">
                 <div class="dropdown-header posrel" id="dropdownHeader">Choose Branch<span
                         class="dropdown-arrow">&#9662;</span></div>
                 <div class="dropdown-content">
 
                     <div class="checkbox-wrapper">
-                        <input type="checkbox" name="branch" value="banking" class="fldrequired village-dropdown">
-                        <label for="banking">Banking</label>
+                        <input type="checkbox" id="Finance" name="branch[]" value="Finance"
+                            class="fldrequired village-dropdown">
+                        <label for="Finance">Finance</label>
                     </div>
                     <div class="checkbox-wrapper">
-                        <input type="checkbox" name="branch" value="banking" class="fldrequired village-dropdown">
-                        <label for="banking">Banking</label>
+                        <input type="checkbox" id="Banking" name="branch[]" value="Banking"
+                            class="fldrequired village-dropdown">
+                        <label for="Banking">Banking</label>
                     </div>
                     <div class="checkbox-wrapper">
-                        <input type="checkbox" name="branch" value="banking" class="fldrequired village-dropdown">
-                        <label for="banking">Banking</label>
+                        <input type="checkbox" id="Agriculture" name="branch[]" value="Agriculture"
+                            class="fldrequired village-dropdown">
+                        <label for="Agriculture">Agriculture</label>
                     </div>
 
                 </div>
-                <!-- <input type="hidden" name="vivran_data[]" class="vivran_data" value=""> -->
+                <!-- <input type="hidden" name="branch[]" class="branch" value=""> -->
             </div>
         </div>
     </div>

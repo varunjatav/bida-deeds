@@ -4,7 +4,7 @@ include_once '../includes/checkSession.php';
 include_once '../includes/get_time_zone.php';
 include_once '../dbcon/db_connect.php';
 include_once '../functions/common.function.php';
-include_once '../core/addNewDataPopup.core.php';
+// include_once '../core/addNewDataPopup.core.php';
 include_once '../languages/' . $lang_file;
 ?>
 <style>
@@ -107,21 +107,14 @@ include_once '../languages/' . $lang_file;
                             </div>
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">3) Gender*</div>
-                                <div class=""
-                                    style=" display:flex; justify-content:left; align-items:center; flex-direction:column">
-                                    <div style="display:flex; justify-content:left; align-items:center; width: 100px;">
-                                        <input type="radio" name="gender" id="gender_male" value="male">
-                                        <label for="gender_male">Male</label>
-                                    </div>
-                                    <div style=" display:flex; justify-content:left; align-items:center; width: 100px;">
-                                        <input type="radio" name="gender" id="gender_female" value="female">
-                                        <label for="gender_female">Female</label>
-                                    </div>
-                                    <div
-                                        style=" display:flex; justify-content:left; align-items:center;  width: 100px;">
-                                        <input type="radio" name="gender" id="gender_other" value="other">
-                                        <label for="gender_other">Other</label>
-                                    </div>
+                                <div class="select dev_req_msg left rmarg" style="width: 100%;">
+                                    <select name="gender" class="form-select fldrequired" id="">
+                                        <option value="">Choose Your Gender*</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div class="select__arrow"></div>
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -255,7 +248,7 @@ include_once '../languages/' . $lang_file;
                                         </div>
 
                                     </div>
-                                    <input type="hidden" name="branch[]" class="branch" value="">
+                                    <!-- <input type="hidden" name="branch[]" class="branch" value=""> -->
                                 </div>
                             </div>
                         </div>
