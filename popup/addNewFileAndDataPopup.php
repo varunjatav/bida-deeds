@@ -233,29 +233,29 @@ include_once '../languages/' . $lang_file;
                             </div>
                             <div class="form-field-wrap posrel left">
                                 <div class="posabsolut frm-lbl-actv">13)Branch*</div>
-                                <div class="select dev_req_msg left rmarg vivran_parent" id="villageDropdown">
+                                <div class="select dev_req_msg left rmarg branch_parent" id="branchDropDown">
                                     <div class="dropdown-header posrel" id="dropdownHeader">Choose Branch<span
                                             class="dropdown-arrow">&#9662;</span></div>
                                     <div class="dropdown-content">
 
                                         <div class="checkbox-wrapper">
-                                            <input type="checkbox" name="branch" value="banking"
+                                            <input type="checkbox" id="Finance" name="branch[]" value="Finance"
                                                 class="fldrequired village-dropdown">
-                                            <label for="banking">Banking</label>
+                                            <label for="Finance">Finance</label>
                                         </div>
                                         <div class="checkbox-wrapper">
-                                            <input type="checkbox" name="branch" value="banking"
+                                            <input type="checkbox" id="Banking" name="branch[]" value="Banking"
                                                 class="fldrequired village-dropdown">
-                                            <label for="banking">Banking</label>
+                                            <label for="Banking">Banking</label>
                                         </div>
                                         <div class="checkbox-wrapper">
-                                            <input type="checkbox" name="branch" value="banking"
+                                            <input type="checkbox" id="Agriculture" name="branch[]" value="Agriculture"
                                                 class="fldrequired village-dropdown">
-                                            <label for="banking">Banking</label>
+                                            <label for="Agriculture">Agriculture</label>
                                         </div>
 
                                     </div>
-                                    <!-- <input type="hidden" name="vivran_data[]" class="vivran_data" value=""> -->
+                                    <input type="hidden" name="branch[]" class="branch" value="">
                                 </div>
                             </div>
                         </div>
@@ -315,14 +315,14 @@ $(document).ready(function() {
         });
         let displayText = selectedValues.length > 0 ? selectedValues.join(', ') : 'विवरण चुनें';
         $dropdown.find('.dropdown-header').text(displayText);
-        $dropdown.closest('.vivran_parent').find('.vivran_data').val(displayText);
+        $dropdown.closest('.branch_parent').find('.branch').val(displayText);
     }
     initializeDropdown();
     $('#addMoreButton').click(function() {
         let newDiv = `
                 <div class="form-field-wrap posrel left">
                     <div class="posabsolut frm-lbl-actv">विवरण*</div>
-                    <div class="select dev_req_msg left rmarg villageDropdown">
+                    <div class="select dev_req_msg left rmarg branchDropDown">
                         <div class="dropdown-header posrel">विवरण चुनें <span class="dropdown-arrow">&#9662;</span></div>
                         <div class="dropdown-content">
                             <div class="checkbox-wrapper">
@@ -335,7 +335,7 @@ $(document).ready(function() {
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="vivran_data[]" class="vivran_data" value="">
+                    <input type="hidden" name="branch[]" class="branch" value="">
                     <div class="frm-er-msg"></div>
                     <div class="clr"></div>
                 </div>`;

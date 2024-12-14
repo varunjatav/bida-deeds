@@ -42,7 +42,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $address = __fi(validateMaxLen($_POST['address'], 50));
         $city = __fi(validateMaxLen($_POST['city'], 50));
         $pincode = __fi(validateMaxLen($_POST['pincode'], 50));
-        $branch = __fi(validateMaxLen($_POST['branch'], 50));
+        // $branch = __fi(validateMaxLen($_POST['branch'], 50));
+        $branch = isset($_POST['branch']) ? $_POST['branch'] : array();
+
+
+        $branchString = implode(',', $branch);
+
+        
 
         $allowed_ext = array("pdf", "jpg", "jpeg", "png", "docx", "doc"); // allowed extensions
         $uploadedDocuments = [];
@@ -93,7 +99,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
             (Name, Mobile, Gender, DOB, Email, Pan, Adhaar, Address, City, Pincode, Branch) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        // Bind parameters
+
         $insrt1->bindParam(1, $name, PDO::PARAM_STR);
         $insrt1->bindParam(2, $mobile, PDO::PARAM_STR);
         $insrt1->bindParam(3, $gender, PDO::PARAM_STR);
@@ -104,7 +110,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $insrt1->bindParam(8, $address, PDO::PARAM_STR);
         $insrt1->bindParam(9, $city, PDO::PARAM_STR);
         $insrt1->bindParam(10, $pincode, PDO::PARAM_STR);
-        $insrt1->bindParam(11, $branch, PDO::PARAM_STR);
+        $insrt1->bindParam(11, $branchString, PDO::PARAM_STR);
 
         // Execute first query
         $insrt1->execute();
@@ -135,11 +141,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         error_log('Error: ' . $e->getMessage());
         echo "Error occurred: " . $e->getMessage();
     }
-}
-
-
-
- elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
+} elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
 
     try {
         // Begin Transaction
@@ -149,10 +151,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         foreach ($_POST as $postValue) {
             check_user_input($postValue);
         }
-     
 
 
-         $id = __fi(validateInteger(decryptIt(myUrlEncode($_POST['id'])), "ID")); 
+
+        $id = __fi(validateInteger(decryptIt(myUrlEncode($_POST['id'])), "ID"));
 
         $name = __fi(validateMaxLen($_POST['name'], 100));
         $user_name = __fi(validateMaxLen($_POST['user_name'],  100));
@@ -164,7 +166,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $password = __fi(validateMaxLen($_POST['password'], 20));
         $c_password = __fi(validateMaxLen($_POST['cpassword'], 20));
 
-     
+
 
 
 
@@ -183,7 +185,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $update1->bindParam(10, $id);
         $update1->execute();
 
-       
+
         $db_response_data = array();
         commit($db, 'User data updated successfully', $db_response_data);
     } catch (\Exception $e) {
@@ -195,4 +197,4 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
         rollback($db, $e->getCode(), $log_error_msg);
     }
-} 
+}
