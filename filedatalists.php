@@ -1,9 +1,15 @@
 <?php
+
 include_once 'config.php';
+
 include_once 'includes/checkSession.php';
+
 include_once 'includes/get_time_zone.php';
+
 include_once 'dbcon/db_connect.php';
+
 include_once 'functions/common.function.php';
+
 include_once 'core/permission.core.php';
 include_once 'core/fileDataList.core.php';
 include_once 'languages/' . $lang_file;
@@ -37,6 +43,7 @@ include_once 'languages/' . $lang_file;
     <?php include "includes/header.php"; ?>
     <div id="appendFilter"></div>
     <div class="wrapper">
+        
         <div class="col-wrapper">
             <?php include "includes/sidebarmenu.php"; ?>
             <div class="full-column db-cont-wrap right">
@@ -170,7 +177,7 @@ include_once 'languages/' . $lang_file;
                             </div>
                         </div>
                         <div id="main-body" style="display: contents;">
-                            <div id="paginate-body" style="display: contents;">
+                             <div id="paginate-body" style="display: contents;">
                                 <?php
                                 $srno = 0;
                                 while ($row = $sql->fetch()) {
@@ -258,7 +265,7 @@ include_once 'languages/' . $lang_file;
                                 <?php
                                 }
                                 ?>
-                            </div>
+                            </div> 
                             <?php
                             if ($output) {
                             ?>

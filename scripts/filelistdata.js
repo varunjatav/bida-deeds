@@ -38,9 +38,12 @@ $(document).ready(function () {
             url: 'ajax/getNewFileData.php',
             data: dataString,
             type: "POST",
+
             beforeSend: function () {
             },
             success: function (data) {
+            console.log("data --->", data);
+
                 $('.property_type').append(data);
                 initializeDropdowns();
             },
@@ -85,7 +88,7 @@ $(document).ready(function () {
         $(this).closest('.change_tree_append').remove();
     });
 
-    // add fasli new data
+    // add new user data and documents
     $('#popup').on('click', '#add_user_data_and_file', function () {
         console.log("inside check")
         var check = 0;
@@ -165,9 +168,13 @@ $(document).ready(function () {
 
     $("#popup").on('submit', '#pfrm', function (e) {
         var postData = new FormData(this);
-        console.log(this);
+        
         console.log("form data -->",postData);
-        alert(postData);
+        postData.forEach((value, key) => {
+            console.log("key and value pair -->", key, value);
+        });
+        
+        // alert(postData);
         
         var action_btn_id = $('input[name="action_btn_id"]').val();
         var action_btn_name = $('input[name="action_btn_name"]').val();

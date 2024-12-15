@@ -26,6 +26,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         // Begin transaction
         $db->beginTransaction();
 
+    
         // Check user input for valid data
         foreach ($_POST as $postValue) {
             check_user_input($postValue);
@@ -44,11 +45,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $pincode = __fi(validateMaxLen($_POST['pincode'], 50));
         // $branch = __fi(validateMaxLen($_POST['branch'], 50));
         $branch = isset($_POST['branch']) ? $_POST['branch'] : array();
-
-
-        $branchString = implode(',', $branch);
-
-        
+        $branchString = implode(",", $branch);
 
         $allowed_ext = array("pdf", "jpg", "jpeg", "png", "docx", "doc"); // allowed extensions
         $uploadedDocuments = [];

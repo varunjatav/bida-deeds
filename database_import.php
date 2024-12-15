@@ -1,14 +1,18 @@
 <?php
-
+// echo "database import file";
 include_once 'config.php';
+// echo "database import file";
 include_once 'dbcon/db_connect.php';
+// echo "database import file";
 include_once 'functions/common.function.php';
+echo "database import file";
 set_time_limit(0);
 ini_set('memory_limit', '6024M'); // or you could use 6G
 $filePath = 'bida-deed-dev.sql';
-
+echo "database import file";
 $res = importSqlFile($db, $filePath);
 
+echo "database import file";
 function importSqlFile($pdo, $sqlFile, $tablePrefix = null, $InFilePath = null) {
     try {
 

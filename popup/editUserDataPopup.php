@@ -142,7 +142,7 @@ include_once '../languages/' . $lang_file;
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no"
                                         maxlength="10" placeholder="Your Mobile No*" autocomplete="off"
-                                        value="<?php echo isset($userInfo['Mobile_NO']) ? htmlspecialchars($userInfo['Mobile_NO']) : ''; ?>">
+                                        value="<?php echo isset($userInfo['Mobile_No']) ? htmlspecialchars($userInfo['Mobile_No']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>

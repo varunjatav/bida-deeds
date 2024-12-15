@@ -4,10 +4,9 @@ include_once '../includes/checkSession.php';
 include_once '../includes/get_time_zone.php';
 include_once '../dbcon/db_connect.php';
 include_once '../functions/common.function.php';
-//    include_once '../core/addNewDataPopup.core.php';
 //include_once '../core/propertType.core.php';
 ?>
-<div class="change_tree_append" style="margin-top: 25px;">
+<div class="change_tree_append index" style="margin-top: 25px;">
     <div style="display: flex; margin-top:10px;">
         <div class="form-field-wrap posrel">
             <div class="posabsolut frm-lbl-actv">1) Name*</div>
@@ -23,7 +22,7 @@ include_once '../functions/common.function.php';
         <div class="form-field-wrap posrel">
             <div class="posabsolut frm-lbl-actv">2) Mobile*</div>
             <div class="select dev_req_msg left rmarg">
-                <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no" maxlength="10"
+                <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile" maxlength="10"
                     placeholder="Your Mobile No*" autocomplete="off">
             </div>
             <div class="frm-er-msg"></div>
@@ -46,7 +45,7 @@ include_once '../functions/common.function.php';
         <div class="form-field-wrap posrel">
             <div class="posabsolut frm-lbl-actv">4) DOB*</div>
             <div class="form-type dev_req_msg">
-                <input type="date" class="frm-txtbox dept-frm-input integer fldrequired" name="date" autocomplete="off">
+                <input type="date" class="frm-txtbox dept-frm-input integer fldrequired" name="dob" autocomplete="off">
             </div>
             <div class="frm-er-msg"></div>
             <div class="clr"></div>
@@ -64,7 +63,7 @@ include_once '../functions/common.function.php';
             <div class="posabsolut frm-lbl-actv">6) PAN*</div>
             <div class="select dev_req_msg left rmarg">
 
-                <input type="text" class="frm-txtbox fldrequired" name="name" maxlength="100"
+                <input type="text" class="frm-txtbox fldrequired" name="pan" maxlength="100"
                     placeholder="Your PAN Card No*" autocomplete="off">
 
             </div>
@@ -74,7 +73,7 @@ include_once '../functions/common.function.php';
         <div class="form-field-wrap posrel">
             <div class="posabsolut frm-lbl-actv">7) Adhaar*</div>
             <div class="select dev_req_msg left rmarg">
-                <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile_no" maxlength="100"
+                <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="adhaar" maxlength="100"
                     placeholder="Your Adhaar No*" autocomplete="off">
             </div>
             <div class="frm-er-msg"></div>
@@ -96,7 +95,7 @@ include_once '../functions/common.function.php';
         <div class="form-field-wrap posrel">
             <div class="posabsolut frm-lbl-actv">9) City*</div>
             <div class="form-type dev_req_msg">
-                <select name="city" class="fldrequired village_gata">
+                <select name="city" class="fldrequired">
                     <option value="">City*</option>
 
                     <option value="delhi">
@@ -144,7 +143,7 @@ include_once '../functions/common.function.php';
         <div class="form-field-wrap posrel left">
             <div class="posabsolut frm-lbl-actv">12)Profile*</div>
             <div class="form-type dev_req_msg">
-                <input type="file" class="frm-txtbox fldrequired" name="profle" autocomplete="off">
+                <input type="file" class="frm-txtbox fldrequired" name="profile[]" autocomplete="off">
             </div>
             <div class="frm-er-msg"></div>
         </div>

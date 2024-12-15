@@ -69,7 +69,7 @@ if ($_REQUEST['mobile']) {
     $sql .= " AND lm_user_data.Mobile Like ?";
 }
 if ($_REQUEST['gender']) {
-    $sql .= " AND lm_user_data.Gender Like ?";
+    $sql .= " AND lm_user_data.Gender = ?";
 }
 if ($_REQUEST['dob']) {
     $sql .= " AND lm_user_data.DOB Like ?";

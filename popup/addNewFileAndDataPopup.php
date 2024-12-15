@@ -306,7 +306,7 @@ $(document).ready(function() {
         $dropdown.find('.village-dropdown:checked').each(function() {
             selectedValues.push($(this).val());
         });
-        let displayText = selectedValues.length > 0 ? selectedValues.join(', ') : 'विवरण चुनें';
+        let displayText = selectedValues.length > 0 ? selectedValues.join(', ') : 'Choose Branch';
         $dropdown.find('.dropdown-header').text(displayText);
         $dropdown.closest('.branch_parent').find('.branch').val(displayText);
     }
@@ -316,14 +316,14 @@ $(document).ready(function() {
                 <div class="form-field-wrap posrel left">
                     <div class="posabsolut frm-lbl-actv">विवरण*</div>
                     <div class="select dev_req_msg left rmarg branchDropDown">
-                        <div class="dropdown-header posrel">विवरण चुनें <span class="dropdown-arrow">&#9662;</span></div>
+                        <div class="dropdown-header posrel">Choose Branch <span class="dropdown-arrow">&#9662;</span></div>
                         <div class="dropdown-content">
                             <div class="checkbox-wrapper">
-                                <input type="checkbox" name="vivran[]" value="Option1" class="fldrequired village-dropdown">
+                                <input type="checkbox" name="branch[]" value="Option1" class="fldrequired village-dropdown">
                                 <label for="village_code">Option 1</label>
                             </div>
                             <div class="checkbox-wrapper">
-                                <input type="checkbox" name="vivran[]" value="Option2" class="fldrequired village-dropdown">
+                                <input type="checkbox" name="branch[]" value="Option2" class="fldrequired village-dropdown">
                                 <label for="village_code">Option 2</label>
                             </div>
                         </div>

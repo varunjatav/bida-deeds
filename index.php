@@ -79,6 +79,7 @@ if (isset($_COOKIE[$cookie_name])) {
         });
 
         $('.login_container').on('click', "#login", function () {
+           
             var check = 0;
             $('.fldrequired').each(function () {
                 $('.frm-txtbox').removeClass('frm-focus');
@@ -99,6 +100,7 @@ if (isset($_COOKIE[$cookie_name])) {
                 e.stopImmediatePropagation();
                 var json_data = getTimeZoneData();
                 var postData = new FormData(this);
+                alert("this -->", this);
                 postData.append('offset', json_data['offset']);
                 postData.append('dst', json_data['dst']);
                 var formURL = "core/login.core.php";
@@ -110,6 +112,7 @@ if (isset($_COOKIE[$cookie_name])) {
                     processData: false,
                     contentType: false,
                     success: function (data, textStatus, jqXHR) {
+                        alert("data -->", data);
                         var data = JSON.parse(data);
                         if (data['status'] === '1') {
                             localStorage.setItem("alert_count", 0);

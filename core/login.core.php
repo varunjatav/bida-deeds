@@ -29,6 +29,10 @@ $dst = $_POST['dst'];
 $userPassKeyVal = hash("sha512", $pass);
 $timestamp = time();
 
+
+// var_dump($_POST);
+// var_dump($_FILES);
+
 if ($userName && $pass) {
     // connect to redis
     $check_redis = 1;//connectRedis($redis_host, $redis_port, $redis_timeout, $redis_password, 'login');

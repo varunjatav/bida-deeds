@@ -2,7 +2,7 @@
 
 error_reporting(0);
 $db_hostname = "localhost";
-$db_database = "deed1@2024";
+$db_database = "deed@2024";
 $db_username = "root";
 $db_password = "";
 define("DOCUMENT_MAX_SIZE", "2000");

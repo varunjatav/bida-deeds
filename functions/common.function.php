@@ -1002,3 +1002,94 @@ function get_weeks_between_dates($date1, $date2) {
     $second = DateTime::createFromFormat('m-d-Y', $date2);
     return floor($first->diff($second)->days / 7);
 }
+
+
+// function upload_chunks_attachments($source, $target_dir, $max_size, $allowed_ext, $identifier, $user_id, $newwidth, $newheight, $compress_factor) {
+//     $a = 0;
+//     $imageArray = array();
+
+//     foreach ($source['tmp_name'] as $nameFile) {
+//         if (is_uploaded_file($source['tmp_name'][$a])) {
+//             $uploadedfile = $source['tmp_name'][$a];
+//             $name = $source['name'][$a];
+            
+//             // Use a variable to store the result of explode
+//             $nameParts = explode('.', $name);
+//             $ext = strtolower(end($nameParts));
+//             $size = filesize($source['tmp_name'][$a]);
+
+//             // Rename image
+//             $name = preg_replace('/\\.[^.\\s]{3,4}$/', '', $name);
+
+//             // Check if the file type is allowed
+//             if (!in_array($ext, $allowed_ext)) {
+//                 // Return response
+//                 return json_encode(array('status' => '-1', 'message' => 'Attached file type not allowed.'));
+//             }
+
+//             // Rename image
+//             $rand_1 = rand(9999, 9999999);
+//             $rand_2 = rand(9999999, 9999999999);
+//             $rand_3 = rand();
+//             $actual_image_name = strtolower(str_replace(' ', '', $identifier . '_' . $size . '_' . $user_id . '_' . time() . '_' . $rand_1 . '_' . $rand_2 . '_' . $rand_3 . "." . $ext));
+
+//             if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
+//                 if ($size > $max_size) {
+//                     $imgInfo = getimagesize($uploadedfile);
+//                     list($width, $height) = $imgInfo;
+//                     $mime = $imgInfo['mime'];
+//                     if ($mime == 'image/jpeg') {
+//                         $src = imagecreatefromjpeg($uploadedfile);
+//                     } else if ($mime == 'image/png') {
+//                         $src = imagecreatefrompng($uploadedfile);
+//                     } else {
+//                         $src = imagecreatefromjpeg($uploadedfile);
+//                     }
+
+//                     // Resize image
+//                     $ratio = $newwidth / $width;
+//                     $new_w = $newwidth;
+//                     $new_h = $height * $ratio;
+//                     if ($new_h > $newheight) {
+//                         $ratio = $newheight / $height;
+//                         $new_h = $newheight;
+//                         $new_w = $width * $ratio;
+//                     }
+
+//                     $tmp = imagecreatetruecolor($new_w, $new_h);
+//                     imagecopyresampled(dst_image: $tmp, $src, 0, 0, 0, 0, $new_w, $new_h, $width, $height);
+//                     $filename = $target_dir . $actual_image_name;
+//                     imagejpeg($tmp, $filename, $compress_factor);
+//                     imagedestroy($src);
+//                     imagedestroy($tmp);
+//                 } else {
+//                     move_uploaded_file($uploadedfile, $target_dir . $actual_image_name);
+//                 }
+//             } else {
+//                 // Process and move the file if not an image
+//                 $target_file = $target_dir . $actual_image_name;
+
+//                 // Upload file in chunks (optional, can be omitted if not needed)
+//                 $chunk_size = 1024; // Chunk in bytes
+//                 $upload_start = 0;
+//                 $handle = fopen($uploadedfile, "rb");
+//                 $fp = fopen($target_file, 'w');
+
+//                 while ($upload_start < $size) {
+//                     $contents = fread($handle, $chunk_size);
+//                     fwrite($fp, $contents);
+//                     $upload_start += strlen($contents);
+//                     fseek($handle, $upload_start);
+//                 }
+
+//                 fclose($handle);
+//                 fclose($fp);
+//                 unlink($uploadedfile);
+//             }
+
+//             $a++;
+//             $imageArray[] = $actual_image_name;
+//         }
+//     }
+//     return $imageArray;
+// }
