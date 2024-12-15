@@ -51,6 +51,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $uploadedDocuments = [];
         $uploadDirectory = '../uploads/';
 
+
         // Handle multiple document uploads
         foreach ($_FILES['document']['name'] as $key => $filename) {
             $fileTmpPath = $_FILES['document']['tmp_name'][$key];

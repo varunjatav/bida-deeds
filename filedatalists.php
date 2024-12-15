@@ -182,6 +182,7 @@ include_once 'languages/' . $lang_file;
                                 $srno = 0;
                                 while ($row = $sql->fetch()) {
                                     $srno++;
+
                                     $id = $row["ID"] ? $row["ID"] : "--";
                                     $name = $row['Name'] ? $row['Name'] : '--';
                                     $mobile = $row['Mobile'] ? $row['Mobile'] : '--';

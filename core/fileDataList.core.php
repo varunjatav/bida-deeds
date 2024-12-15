@@ -18,6 +18,7 @@ $page = (int) $offset + 1;
 $id = decryptIt($_REQUEST['id']);
 $srno = ($page - 1) * $limit;
 
+
 if ($action == 'filter_applied') {
     $name = trim($_REQUEST['name']) . '%';
     $mobile = trim($_REQUEST['mobile']) . '%';
