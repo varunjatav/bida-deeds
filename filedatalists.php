@@ -179,6 +179,7 @@ include_once 'languages/' . $lang_file;
                         <div id="main-body" style="display: contents;">
                              <div id="paginate-body" style="display: contents;">
                                 <?php
+                              
                                 $srno = 0;
                                 while ($row = $sql->fetch()) {
                                     $srno++;

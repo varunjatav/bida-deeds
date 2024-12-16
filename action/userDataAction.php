@@ -45,6 +45,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
         $password = __fi(validateMaxLen($_POST['password'], 20));
         $c_password = __fi(validateMaxLen($_POST['cpassword'], 20));
 
+        
+        $validated_email = validateEmail($email);
        
         // $timestamp = time();
         // $created_by = $_SESSION['UserID'];
@@ -53,7 +55,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data') {
         $insrt1 = $db->prepare("INSERT INTO  user_info  (Name, User_Name, Email, Mobile_No, Designation, Address, Gender, Password, Confirm_Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)");
         $insrt1->bindParam(1, $name);
         $insrt1->bindParam(2, $user_name);
-        $insrt1->bindParam(3, $email);
+        $insrt1->bindParam(3, $validated_email);
         $insrt1->bindParam(4, $mobile_no);
         $insrt1->bindParam(5, $designation);
         $insrt1->bindParam(6, $address);

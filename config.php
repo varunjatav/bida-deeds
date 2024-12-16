@@ -204,3 +204,11 @@ $kismList_1359_array = array(
     'आबादी',
     'कृषि'
 );
+
+$branch_list_array = array(
+    'Banking',
+    'Agriculture',
+    'Technology',
+    'Development',
+    'Finances'
+);

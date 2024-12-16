@@ -122,8 +122,26 @@ include_once '../functions/common.function.php';
         <div class="form-field-wrap posrel">
             <div class="posabsolut frm-lbl-actv">10) Pincode*</div>
             <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                <input type="text" class="frm-txtbox fldrequired" name="pincode" maxlength="20"
-                    placeholder="Your Pincode*" autocomplete="off">
+                <select name="pincode" class="fldrequired village_gata">
+                    <option value="">Pincodes*</option>
+
+                    <option value="284001">
+                        284001
+                    </option>
+                    <option value="284002">
+                        284002
+                    </option>
+                    <option value="284003">
+                        284003
+                    </option>
+                    <option value="284004">
+                        284004
+                    </option>
+                    <option value="284005">
+                        284005
+                    </option>
+
+                </select>
             </div>
             <div class="frm-er-msg"></div>
             <div class="clr"></div>

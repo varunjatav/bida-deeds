@@ -4,7 +4,9 @@ include_once '../includes/checkSession.php';
 include_once '../includes/get_time_zone.php';
 include_once '../dbcon/db_connect.php';
 include_once '../functions/common.function.php';
-// include_once '../core/addNewDataPopup.core.php';
+
+// include_once '../core/addNewFileAndDataPopup.core.php';
+// echo "inside add new data popup";
 include_once '../languages/' . $lang_file;
 ?>
 <style>
@@ -200,8 +202,26 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">10) Pincode*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="text" class="frm-txtbox fldrequired" name="pincode" maxlength="20"
-                                        placeholder="Your Pincode*" autocomplete="off">
+                                <select name="pincode" class="fldrequired village_gata">
+                                        <option value="">Pincodes*</option>
+
+                                        <option value="284001">
+                                            284001
+                                        </option>
+                                        <option value="284002">
+                                            284002
+                                        </option>
+                                        <option value="284003">
+                                            284003
+                                        </option>
+                                        <option value="284004">
+                                            284004
+                                        </option>
+                                        <option value="284005">
+                                            284005
+                                        </option>
+
+                                    </select>
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -230,22 +250,15 @@ include_once '../languages/' . $lang_file;
                                     <div class="dropdown-header posrel" id="dropdownHeader">Choose Branch<span
                                             class="dropdown-arrow">&#9662;</span></div>
                                     <div class="dropdown-content">
+                                      <?php  foreach ($branch_list_array as $value) { ?>
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" id="<?php echo $value?>" name="branch[]" value="<?php echo $value?>"
+                                                class="fldrequired village-dropdown">
+                                            <label for="<?php echo $value?>"><?php echo $value?></label>
+                                        </div>
 
-                                        <div class="checkbox-wrapper">
-                                            <input type="checkbox" id="Finance" name="branch[]" value="Finance"
-                                                class="fldrequired village-dropdown">
-                                            <label for="Finance">Finance</label>
-                                        </div>
-                                        <div class="checkbox-wrapper">
-                                            <input type="checkbox" id="Banking" name="branch[]" value="Banking"
-                                                class="fldrequired village-dropdown">
-                                            <label for="Banking">Banking</label>
-                                        </div>
-                                        <div class="checkbox-wrapper">
-                                            <input type="checkbox" id="Agriculture" name="branch[]" value="Agriculture"
-                                                class="fldrequired village-dropdown">
-                                            <label for="Agriculture">Agriculture</label>
-                                        </div>
+                                      <?php }  ?>
+                                      
 
                                     </div>
                                     <!-- <input type="hidden" name="branch[]" class="branch" value=""> -->
