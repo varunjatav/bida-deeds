@@ -177,12 +177,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $validated_mobile = validateMobile($mobile);
         $validated_adhaar = aadharValidation($adhaar);
 
-        $imageArray = array();
-        $timestamp = time();
-
+    
        
 
 
+// Default values for conditional bindings
+// $panValue = ($validated_pan == 1) ? $pan : "--";
+// $adhaarValue = ($validated_adhaar == 1) ? $adhaar : "--";
 
 
 
@@ -207,8 +208,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $insrt1->bindParam(3, $gender, PDO::PARAM_STR);
         $insrt1->bindParam(4, $dob, PDO::PARAM_STR);
         $insrt1->bindParam(5, $validated_email, PDO::PARAM_STR);
-        if ($validated_pan == 1)  $insrt1->bindParam(6, $pan, PDO::PARAM_STR); else null;
-        if ($validated_adhaar == 1) $insrt1->bindParam(7, $adhaar, PDO::PARAM_STR); else null;
+        $insrt1->bindParam(6, $pan, PDO::PARAM_STR); 
+        $insrt1->bindParam(7, $adhaar, PDO::PARAM_STR);
         $insrt1->bindParam(8, $address, PDO::PARAM_STR);
         $insrt1->bindParam(9, $city, PDO::PARAM_STR);
         $insrt1->bindParam(10, $pincode, PDO::PARAM_STR);
@@ -222,51 +223,78 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
 
         // Insert documents and profile picture into the second table (lm_user_documents)
         // $documentsString = implode(",", $uploadedDocuments);
-        $insrt2 = $db->prepare("INSERT INTO lm_user_documents (user_id, document, profile) VALUES (?, ?, ?)");
+       
 
 
 
+        $imageArray = array();
+        $timestamp = time();
 
-        $allowed_ext = array("pdf", "jpg", "jpeg", "png", "docx", "doc"); // allowed extensions
+        $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF"); // allowed extensions
 
-        $target_dir = "../uploads";
+        $target_dir = "../media/uploads/";
         
         // $uploadedDocuments = array();
         // pcpndt attachment
        
         // validate attachments
         validate_attachments($_FILES['document'], $allowed_ext);
-        $imageArray = upload_chunks_attachments($_FILES['document'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_douments', $userId, 640, 760, 95);
+        $imageArray = upload_attachments($_FILES['document'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_documents', $userId, 640, 760, 95);
 
 
         validate_attachments_single($_FILES['profile'], $allowed_ext);
 
-        $profilePicture = upload_chunks_attachments_single($_FILES['profile'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_profile', $user_id, 640, 760, 95);
+        $profilePicture = upload_attachments_single($_FILES['profile'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_profile', $user_id, 640, 760, 95);
 
 
 
 
-        $details_array = array();
-        $details_array = array(
-            // 'expected_date_rfp' => $date_timestamp,
-            'expected_date_consultant' => 0,
-            'actual_completion_date' => 0,
-            'review_last_date' => 0,
-            'approval_status' => '0',
-            'approval_remark' => '',
-            'consultant_deliverables' => '',
-            'attachment' => $imageArray
-        );
+        // $details_array = array();
+        // $details_array = array(
+        //     // 'expected_date_rfp' => $date_timestamp,
+        //     'expected_date_consultant' => 0,
+        //     'actual_completion_date' => 0,
+        //     'review_last_date' => 0,
+        //     'approval_status' => '0',
+        //     'approval_remark' => '',
+        //     'consultant_deliverables' => '',
+        //     'attachment' => $imageArray
+        // );
 
-        $details = json_encode($details_array);
+        // $details = json_encode($imageArray);
 
+
+        // $profile_array = array();
+        // $profile_array = array(
+        //     // 'expected_date_rfp' => $date_timestamp,
+        //     'expected_date_consultant' => 0,
+        //     'actual_completion_date' => 0,
+        //     'review_last_date' => 0,
+        //     'approval_status' => '0',
+        //     'approval_remark' => '',
+        //     'consultant_deliverables' => '',
+        //     'attachment' => $profilePicture
+        // );
+
+
+        // $profile = json_encode($profilePicture);
+        
+        $insrt2 = $db->prepare("INSERT INTO lm_multiple_documents (user_id, documents) VALUES (?, ?)");
         // Bind parameters
-        $insrt2->bindParam(1, $userId, PDO::PARAM_INT);
-        $insrt2->bindParam(2, $details, PDO::PARAM_STR);
-        $insrt2->bindParam(3, $profilePicture, PDO::PARAM_STR);
+        
+        foreach($imageArray as $pkey => $pitem){
+            $insrt2->bindParam(1, $userId, PDO::PARAM_INT);
+            $insrt2->bindParam(2, $pitem, PDO::PARAM_STR);
+          
+        }
 
-        // Execute second query
         $insrt2->execute();
+        $insrt3 = $db->prepare("INSERT INTO  lm_single_profile (user_id, profile) VALUES (?, ?)");
+
+        $insrt3->bindParam(1, $userId, PDO::PARAM_INT);
+        $insrt3->bindParam(2, $profilePicture[0], PDO::PARAM_STR);
+        
+        $insrt3->execute();
 
 
 

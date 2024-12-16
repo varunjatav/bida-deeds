@@ -48,14 +48,18 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS
         lm_user_data.City, 
         lm_user_data.PinCode, 
         lm_user_data.Branch,
-        lm_user_documents.document,
-        lm_user_documents.profile
+        lm_multiple_documents.documents,
+        lm_single_profile.profile
     FROM 
         lm_user_data
     LEFT JOIN 
-        lm_user_documents 
+        lm_single_profile 
     ON 
-        lm_user_data.ID = lm_user_documents.user_id
+        lm_user_data.ID = lm_single_profile.user_id
+    LEFT JOIN 
+        lm_multiple_documents
+    ON 
+        lm_user_data.ID = lm_multiple_documents.user_id
     WHERE 
         1 = 1
 ";
@@ -93,11 +97,11 @@ if ($_REQUEST['city']) {
 if ($_REQUEST['pincode']) {
     $sql .= " AND lm_user_data.PinCode Like ?";
 }
-if ($_REQUEST['document']) {
-    $sql .= " AND lm_user_documents.document Like ?";
+if ($_REQUEST['documents']) {
+    $sql .= " AND lm_multiple_documents.documents Like ?";
 }
 if ($_REQUEST['profile']) {
-    $sql .= " AND lm_user_documents.profile Like ?";
+    $sql .= " AND lm_single_profile.profile Like ?";
 }
 if ($_REQUEST['branch']) {
     $sql .= " AND lm_user_data.Branch Like ?";

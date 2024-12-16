@@ -181,6 +181,7 @@ include_once 'languages/' . $lang_file;
                                 <?php
                               
                                 $srno = 0;
+                                // echo /media/uploads;
                                 while ($row = $sql->fetch()) {
                                     $srno++;
 
@@ -196,9 +197,13 @@ include_once 'languages/' . $lang_file;
                                     $city = $row['City'] ? $row['City'] : '--';
                                     $pincode = $row['PinCode'] ? $row['PinCode'] : '--';
                                     $branch = $row['Branch'] ? $row['Branch'] : '--';
-                                    $document = $row['document'] ? $row['document'] : '--';
                                     $profile = $row['profile'] ? $row['profile'] : '--';
-                                    $document_array = explode(',', $document);
+                                    $document = $row['document'] ? $row['document'] : '--';
+                                   
+                                    // $document_array = $document -> $attachment;
+                                //   echo  $document_array -> attachment;
+
+                               
                                 ?>
                                     <div class="rowDiv <?php echo $validate_color; ?>">
                                         <div class="cellDiv col1" name="<?php echo $id; ?>">
@@ -239,12 +244,15 @@ include_once 'languages/' . $lang_file;
                                             <?php echo $branch; ?>
                                         </div>
                                         <div class="cellDiv col10">
-                                            <?php foreach ($document_array as $url) {
-                                                echo "<img src='./uploads/$url' alt='$url' width='50px' height='50px'/>";
+                                            
+                                            <?php foreach ($document as $url) {
+                                                // echo '../media/uploads/$url';
+                                                // echo $url;
+                                                echo "<img src='$main_path . '/' . $media_path . '/' . $url' alt='QR Code'>";
                                             } ?>
                                         </div>
                                         <div class="cellDiv col10">
-                                            <img src="<?php echo "./uploads/" . $profile; ?>" alt="<?php echo $profile; ?>"
+                                            <img src="<?php echo "/media/uploads/" . $profile; ?>" alt="<?php echo $profile; ?>"
                                                 width="50px" height="50px">
 
                                         </div>

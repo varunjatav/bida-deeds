@@ -33,7 +33,9 @@ $media_export = "media/excel";
 
 $url_head = 'http://';
 
-$main_path = $url_head . 'localhost/dgms';
+$main_path = $url_head . 'localhost/bida-deed';
+
+$media_path = 'media/uploads';
 
 $kasht_main_path = $url_head . 'localhost/bida_lams/kashtkarlogin';
 
@@ -212,3 +214,4 @@ $branch_list_array = array(
     'Development',
     'Finances'
 );
+

@@ -654,7 +654,7 @@ function upload_attachments($source, $target_dir, $max_size, $allowed_ext, $iden
             $rand_1 = rand(9999, 9999999);
             $rand_2 = rand(9999999, 9999999999);
             $rand_3 = rand();
-            $actual_image_name = strtolower(str_replace(' ', '', $identifier . '_' . $size . '_' . $user_id . '_' . time() . '_' . $rand_1 . '_' . $rand_2 . '_' . $rand_3 . "." . $ext));
+            $actual_image_name = strtolower(str_replace(' ', '', $identifier . '' . $size . '' . $user_id . '' . time() . '' . $rand_1 . '' . $rand_2 . '' . $rand_3 . "." . $ext));
 
             if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
                 if ($size > $max_size) {
@@ -699,6 +699,73 @@ function upload_attachments($source, $target_dir, $max_size, $allowed_ext, $iden
     }
     return $imageArray;
 }
+
+function upload_attachments_single($source, $target_dir, $max_size, $allowed_ext, $identifier, $user_id, $newwidth, $newheight, $compress_factor) {
+    // copy attachments to folder
+    $a = 0;
+    $imageArray = array();
+    
+        if (is_uploaded_file($source['tmp_name'][$a])) {
+            // save attached file
+            $uploadedfile = $source['tmp_name'][$a];
+
+            $name = $source['name'][$a];
+            $tmp = explode('.', $name);
+            $file_extension = end($tmp);
+            $ext = strtolower( $file_extension);
+            $size = filesize($source['tmp_name'][$a]);
+
+            // rename image
+            $name = preg_replace('/\\.[^.\\s]{3,4}$/', '', $name);
+            $rand_1 = rand(9999, 9999999);
+            $rand_2 = rand(9999999, 9999999999);
+            $rand_3 = rand();
+            $actual_image_name = strtolower(str_replace(' ', '', $identifier . '_' . $size . '_' . $user_id . '_' . time() . '_' . $rand_1 . '_' . $rand_2 . '_' . $rand_3 . "." . $ext));
+
+            if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png') {
+                if ($size > $max_size) {
+                    $imgInfo = getimagesize($uploadedfile);
+                    list($width, $height) = $imgInfo;
+                    $mime = $imgInfo['mime'];
+                    if ($mime == 'image/jpeg') {
+                        $src = imagecreatefromjpeg($uploadedfile);
+                    } else if ($mime == 'image/png') {
+                        $src = imagecreatefrompng($uploadedfile);
+                    } else {
+                        $src = imagecreatefromjpeg($uploadedfile);
+                    }
+
+                    //try max width first...
+                    $ratio = $newwidth / $width;
+                    $new_w = $newwidth;
+                    $new_h = $height * $ratio;
+
+                    //if that didn't work
+                    if ($new_h > $newheight) {
+                        $ratio = $newheight / $height;
+                        $new_h = $newheight;
+                        $new_w = $width * $ratio;
+                    }
+
+                    $tmp = imagecreatetruecolor($new_w, $new_h);
+                    imagecopyresampled($tmp, $src, 0, 0, 0, 0, $new_w, $new_h, $width, $height);
+                    $filename = $target_dir . $actual_image_name;
+                    imagejpeg($tmp, $filename, $compress_factor);
+                    imagedestroy($src);
+                    imagedestroy($tmp);
+                } else {
+                    move_uploaded_file($uploadedfile, $target_dir . $actual_image_name);
+                }
+            } else {
+                move_uploaded_file($uploadedfile, $target_dir . $actual_image_name);
+            }
+            $a++;
+            $imageArray[] = $actual_image_name;
+        }
+    
+    return $imageArray;
+}
+
 
 // convert size if size in bytes
 function convert_bytes_readable($size) {
