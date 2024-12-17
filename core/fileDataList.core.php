@@ -29,40 +29,40 @@ if ($action == 'filter_applied') {
     $adhaar = trim($_REQUEST['adhaar']) . '%';
     $address = trim($_REQUEST['address']) . '%';
     $pincode = trim($_REQUEST['pincode']) . '%';
-    $document = trim($_REQUEST['document']) . '%';
-    $profile = trim($_REQUEST['profile']) . '%';
+    $document = trim($_REQUEST['document']) ;
+    $profile = trim($_REQUEST['profile']) ;
     $branch = trim($_REQUEST['branch']) . '%';
 }
 
 
-$sql = "SELECT SQL_CALC_FOUND_ROWS 
-        lm_user_data.ID, 
-        lm_user_data.Name, 
-        lm_user_data.Mobile, 
-        lm_user_data.Gender, 
-        lm_user_data.DOB, 
-        lm_user_data.Email, 
-        lm_user_data.Pan, 
-        lm_user_data.Adhaar, 
-        lm_user_data.Address, 
-        lm_user_data.City, 
-        lm_user_data.PinCode, 
-        lm_user_data.Branch,
-        lm_multiple_documents.documents,
-        lm_single_profile.profile
-    FROM 
-        lm_user_data
-    LEFT JOIN 
-        lm_single_profile 
-    ON 
-        lm_user_data.ID = lm_single_profile.user_id
-    LEFT JOIN 
-        lm_multiple_documents
-    ON 
-        lm_user_data.ID = lm_multiple_documents.user_id
-    WHERE 
-        1 = 1
-";
+$sql = "SELECT 
+    lm_user_data.ID, 
+    lm_user_data.Name, 
+    lm_user_data.Mobile, 
+    lm_user_data.Gender, 
+    lm_user_data.DOB, 
+    lm_user_data.Email, 
+    lm_user_data.Pan, 
+    lm_user_data.Adhaar, 
+    lm_user_data.Address, 
+    lm_user_data.City, 
+    lm_user_data.PinCode, 
+    lm_user_data.Branch,
+    lm_multiple_documents.documents,
+    lm_single_profile.profile
+FROM 
+    lm_user_data
+INNER JOIN 
+    lm_single_profile 
+    ON lm_user_data.ID = lm_single_profile.user_id
+INNER JOIN 
+    lm_multiple_documents
+    ON lm_user_data.ID = lm_multiple_documents.user_id
+WHERE 
+    1 = 1";
+
+
+
 
 if ($_REQUEST["id"]) {
     $sql .= " AND lm_user_data.ID LIKE ?";
@@ -97,11 +97,11 @@ if ($_REQUEST['city']) {
 if ($_REQUEST['pincode']) {
     $sql .= " AND lm_user_data.PinCode Like ?";
 }
-if ($_REQUEST['documents']) {
-    $sql .= " AND lm_multiple_documents.documents Like ?";
+if ($_REQUEST['document']) {
+    $sql .= " AND lm_multiple_documents.documents = ?";
 }
 if ($_REQUEST['profile']) {
-    $sql .= " AND lm_single_profile.profile Like ?";
+    $sql .= " AND lm_single_profile.profile = ?";
 }
 if ($_REQUEST['branch']) {
     $sql .= " AND lm_user_data.Branch Like ?";

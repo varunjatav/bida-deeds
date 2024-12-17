@@ -198,7 +198,15 @@ include_once 'languages/' . $lang_file;
                                     $pincode = $row['PinCode'] ? $row['PinCode'] : '--';
                                     $branch = $row['Branch'] ? $row['Branch'] : '--';
                                     $profile = $row['profile'] ? $row['profile'] : '--';
-                                    $document = $row['document'] ? $row['document'] : '--';
+                                     $document = $row['documents'] ? $row['documents'] : '--';
+                                    //  echo $document[0];
+                                    echo  $json_profile = json_decode($profile);
+                                    echo $json_document = json_decode($document);
+
+                                    // foreach($json_document as $key => $value){
+                                    //     echo $key;
+                                    // }
+                                //    echo $profile[0];
                                    
                                     // $document_array = $document -> $attachment;
                                 //   echo  $document_array -> attachment;
@@ -244,17 +252,16 @@ include_once 'languages/' . $lang_file;
                                             <?php echo $branch; ?>
                                         </div>
                                         <div class="cellDiv col10">
+                                         <?php foreach ($json_document as $url) { ?>;
                                             
-                                            <?php foreach ($document as $url) {
-                                                // echo '../media/uploads/$url';
-                                                // echo $url;
-                                                echo "<img src='$main_path . '/' . $media_path . '/' . $url' alt='QR Code'>";
-                                            } ?>
+                                                 <img src="<?php echo $main_path . '/' . $media_path . '/' . $url ?>" alt='<?php $url ?>'  width="100px" height="100px">
+                                          <?php }?>
                                         </div>
                                         <div class="cellDiv col10">
-                                            <img src="<?php echo "/media/uploads/" . $profile; ?>" alt="<?php echo $profile; ?>"
-                                                width="50px" height="50px">
-
+                                      
+                                           
+                                                 <img src="<?php echo $main_path . '/' . $media_path . '/' . $json_profile[0] ?>" alt='<?php $$json_profile[0] ?>' width="100px" height="100px">
+                                         
                                         </div>
                                         <div class="cellDiv cellDivacts col10">
                                             <div class="posrel tblactns">

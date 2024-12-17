@@ -82,7 +82,7 @@ if ($api_validate == 1) {
                 validate_attachments($passbook, $allowed_ext);
 
                 // copy attachments to folder
-                $passbookArray = upload_attachments($passbook, $passbook_file_target_dir, 209600, $allowed_ext, 'passbook_file', $user_id, 1024, 768, 95);
+                $d = upload_attachments($passbook, $passbook_file_target_dir, 209600, $allowed_ext, 'passbook_file', $user_id, 1024, 768, 95);
                 $passbook_image_name = $passbookArray[0];
             }
 

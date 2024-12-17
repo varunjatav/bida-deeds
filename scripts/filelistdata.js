@@ -42,7 +42,7 @@ $(document).ready(function () {
             beforeSend: function () {
             },
             success: function (data) {
-            console.log("data --->", data);
+            // console.log("data --->", data);
 
                 $('.property_type').append(data);
                 initializeDropdowns();

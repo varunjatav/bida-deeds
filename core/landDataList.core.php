@@ -37,6 +37,7 @@ $sql = "SELECT SQL_CALC_FOUND_ROWS T1.ID, T1.UniqueID, T1.MahalKaName, T1.Villag
         FROM lm_land_data T1
         LEFT JOIN lm_village T2 ON T2.VillageCode = T1.VillageCode
         WHERE T2.VillageCode NOT IN ('$village_code_list')";
+
 if ($_REQUEST['id']) {
     $sql .= " AND T1.ID = ?";
 }
