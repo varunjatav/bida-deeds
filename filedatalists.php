@@ -197,15 +197,15 @@ include_once 'languages/' . $lang_file;
                                     $city = $row['City'] ? $row['City'] : '--';
                                     $pincode = $row['PinCode'] ? $row['PinCode'] : '--';
                                     $branch = $row['Branch'] ? $row['Branch'] : '--';
-                                    $profile = $row['profile'] ? $row['profile'] : '--';
+                                     $profile = $row['profile'] ? $row['profile'] : '--' ;
                                      $document = $row['documents'] ? $row['documents'] : '--';
-                                    //  echo $document[0];
-                                    echo  $json_profile = json_decode($profile);
-                                    echo $json_document = json_decode($document);
+                                      $document;
+                                      $json_profile = json_decode($profile);
+                                       $json_document = json_decode($document);
 
-                                    // foreach($json_document as $key => $value){
-                                    //     echo $key;
-                                    // }
+                                    foreach($document as $key => $value){
+                                        echo $key , $value;
+                                    }
                                 //    echo $profile[0];
                                    
                                     // $document_array = $document -> $attachment;
@@ -260,7 +260,7 @@ include_once 'languages/' . $lang_file;
                                         <div class="cellDiv col10">
                                       
                                            
-                                                 <img src="<?php echo $main_path . '/' . $media_path . '/' . $json_profile[0] ?>" alt='<?php $$json_profile[0] ?>' width="100px" height="100px">
+                                                 <img src="<?php echo $main_path . '/' . $media_path . '/' . $json_profile ?>" alt='<?php $$json_profile ?>' width="100px" height="100px">
                                          
                                         </div>
                                         <div class="cellDiv cellDivacts col10">

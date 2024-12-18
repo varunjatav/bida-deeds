@@ -172,21 +172,15 @@ include_once '../functions/common.function.php';
                         class="dropdown-arrow">&#9662;</span></div>
                 <div class="dropdown-content">
 
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="Finance" name="branch[]" value="Finance"
-                            class="fldrequired village-dropdown">
-                        <label for="Finance">Finance</label>
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="Banking" name="branch[]" value="Banking"
-                            class="fldrequired village-dropdown">
-                        <label for="Banking">Banking</label>
-                    </div>
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="Agriculture" name="branch[]" value="Agriculture"
-                            class="fldrequired village-dropdown">
-                        <label for="Agriculture">Agriculture</label>
-                    </div>
+                    <?php foreach ($branch_list_array as $value) { ?>
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="<?php echo $value ?>" name="branch[]" value="<?php echo $value ?>"
+                                class="fldrequired village-dropdown">
+                            <label for="<?php echo $value ?>"><?php echo $value ?></label>
+                        </div>
+
+                    <?php }  ?>
+ 
 
                 </div>
                 <!-- <input type="hidden" name="branch[]" class="branch" value=""> -->

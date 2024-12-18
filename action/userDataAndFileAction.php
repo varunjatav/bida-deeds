@@ -48,8 +48,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $address = $_POST['address'];
         $city = $_POST['city'];
         $pincode = $_POST['pincode'];
-        $branch = $_POST['branch'];
-        $branch = $_POST['branch'];
+        // $branch = $_POST['branch'];
+        $branch = isset($_POST['branch']) ? $_POST['branch'] : array();
         // $branchString = implode(",", $branch);
 
        
@@ -70,7 +70,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
 // Default values for conditional bindings
 // $panValue = ($validated_pan == 1) ? $pan : "--";
 // $adhaarValue = ($validated_adhaar == 1) ? $adhaar : "--";
-// $profilePicture = array();
+
 
 // exit();
 
@@ -78,8 +78,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
 
 
 
-      
-      
+
+         
 
 foreach($name as $key => $unival){
 
@@ -93,7 +93,7 @@ foreach($name as $key => $unival){
         $address_value = isset($address[$key]) ? $address[$key] : "--";
         $city_value = isset($city[$key]) ? $city[$key] : "--";
         $pincode_value = isset($pincode[$key]) ? $pincode[$key] : "--";
-        $branchString = isset($branch[$key]) ? $branch[$key] : "--";
+        $branch_value = isset($branch[$key]) ? $branch[$key] : "--";
 
         // $validated_email = validateEmail($email_value);
         
@@ -136,18 +136,22 @@ foreach($name as $key => $unival){
         $insrt1->bindParam(8, $address_value, PDO::PARAM_STR);
         $insrt1->bindParam(9, $city_value, PDO::PARAM_STR);
         $insrt1->bindParam(10, $pincode_value, PDO::PARAM_STR);
-        $insrt1->bindParam(11, $branchString, PDO::PARAM_STR);
+        $insrt1->bindParam(11, $branch_value, PDO::PARAM_STR);
+
+
+
+        $profilePicture = array();
+
+        $imageArray = array();
 
         $insrt1->execute();
 
 
     
-        $imageArray = array();
        
         $timestamp = time();
 
-       
-
+        
         $userId = $db->lastInsertId();
         $target_dir = "../media/uploads/";
         $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF"); // allowed extensions
@@ -161,7 +165,7 @@ foreach($name as $key => $unival){
 
 
        
-         $profile = json_encode($profilePicture);
+         $profile = json_encode($profilePicture[0]);
 
 
 
