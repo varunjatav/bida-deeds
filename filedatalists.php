@@ -197,20 +197,12 @@ include_once 'languages/' . $lang_file;
                                     $city = $row['City'] ? $row['City'] : '--';
                                     $pincode = $row['PinCode'] ? $row['PinCode'] : '--';
                                     $branch = $row['Branch'] ? $row['Branch'] : '--';
-                                     $profile = $row['profile'] ? $row['profile'] : '--' ;
-                                     $document = $row['documents'] ? $row['documents'] : '--';
-                                      $document;
-                                      $json_profile = json_decode($profile);
-                                       $json_document = json_decode($document);
-
-                                    foreach($document as $key => $value){
-                                        echo $key , $value;
-                                    }
-                                //    echo $profile[0];
+                                    $profile = $row['profile'] ? $row['profile'] : '--' ;
+                                    $document = $row['documents'] ? $row['documents'] : '--';
+                                      
+                                    // $json_profile = json_decode($profile);
+                                    $json_document = json_decode($document);
                                    
-                                    // $document_array = $document -> $attachment;
-                                //   echo  $document_array -> attachment;
-
                                
                                 ?>
                                     <div class="rowDiv <?php echo $validate_color; ?>">
@@ -260,7 +252,7 @@ include_once 'languages/' . $lang_file;
                                         <div class="cellDiv col10">
                                       
                                            
-                                                 <img src="<?php echo $main_path . '/' . $media_path . '/' . $json_profile ?>" alt='<?php $$json_profile ?>' width="100px" height="100px">
+                                                 <img src="<?php echo $main_path . '/' . $media_path . '/' . $profile ?>" alt='<?php $profile ?>' width="100px" height="100px">
                                          
                                         </div>
                                         <div class="cellDiv cellDivacts col10">
@@ -270,9 +262,7 @@ include_once 'languages/' . $lang_file;
                                                 </a>
                                                 <div class="posabsolut nwactdrops" style="display:none;">
                                                     <a style="cursor:pointer;" class="edit_file"
-                                                        id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>"
-                                                        uid="<?php echo encryptIt(myUrlEncode($row['UniqueID'])); ?>"
-                                                        vicode="<?php echo encryptIt(myUrlEncode($row['VillageCode'])); ?>">
+                                                        id="<?php echo encryptIt(myUrlEncode($row['ID'])); ?>">
                                                         <?php echo $master_data_details['edit']; ?>
                                                     </a>
                                                 </div>

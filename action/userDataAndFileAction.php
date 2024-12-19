@@ -37,7 +37,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
             check_user_input($postValue);
         }
 
-        // Sanitize and validate input data
+     
         $name = $_POST['name'];
         $mobile = $_POST['mobile'];
         $gender = $_POST['gender'];
@@ -49,77 +49,49 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $city = $_POST['city'];
         $pincode = $_POST['pincode'];
         // $branch = $_POST['branch'];
-        $branch = isset($_POST['branch']) ? $_POST['branch'] : array();
-        // $branchString = implode(",", $branch);
-
-       
-
-    
-        // if (count_($name) == 0) {
-        //     // return response
-        //     $db_respose_data = json_encode(array('status' => '-1', 'message' => 'Please add atleast one gata'));
-        //     print_r($db_respose_data);
-        //     exit();
-        // }
-
-        // foreach($name as $key => $unival){
-        //     echo $key;
-        // }
-        // exit();
-
-// Default values for conditional bindings
-// $panValue = ($validated_pan == 1) ? $pan : "--";
-// $adhaarValue = ($validated_adhaar == 1) ? $adhaar : "--";
-
-
-// exit();
-
-
-
-
-
-
-         
+         $branch = isset($_POST['branch_data']) ? $_POST['branch_data'] : array();      
 
 foreach($name as $key => $unival){
 
-        $name_value = isset($name[$key]) ? $name[$key] : "--";
-        $mobile_value = isset($mobile[$key]) ? $mobile[$key] : "--";
-        $gender_value = isset($gender[$key]) ? $gender[$key] : "--";
+        $name_value = isset($name[$key]) ? __fi(validateMaxLen($name[$key],100)) : "--";
+        $mobile_value = isset($mobile[$key]) ?  __fi(validateMaxLen($mobile[$key],20)) : "--";
+        $gender_value = isset($gender[$key]) ? __fi(validateMaxLen($gender[$key],20)) : "--";
         $dob_value = isset($dob[$key]) ? $dob[$key] : "--";
-        $email_value = isset($email[$key]) ? $email[$key] : "--";
-        $pan_value = isset($pan[$key]) ? $pan[$key] : "--";
-        $adhaar_value = isset($adhaar[$key]) ? $adhaar[$key] : "--";
-        $address_value = isset($address[$key]) ? $address[$key] : "--";
-        $city_value = isset($city[$key]) ? $city[$key] : "--";
-        $pincode_value = isset($pincode[$key]) ? $pincode[$key] : "--";
-        $branch_value = isset($branch[$key]) ? $branch[$key] : "--";
+        $email_value = isset($email[$key]) ? __fi(validateMaxLen($email[$key],100)) : "--";
+        $pan_value = isset($pan[$key]) ? __fi(validateMaxLen($pan[$key],50)) : "--";
+        $adhaar_value = isset($adhaar[$key]) ? __fi(validateMaxLen($adhaar[$key],50)) : "--";
+        $address_value = isset($address[$key]) ? __fi(validateMaxLen($address[$key],100)) : "--";
+        $city_value = isset($city[$key]) ? __fi(validateMaxLen($city[$key],100)) : "--";
+        $pincode_value = isset($pincode[$key]) ? __fi(validateMaxLen($pincode[$key],50)) : "--";
 
-        // $validated_email = validateEmail($email_value);
+        // $branchString = implode(",", $branch);
+        $branch_value = isset($branch[$key]) ? $branch[$key] : "--";
+        // exit();
+        $validated_email = validateEmail($email_value);
         
-        // $validated_mobile = validateMobile($mobile_value);
+        $validated_mobile = validateMobile($mobile_value);
        
 
            
-    //     if (!empty($adhaar_value)) 
-    //     {
-    //         $valid = aadharValidation($adhaar_value);
-    //         if ($valid == 0) 
-    //         {
-    //              $db_respose_data = json_encode(array('status' => false, 'message' => 'Invalid aadhar card number.'));
-    //              print_r($db_respose_data);
-    //              exit();
-    //         }    
-    //    }
+        if (!empty($adhaar_value)) 
+        {
+            $valid = aadharValidation($adhaar_value);
+            if ($valid == 0) 
+            {
+                 $db_respose_data = json_encode(array('status' => false, 'message' => 'Invalid aadhar card number.'));
+                 print_r($db_respose_data);
+                 exit();
+            }    
+       }
 
-    //   if (!empty($pan_value)) {
-    //       $valid = panValidation($pan_value);
-    //       if ($valid == 0) {
-    //           $db_respose_data = json_encode(array('status' => false, 'message' => 'Invalid pan card number.'));
-    //           print_r($db_respose_data);
-    //           exit();
-    //       }
-    //     }
+      if (!empty($pan_value)) {
+          $valid = panValidation($pan_value);
+          if ($valid == 0) {
+              $db_respose_data = json_encode(array('status' => false, 'message' => 'Invalid pan card number.'));
+              print_r($db_respose_data);
+              exit();
+          }
+        }
 
         $insrt1 = $db->prepare("INSERT INTO lm_user_data 
             (Name, Mobile, Gender, DOB, Email, Pan, Adhaar, Address, City, Pincode, Branch) 
@@ -127,10 +99,10 @@ foreach($name as $key => $unival){
 
 
         $insrt1->bindParam(1, $name_value, PDO::PARAM_STR);
-        $insrt1->bindParam(2, $mobile_value, PDO::PARAM_STR);
+        $insrt1->bindParam(2, $validated_mobile, PDO::PARAM_STR);
         $insrt1->bindParam(3, $gender_value, PDO::PARAM_STR);
         $insrt1->bindParam(4, $dob_value, PDO::PARAM_STR);
-        $insrt1->bindParam(5, $email_value, PDO::PARAM_STR);
+        $insrt1->bindParam(5, $validated_email, PDO::PARAM_STR);
         $insrt1->bindParam(6, $pan_value, PDO::PARAM_STR); 
         $insrt1->bindParam(7, $adhaar_value, PDO::PARAM_STR);
         $insrt1->bindParam(8, $address_value, PDO::PARAM_STR);
@@ -139,22 +111,25 @@ foreach($name as $key => $unival){
         $insrt1->bindParam(11, $branch_value, PDO::PARAM_STR);
 
 
-
+        $insrt1->execute();
+        
         $profilePicture = array();
 
         $imageArray = array();
 
-        $insrt1->execute();
+        
 
 
     
        
-        $timestamp = time();
+        // $timestamp = time();
 
         
         $userId = $db->lastInsertId();
         $target_dir = "../media/uploads/";
-        $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF"); // allowed extensions
+        $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF");
+
+
         $profilePicture = upload_attachments($_FILES['profile'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_profile', $userId, 640, 760, 95);
 
         
@@ -165,27 +140,30 @@ foreach($name as $key => $unival){
 
 
        
-         $profile = json_encode($profilePicture[0]);
+        //  $profile = json_encode($profilePicture[0]);
 
 
 
 
-        $image = json_encode($imageArray);
-      
-       
-            $insrt2 = $db->prepare("INSERT INTO lm_multiple_documents (user_id, documents) VALUES (?, ?)");
-            $insrt2->bindParam(1, $userId, PDO::PARAM_INT);
-            $insrt2->bindParam(2, $image, PDO::PARAM_STR);
-            $insrt2->execute();  
+            $image = json_encode($imageArray);
+    if($imageArray){
+        $insrt2 = $db->prepare("INSERT INTO lm_multiple_documents (user_id, documents) VALUES (?, ?)");
+        $insrt2->bindParam(1, $userId, PDO::PARAM_INT);
+        $insrt2->bindParam(2, $image, PDO::PARAM_STR);
+        $insrt2->execute();  
+    }
+           
        
 
         
-        $insrt3 = $db->prepare("INSERT INTO  lm_single_profile (user_id, profile) VALUES (?, ?)");
-
-        $insrt3->bindParam(1, $userId, PDO::PARAM_INT);
-        $insrt3->bindParam(2, $profile, PDO::PARAM_STR);
+       
+        if($profilePicture){
+            $insrt3 = $db->prepare("INSERT INTO  lm_single_profile (user_id, profile) VALUES (?, ?)");
+            $insrt3->bindParam(1, $userId, PDO::PARAM_INT);
+            $insrt3->bindParam(2, $profilePicture[0], PDO::PARAM_STR);
+            $insrt3->execute();
+        }
         
-        $insrt3->execute();
 
     }
 

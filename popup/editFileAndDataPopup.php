@@ -267,18 +267,10 @@ echo $city_query;
                                 </div>
                             </div>
                         </div>
-                        <hr>
-
-                        <div class="clr"></div>
-                        <div class="property_type"></div>
-                        <div class="left rmarg" id="add_more_hide">
-                            <a id="add_more_data"
-                                style="cursor: pointer; font-size: 14px; line-height: 40px; font-weight: 500; color: blue;">+
-                                Add More Data</a>
-                        </div>
+                      
                     </div>
                     <div class="frm_hidden_data"></div>
-
+                    <input type="hidden" name="id" class="id" value="<?php echo $_REQUEST['file_id']; ?>">
                     <div class="popup-actionwrap posrel">
                         <div class="posabsolut act_btn_ovrly"></div>
                         <a style="cursor: pointer;" id="add_user_data_and_file" class="pp-primact right">Save</a>

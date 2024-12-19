@@ -24,9 +24,11 @@ $(document).ready(function () {
     $('.full-column').on('click', '.edit_file', function () {
       
         var file_id = $(this).attr('id');
-        var file_uid = $(this).attr('uid');
-        var file_vcode = $(this).attr('vicode');
-        $('#popup').load('popup/editFasliNewDataPopup.php?file_id=' + file_id + '&file_uid=' + file_uid + '&file_vcode=' + file_vcode, function () {
+        // var file_uid = $(this).attr('uid');
+        // var file_vcode = $(this).attr('vicode');
+        console.log(file_id);
+        
+        $('#popup').load('popup/editFileAndDataPopup.php?file_id=' + file_id , function () {
             $('#popup').show();
             $('body').css('overflow-y', 'hidden');
             makeDragable('.popup-header', '.popup-wrap');
