@@ -5,9 +5,15 @@ include_once '../includes/get_time_zone.php';
 include_once '../dbcon/db_connect.php';
 include_once '../functions/common.function.php';
 
-// include_once '../core/addNewFileAndDataPopup.core.php';
-// echo "inside add new data popup";
+include_once '../core/addNewFileAndDataPopup.core.php';
+
 include_once '../languages/' . $lang_file;
+
+foreach($cityInfo as $cKey => $cValue){
+    foreach($cValue as $cKey => $cVal){
+        echo $cKey , $cVal ,"<br>";
+    }
+}
 ?>
 <style>
     .dropdown-header {
@@ -71,9 +77,7 @@ include_once '../languages/' . $lang_file;
     }
 </style>
 
-<?php
-echo $city_query;
-?>
+
 <div class="popup-overlay">
     <div class="popup-wrap pp-large-x">
         <div class="popup-header" style="cursor: move;">
