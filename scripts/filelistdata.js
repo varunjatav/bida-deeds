@@ -131,7 +131,7 @@ $(document).ready(function () {
     });
 
     //edit fasli new data
-    $('#popup').on('click', '#edit_land_data', function () {
+    $('#popup').on('click', '#edit_user_data_and_file', function () {
         var check = 0;
         var fldrequired_index_arr = [];
         $(".fldrequired").each(function (index) {
@@ -158,9 +158,9 @@ $(document).ready(function () {
             return false;
         } else {
             $('#pfrm').find('.frm_hidden_data').html('');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="edit_land_data" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/deedAction" autocomplete="off">');
-            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#edit_land_data" autocomplete="off">');
+            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action" value="edit_user_data_and_file" autocomplete="off">');
+            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_url" value="action/userDataAndFileAction" autocomplete="off">');
+            $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_id" value="#edit_user_data_and_file" autocomplete="off">');
             $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="action_btn_name" value="Save" autocomplete="off">');
             $('#frm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_action" value="reload" autocomplete="off">');
             $('#pfrm').find('.frm_hidden_data').append('<input type="hidden" name="after_success_redirect" value="" autocomplete="off">');
@@ -171,10 +171,10 @@ $(document).ready(function () {
     $("#popup").on('submit', '#pfrm', function (e) {
         var postData = new FormData(this);
         
-        alert(" sasidhasd");
-        postData.forEach((value, key) => {
-            console.log("key and value pair -->", key, value);
-        });
+        // alert(" sasidhasd");
+        // postData.forEach((value, key) => {
+        //     console.log("key and value pair -->", key, value);
+        // });
         
         // alert(postData);
         
@@ -194,7 +194,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data, textStatus, jqXHR) {
-                alert("data", data);
+                console.log("data", data);
                 
                 $(action_btn_id).text(action_btn_name);
                 var response_data = JSON.parse(data);

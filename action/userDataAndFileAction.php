@@ -29,8 +29,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         // Begin transaction
         $db->beginTransaction();
 
-print_r($_FILES);
-exit();
+// print_r($_FILES);
+// exit();
 
 
 ini_set('display_errors', 1);
@@ -66,22 +66,23 @@ error_reporting(E_ALL);
         
 
 
-    
-       
-        // $timestamp = time();
-
-        
-   
         $target_dir = "../media/uploads/";
         $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF");
-
-
+    
+    
         $profilePicture = upload_attachments($_FILES['profile'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_profile', $userId, 640, 760, 95);
-
+    
         
        
      
         $imageArray = upload_attachments($_FILES['document'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_documents', $userId, 640, 760, 95);
+
+
+       
+        // $timestamp = time();
+
+        
+  
 
         // print_r($profilePicture);
         // exit();
@@ -156,13 +157,13 @@ foreach($name as $key => $unival){
         $userId = $db->lastInsertId();
 
 
+         
+  
        
         //  $profile = json_encode($profilePicture[0]);
 
-
-
-
-            $image = json_encode($imageArray[$key]);
+     
+            $image = json_encode($imageArray);
     if($imageArray){
 
         $insrt2 = $db->prepare("INSERT INTO lm_multiple_documents (user_id, documents) VALUES (?, ?)");
@@ -178,7 +179,7 @@ foreach($name as $key => $unival){
         if($profilePicture){
             $insrt3 = $db->prepare("INSERT INTO  lm_single_profile (user_id, profile) VALUES (?, ?)");
             $insrt3->bindParam(1, $userId, PDO::PARAM_INT);
-            $insrt3->bindParam(2, $profilePicture[$key], PDO::PARAM_STR);
+            $insrt3->bindParam(2, $profilePicture[0], PDO::PARAM_STR);
             $insrt3->execute();
         }
         
@@ -186,7 +187,7 @@ foreach($name as $key => $unival){
     }
 
 
-
+  
 
         // Commit transaction
         $db_response_data = array();
@@ -200,7 +201,7 @@ foreach($name as $key => $unival){
         echo "Error occurred: " . $e->getMessage();
     }
 } 
-elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
+elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data_and_file') {
 
     try {
         // Begin Transaction
@@ -213,40 +214,119 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'edit_user_data') {
 
 
 
-        $id = __fi(validateInteger(decryptIt(myUrlEncode($_POST['id'])), "ID"));
+        $decodedId = decryptIt(myUrlEncode($_POST['id']));
+        $id = __fi(validateInteger($decodedId, "ID"));
+
 
         $name = __fi(validateMaxLen($_POST['name'], 100));
-        $user_name = __fi(validateMaxLen($_POST['user_name'],  100));
+        $mobile = __fi(validateMaxLen($_POST['mobile'],  20));
+        $gender = __fi(validateMaxLen($_POST['gender'],20));
+        $dob = $_POST['dob'];
         $email = __fi(validateMaxLen($_POST['email'], 100));
-        $mobile_no = __fi(validateMaxLen($_POST['mobile_no'], 10));
-        $designation = __fi(validateMaxLen($_POST['designation'], 100));
-        $address = __fi(validateMaxLen($_POST['address'], 50));
-        $gender = __fi(validateMaxLen($_POST['gender'], 10));
-        $password = __fi(validateMaxLen($_POST['password'], 20));
-        $c_password = __fi(validateMaxLen($_POST['cpassword'], 20));
+        $pan = __fi(validateMaxLen($_POST['pan'], 50));
+        $adhaar = __fi(validateMaxLen($_POST['adhaar'], 50));
+        $address = __fi(validateMaxLen($_POST['address'], 100));
+        
+        $city = __fi(validateMaxLen($_POST['city'], 100));
+        $pincode = __fi(validateMaxLen($_POST['pincode'], 50));
+        $branch = isset($_POST['branch_data']) ? $_POST['branch_data'] : array(); 
+        $branchString = implode(",", $branch);
+          
+        // print_r($gender);
+        // exit;
 
 
+        $validated_email = validateEmail($email);
+        
+        $validated_mobile = validateMobile($mobile);
+       
+
+           
+        if (!empty($adhaar)) 
+        {
+            $valid = aadharValidation($adhaar);
+            if ($valid == 0) 
+            {
+                 $db_respose_data = json_encode(array('status' => false, 'message' => 'Invalid aadhar card number.'));
+                 print_r($db_respose_data);
+                 exit();
+            }    
+       }
+
+
+
+      if (!empty($pan)) {
+          $valid = panValidation($pan);
+          if ($valid == 0) {
+              $db_respose_data = json_encode(array('status' => false, 'message' => 'Invalid pan card number.'));
+              print_r($db_respose_data);
+              exit();
+          }
+        }
 
 
 
         $timestamp = time();
 
-        $update1 = $db->prepare("UPDATE user_info SET Name = ?, User_Name = ?, Email = ?, Password = ?, Confirm_Password = ? , Mobile_No = ?,Designation = ?,Address = ?, Gender = ?  WHERE ID = ?");
+        $update1 = $db->prepare("UPDATE lm_user_data SET Name = ?, Mobile = ?, Gender = ?, DOB = ?, Email = ? , Pan = ?,Adhaar = ?,Address = ?, City = ?, Pincode = ?, Branch=?  WHERE ID = ?");
         $update1->bindParam(1, $name);
-        $update1->bindParam(2, $user_name);
-        $update1->bindParam(3, $email);
-        $update1->bindParam(4, $password);
-        $update1->bindParam(5, $c_password);
-        $update1->bindParam(6, $mobile_no);
-        $update1->bindParam(7, $designation);
+        $update1->bindParam(2, $validated_mobile);
+        $update1->bindParam(3, $gender);
+        $update1->bindParam(4, $dob);
+        $update1->bindParam(5, $validated_email);
+        $update1->bindParam(6, $pan);
+        $update1->bindParam(7, $adhaar);
         $update1->bindParam(8, $address);
-        $update1->bindParam(9, $gender);
-        $update1->bindParam(10, $id);
+        $update1->bindParam(9, $city);
+        $update1->bindParam(10, $pincode);
+        $update1->bindParam(11, $branchString);
+        $update1->bindParam(12, $id);
         $update1->execute();
 
 
+
+
+        $profilePicture = array();
+
+        $imageArray = array();
+
+        $target_dir = "../media/uploads/";
+        $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF");
+    
+    
+        $profilePicture = upload_attachments($_FILES['profile'], $target_dir, (int)DOCUMENT_MAX_SIZE, $allowed_ext, 'user_profile', $id, (int)640, (int)760, (int)95);
+    
+        
+       
+     
+        $imageArray = upload_attachments($_FILES['document'], $target_dir,(int)DOCUMENT_MAX_SIZE, $allowed_ext, 'user_documents', $id, (int)640, (int)760, (int)95);
+
+
+        $image = json_encode($imageArray);
+
+
+        if($imageArray){
+            $update2 = $db->prepare("UPDATE  lm_multiple_documents SET documents = ? WHERE user_id =?");
+            $update2->bindParam(2, $id, PDO::PARAM_INT);
+            $update2->bindParam(1, $image, PDO::PARAM_STR);
+            $update2->execute();  
+        }
+               
+           
+    
+            
+           
+            if($profilePicture){
+                $update3 = $db->prepare("UPDATE lm_single_profile SET profile = ? WHERE user_id = ?");
+                $update3->bindParam(2, $id, PDO::PARAM_INT);
+                $update3->bindParam(1, $profilePicture[0], PDO::PARAM_STR);
+                $update3->execute();
+            }
+            
+
+
         $db_response_data = array();
-        commit($db, 'User data updated successfully', $db_response_data);
+        commit($db, 'User data and file updated successfully', $db_response_data);
     } catch (\Exception $e) {
         if ($db->inTransaction()) {
             $db->rollback();

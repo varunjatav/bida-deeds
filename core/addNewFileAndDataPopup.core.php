@@ -33,4 +33,4 @@ $village_query->execute();
 $village_query->setFetchMode(PDO::FETCH_ASSOC);
 $villageInfo = $village_query->fetchAll();
 
-print_r($villageInfo);
+// print_r($villageInfo);

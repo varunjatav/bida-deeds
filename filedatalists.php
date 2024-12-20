@@ -198,7 +198,7 @@ include_once 'languages/' . $lang_file;
                                     $pincode = $row['PinCode'] ? $row['PinCode'] : '--';
                                     $branch = $row['Branch'] ? $row['Branch'] : '--';
                                     $profile = $row['profile'] ? $row['profile'] : '--' ;
-                                    $document = $row['documents'] ? $row['documents'] : '--';
+                                     $document = $row['documents'] ? $row['documents'] : '--';
                                       
                                     // $json_profile = json_decode($profile);
                                     $json_document = json_decode($document);

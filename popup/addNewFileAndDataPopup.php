@@ -92,7 +92,7 @@ include_once '../languages/' . $lang_file;
         <div id="popupDiv">
             <div class="popup-body pp-large-y">
                 <form id="pfrm" enctype="multipart/form-data">
-                    <div class="card_item" style="padding-bottom:50px;">
+                    <div class="card_item" style="padding-bottom:100px;">
 
                         <div style="display: flex; margin-top:10px;">
                             <div class="form-field-wrap posrel">
@@ -234,24 +234,7 @@ include_once '../languages/' . $lang_file;
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
                             </div>
-                            <div class="form-field-wrap posrel left">
-                                <div class="posabsolut frm-lbl-actv">11)Document*</div>
-                                <div class="form-type dev_req_msg">
-
-                                    <input type="file" class="frm-txtbox fldrequired" name="document[][]" id="file" accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple
-                                        autocomplete="off">
-
-                                </div>
-                                <div class="frm-er-msg"></div>
-                                <div class="clr"></div>
-                            </div>
-                            <div class="form-field-wrap posrel left">
-                                <div class="posabsolut frm-lbl-actv">12)Profile*</div>
-                                <div class="form-type dev_req_msg">
-                                    <input type="file" class="frm-txtbox fldrequired" name="profile[]" autocomplete="off">
-                                </div>
-                                <div class="frm-er-msg"></div>
-                            </div>
+                        
                             <div class="form-field-wrap posrel left">
                                 <div class="posabsolut frm-lbl-actv">13)Branch*</div>
                                 <div class="select dev_req_msg left rmarg branch_parent" id="branchDropDown">
@@ -272,7 +255,7 @@ include_once '../languages/' . $lang_file;
                                 </div>
                             </div>
                         </div>
-                        <hr>
+                        
 
                         <div class="clr"></div>
                         <div class="property_type"></div>
@@ -281,9 +264,29 @@ include_once '../languages/' . $lang_file;
                                 style="cursor: pointer; font-size: 14px; line-height: 40px; font-weight: 500; color: blue;">+
                                 Add More Data</a>
                         </div>
+
+                        <div class="form-field-wrap posrel left">
+                                <div class="posabsolut frm-lbl-actv">11)Document*</div>
+                                <div class="form-type dev_req_msg">
+
+                                    <input type="file" class="frm-txtbox fldrequired" name="document[]" id="file" accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple
+                                        autocomplete="off">
+
+                                </div>
+                                <div class="frm-er-msg"></div>
+                                <div class="clr"></div>
+                        </div>
+                        <div class="form-field-wrap posrel left">
+                                <div class="posabsolut frm-lbl-actv">12)Profile*</div>
+                                <div class="form-type dev_req_msg">
+                                    <input type="file" class="frm-txtbox fldrequired" name="profile[]" autocomplete="off">
+                                </div>
+                                <div class="frm-er-msg"></div>
+                        </div>
                     </div>
                     <div class="frm_hidden_data"></div>
 
+                 
                     <div class="popup-actionwrap posrel">
                         <div class="posabsolut act_btn_ovrly"></div>
                         <a style="cursor: pointer;" id="add_user_data_and_file" class="pp-primact right">Save</a>

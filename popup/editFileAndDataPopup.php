@@ -77,7 +77,7 @@ echo $city_query;
 <div class="popup-overlay">
     <div class="popup-wrap pp-large-x">
         <div class="popup-header" style="cursor: move;">
-            <span class="popup-title text-wrapping left">Add New User Data and File</span>
+            <span class="popup-title text-wrapping left">Edit User Data and File</span>
             <span class="popup-close right">
                 <a style="cursor:pointer;" class="cancel_popup">
                     <img src="img/clear-w.svg" alt="" width="18px">
@@ -95,7 +95,7 @@ echo $city_query;
                                 <div class="posabsolut frm-lbl-actv">1) Name*</div>
                                 <div class="select dev_req_msg left rmarg">
 
-                                    <input type="text" class="frm-txtbox fldrequired" name="name[]" maxlength="100"
+                                    <input type="text" class="frm-txtbox fldrequired" name="name" maxlength="100"
                                         placeholder="Your Name*" autocomplete="off">
 
                                 </div>
@@ -105,7 +105,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">2) Mobile*</div>
                                 <div class="select dev_req_msg left rmarg">
-                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile[]"
+                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile"
                                         maxlength="10" placeholder="Your Mobile No*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -114,7 +114,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">3) Gender*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <select name="gender[]" class="form-select fldrequired" id="">
+                                    <select name="gender" class="form-select fldrequired" id="">
                                         <option value="">Choose Your Gender*</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -128,7 +128,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">4) DOB*</div>
                                 <div class="form-type dev_req_msg">
-                                    <input type="date" class="frm-txtbox dept-frm-input integer fldrequired" name="dob[]"
+                                    <input type="date" class="frm-txtbox dept-frm-input integer fldrequired" name="dob"
                                         autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -137,7 +137,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">5) Email*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="email" class="frm-txtbox fldrequired" name="email[]" maxlength="100"
+                                    <input type="email" class="frm-txtbox fldrequired" name="email" maxlength="100"
                                         placeholder="Your Email*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -147,7 +147,7 @@ echo $city_query;
                                 <div class="posabsolut frm-lbl-actv">6) PAN*</div>
                                 <div class="select dev_req_msg left rmarg">
 
-                                    <input type="text" class="frm-txtbox fldrequired" name="pan[]" maxlength="100"
+                                    <input type="text" class="frm-txtbox fldrequired" name="pan" maxlength="100"
                                         placeholder="Your PAN Card No*" autocomplete="off">
 
                                 </div>
@@ -157,7 +157,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">7) Adhaar*</div>
                                 <div class="select dev_req_msg left rmarg">
-                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="adhaar[]"
+                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="adhaar"
                                         maxlength="100" placeholder="Your Adhaar No*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -170,7 +170,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">8) Address*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="address[]"
+                                    <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="address"
                                         maxlength="100" placeholder="Your Address*" autocomplete="off">
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -179,7 +179,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">9) City*</div>
                                 <div class="form-type dev_req_msg">
-                                    <select name="city[]" class="fldrequired village_gata">
+                                    <select name="city" class="fldrequired village_gata">
                                         <option value="">City*</option>
 
                                         <option value="delhi">
@@ -206,7 +206,7 @@ echo $city_query;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">10) Pincode*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <select name="pincode[]" class="fldrequired village_gata">
+                                    <select name="pincode" class="fldrequired village_gata">
                                         <option value="">Pincodes*</option>
 
                                         <option value="284001">
@@ -273,7 +273,7 @@ echo $city_query;
                     <input type="hidden" name="id" class="id" value="<?php echo $_REQUEST['file_id']; ?>">
                     <div class="popup-actionwrap posrel">
                         <div class="posabsolut act_btn_ovrly"></div>
-                        <a style="cursor: pointer;" id="add_user_data_and_file" class="pp-primact right">Save</a>
+                        <a style="cursor: pointer;" id="edit_user_data_and_file" class="pp-primact right">Save</a>
                         <a style="cursor: pointer;" id="" class="pp-secact right cancel_popup">Close</a>
                         <div class="clr"></div>
                     </div>

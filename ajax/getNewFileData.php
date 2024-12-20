@@ -146,25 +146,7 @@ include_once '../functions/common.function.php';
             <div class="frm-er-msg"></div>
             <div class="clr"></div>
         </div>
-        <div class="form-field-wrap posrel left">
-            <div class="posabsolut frm-lbl-actv">11) Document*</div>
-            <div class="form-type dev_req_msg">
-
-                <input type="file" class="frm-txtbox fldrequired" name="document[][]" id="file"
-                    accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple autocomplete="off">
-
-
-            </div>
-            <div class="frm-er-msg"></div>
-            <div class="clr"></div>
-        </div>
-        <div class="form-field-wrap posrel left">
-            <div class="posabsolut frm-lbl-actv">12)Profile*</div>
-            <div class="form-type dev_req_msg">
-                <input type="file" class="frm-txtbox fldrequired" name="profile[]" autocomplete="off">
-            </div>
-            <div class="frm-er-msg"></div>
-        </div>
+     
         <div class="form-field-wrap posrel left">
             <div class="posabsolut frm-lbl-actv">13)Branch*</div>
             <div class="select dev_req_msg left rmarg branch_parent" id="branchDropDown">
