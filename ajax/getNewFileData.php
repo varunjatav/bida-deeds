@@ -150,7 +150,7 @@ include_once '../functions/common.function.php';
             <div class="posabsolut frm-lbl-actv">11) Document*</div>
             <div class="form-type dev_req_msg">
 
-                <input type="file" class="frm-txtbox fldrequired" name="document[]" id="file"
+                <input type="file" class="frm-txtbox fldrequired" name="document[][]" id="file"
                     accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple autocomplete="off">
 
 
@@ -183,7 +183,7 @@ include_once '../functions/common.function.php';
  
 
                 </div>
-                <!-- <input type="hidden" name="branch[]" class="branch" value=""> -->
+                <input type="hidden" name="branch_data[]" class="branch_data" value="">
             </div>
         </div>
     </div>

@@ -171,7 +171,7 @@ $(document).ready(function () {
     $("#popup").on('submit', '#pfrm', function (e) {
         var postData = new FormData(this);
         
-        console.log("form data -->",postData);
+        alert(" sasidhasd");
         postData.forEach((value, key) => {
             console.log("key and value pair -->", key, value);
         });
@@ -194,7 +194,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data, textStatus, jqXHR) {
-                console.log("data", data);
+                alert("data", data);
                 
                 $(action_btn_id).text(action_btn_name);
                 var response_data = JSON.parse(data);

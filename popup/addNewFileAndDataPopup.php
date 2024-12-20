@@ -9,11 +9,11 @@ include_once '../core/addNewFileAndDataPopup.core.php';
 
 include_once '../languages/' . $lang_file;
 
-foreach($cityInfo as $cKey => $cValue){
-    foreach($cValue as $cKey => $cVal){
-        echo $cKey , $cVal ,"<br>";
-    }
-}
+// foreach($cityInfo as $cKey => $cValue){
+//     foreach($cValue as $cKey => $cVal){
+//         echo $cKey , $cVal ,"<br>";
+//     }
+// }
 ?>
 <style>
     .dropdown-header {
@@ -238,7 +238,7 @@ foreach($cityInfo as $cKey => $cValue){
                                 <div class="posabsolut frm-lbl-actv">11)Document*</div>
                                 <div class="form-type dev_req_msg">
 
-                                    <input type="file" class="frm-txtbox fldrequired" name="document[]" id="file" accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple
+                                    <input type="file" class="frm-txtbox fldrequired" name="document[][]" id="file" accept="image/jpg,image/jpeg, image/png,.doc,.docx,.pdf" multiple
                                         autocomplete="off">
 
                                 </div>
@@ -268,6 +268,7 @@ foreach($cityInfo as $cKey => $cValue){
                                         <?php } ?>
                                     </div>
                                     <input type="hidden" name="branch_data[]" class="branch_data" value="">
+                                    <!-- <input type="hidden" name="document_array[]" class="document_array" value=""> -->
                                 </div>
                             </div>
                         </div>

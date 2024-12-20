@@ -29,7 +29,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         // Begin transaction
         $db->beginTransaction();
 
+print_r($_FILES);
+exit();
 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
         
 
         // Check user input for valid data
@@ -49,7 +55,36 @@ if (isset($_POST['action']) && $_POST['action'] == 'add_user_data_and_file') {
         $city = $_POST['city'];
         $pincode = $_POST['pincode'];
         // $branch = $_POST['branch'];
-         $branch = isset($_POST['branch_data']) ? $_POST['branch_data'] : array();      
+         $branch = isset($_POST['branch_data']) ? $_POST['branch_data'] : array();   
+         
+         
+          
+        $profilePicture = array();
+
+        $imageArray = array();
+
+        
+
+
+    
+       
+        // $timestamp = time();
+
+        
+   
+        $target_dir = "../media/uploads/";
+        $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF");
+
+
+        $profilePicture = upload_attachments($_FILES['profile'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_profile', $userId, 640, 760, 95);
+
+        
+       
+     
+        $imageArray = upload_attachments($_FILES['document'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_documents', $userId, 640, 760, 95);
+
+        // print_r($profilePicture);
+        // exit();
 
 foreach($name as $key => $unival){
 
@@ -66,6 +101,9 @@ foreach($name as $key => $unival){
 
         // $branchString = implode(",", $branch);
         $branch_value = isset($branch[$key]) ? $branch[$key] : "--";
+        
+        //echo $branch_value;
+        // exit();
         // exit();
         $validated_email = validateEmail($email_value);
         
@@ -83,6 +121,8 @@ foreach($name as $key => $unival){
                  exit();
             }    
        }
+
+
 
       if (!empty($pan_value)) {
           $valid = panValidation($pan_value);
@@ -112,31 +152,8 @@ foreach($name as $key => $unival){
 
 
         $insrt1->execute();
-        
-        $profilePicture = array();
-
-        $imageArray = array();
-
-        
-
-
-    
        
-        // $timestamp = time();
-
-        
         $userId = $db->lastInsertId();
-        $target_dir = "../media/uploads/";
-        $allowed_ext = array("jpg", "jpeg", "png", "doc", "docx", "ppt", "pdf", "PDF");
-
-
-        $profilePicture = upload_attachments($_FILES['profile'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_profile', $userId, 640, 760, 95);
-
-        
-       
-     
-        $imageArray = upload_attachments($_FILES['document'], $target_dir, DOCUMENT_MAX_SIZE, $allowed_ext, 'user_documents', $userId, 640, 760, 95);
-
 
 
        
@@ -145,8 +162,9 @@ foreach($name as $key => $unival){
 
 
 
-            $image = json_encode($imageArray);
+            $image = json_encode($imageArray[$key]);
     if($imageArray){
+
         $insrt2 = $db->prepare("INSERT INTO lm_multiple_documents (user_id, documents) VALUES (?, ?)");
         $insrt2->bindParam(1, $userId, PDO::PARAM_INT);
         $insrt2->bindParam(2, $image, PDO::PARAM_STR);
@@ -160,7 +178,7 @@ foreach($name as $key => $unival){
         if($profilePicture){
             $insrt3 = $db->prepare("INSERT INTO  lm_single_profile (user_id, profile) VALUES (?, ?)");
             $insrt3->bindParam(1, $userId, PDO::PARAM_INT);
-            $insrt3->bindParam(2, $profilePicture[0], PDO::PARAM_STR);
+            $insrt3->bindParam(2, $profilePicture[$key], PDO::PARAM_STR);
             $insrt3->execute();
         }
         
