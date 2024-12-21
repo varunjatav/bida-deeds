@@ -207,71 +207,7 @@ include_once '../languages/' . $lang_file;
                             <div class="form-field-wrap posrel">
                                 <div class="posabsolut frm-lbl-actv">10) Pincode*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
-                                    <select name="pincode[]" class="fldrequired village_gata">
-                                        <option value="">Pincodes*</option>
-                                        <option value="110001">
-                                            110001
-                                        </option>
-                                        <option value="110002">
-                                            110002
-                                        </option>
-                                        <option value="110003">
-                                            110003
-                                        </option>
-                                        <option value="110004">
-                                            110004
-                                        </option>
-                                        <option value="110005">
-                                            110005
-                                        </option>
-                                        <option value="111045">
-                                            111045
-                                        </option>
-
-                                        <option value="410014">
-                                            410014
-                                        </option>
-                                        <option value="410038">
-                                            410038
-                                        </option>
-                                        <option value="411000">
-                                            411000
-                                        </option>
-                                        <option value="41101">
-                                            41101
-                                        </option>
-                                        <option value="284001">
-                                            284001
-                                        </option>
-                                        <option value="284002">
-                                            284002
-                                        </option>
-                                        <option value="284003">
-                                            284003
-                                        </option>
-                                        <option value="284004">
-                                            284004
-                                        </option>
-                                        <option value="284005">
-                                            284005
-                                        </option>
-
-                                        <option value="208001">
-                                            208001
-                                        </option>
-                                        <option value="208002">
-                                            208002
-                                        </option>
-                                        <option value="208003">
-                                            208003
-                                        </option>
-                                        <option value="208004">
-                                            208004
-                                        </option>
-                                        <option value="208005">
-                                            208005
-                                        </option>
-                                    </select>
+                                 c
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
