@@ -10,7 +10,7 @@ if (isset($_REQUEST['file_id'])) {
 
        // echo "step 2: ",$user_id ,"<br>";
        // Prepare the SQL query
-       $stmt = $db->prepare("SELECT * FROM user_info WHERE ID = ?");
+       $stmt = $db->prepare("SELECT * FROM lm_user_data WHERE ID = ?");
 
        // Bind the parameter to the prepared statement (the first parameter is 1)
        $stmt->bindParam(1, $file_id, PDO::PARAM_INT); // Use $userId, bind to index 1
@@ -20,8 +20,7 @@ if (isset($_REQUEST['file_id'])) {
 
        // Fetch the result
        $userInfo = $stmt->fetch(PDO::FETCH_ASSOC);
-
-       // echo $userInfo;
+//       echo $userInfo["Gender"];
        // print_r($file_id, return: $user_id);
 }
    

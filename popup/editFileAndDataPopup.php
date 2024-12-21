@@ -5,9 +5,23 @@ include_once '../includes/get_time_zone.php';
 include_once '../dbcon/db_connect.php';
 include_once '../functions/common.function.php';
 
-// include_once '../core/addNewFileAndDataPopup.core.php';
+include_once '../core/editFileAndDataPopup.core.php';
 // echo "inside add new data popup";
 include_once '../languages/' . $lang_file;
+$dateValue = '';
+
+// Check if $userInfo['DOB'] is set and not empty
+if (isset($userInfo['DOB']) && !empty($userInfo['DOB'])) {
+    try {
+        // Parse the timestamp string
+        $dateTime = new DateTime($userInfo['DOB']); // Automatically detects the format
+        $dateValue = $dateTime->format('Y-m-d'); // Format as 'YYYY-MM-DD'
+    } catch (Exception $e) {
+        echo "Error parsing date: " . $e->getMessage();
+    }
+}
+
+
 ?>
 <style>
     .dropdown-header {
@@ -96,7 +110,7 @@ echo $city_query;
                                 <div class="select dev_req_msg left rmarg">
 
                                     <input type="text" class="frm-txtbox fldrequired" name="name" maxlength="100"
-                                        placeholder="Your Name*" autocomplete="off">
+                                        placeholder="Your Name*" autocomplete="off" value="<?php echo isset($userInfo['Name']) ? htmlspecialchars($userInfo['Name']) : ''; ?>">
 
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -106,7 +120,7 @@ echo $city_query;
                                 <div class="posabsolut frm-lbl-actv">2) Mobile*</div>
                                 <div class="select dev_req_msg left rmarg">
                                     <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="mobile"
-                                        maxlength="10" placeholder="Your Mobile No*" autocomplete="off">
+                                        maxlength="10" placeholder="Your Mobile No*" autocomplete="off" value="<?php echo isset($userInfo['Mobile']) ? htmlspecialchars($userInfo['Mobile']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -116,9 +130,9 @@ echo $city_query;
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <select name="gender" class="form-select fldrequired" id="">
                                         <option value="">Choose Your Gender*</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
+                                        <option value="<?php echo isset($userInfo['Gender']) && $userInfo['Gender'] === 'male'? 'selected' : ''; ?>">Male</option>
+                                        <option value="<?php echo isset($userInfo['Gender']) && $userInfo['Gender'] === 'female'? 'selected' : ''; ?>">Female</option>
+                                        <option  value="<?php echo isset($userInfo['Gender']) && $userInfo['Gender'] === 'other'? 'selected' : ''; ?>">Other</option>
                                     </select>
                                     <div class="select__arrow"></div>
                                 </div>
@@ -129,7 +143,8 @@ echo $city_query;
                                 <div class="posabsolut frm-lbl-actv">4) DOB*</div>
                                 <div class="form-type dev_req_msg">
                                     <input type="date" class="frm-txtbox dept-frm-input integer fldrequired" name="dob"
-                                        autocomplete="off">
+                                        autocomplete="off"
+                                        value="<?php echo $dateValue; ?>"  >
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -138,7 +153,8 @@ echo $city_query;
                                 <div class="posabsolut frm-lbl-actv">5) Email*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="email" class="frm-txtbox fldrequired" name="email" maxlength="100"
-                                        placeholder="Your Email*" autocomplete="off">
+                                        placeholder="Your Email*" autocomplete="off"
+                                        value="<?php echo isset($userInfo['Email']) ? htmlspecialchars($userInfo['Email']) : ''; ?>" >
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -148,7 +164,8 @@ echo $city_query;
                                 <div class="select dev_req_msg left rmarg">
 
                                     <input type="text" class="frm-txtbox fldrequired" name="pan" maxlength="100"
-                                        placeholder="Your PAN Card No*" autocomplete="off">
+                                        placeholder="Your PAN Card No*" autocomplete="off"  
+                                        value="<?php echo isset($userInfo['Pan']) ? htmlspecialchars($userInfo['Pan']) : ''; ?>" >
 
                                 </div>
                                 <div class="frm-er-msg"></div>
@@ -158,7 +175,8 @@ echo $city_query;
                                 <div class="posabsolut frm-lbl-actv">7) Adhaar*</div>
                                 <div class="select dev_req_msg left rmarg">
                                     <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="adhaar"
-                                        maxlength="100" placeholder="Your Adhaar No*" autocomplete="off">
+                                        maxlength="100" placeholder="Your Adhaar No*" autocomplete="off"  
+                                        value="<?php echo isset($userInfo['Adhaar']) ? htmlspecialchars($userInfo['Adhaar']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
@@ -171,7 +189,8 @@ echo $city_query;
                                 <div class="posabsolut frm-lbl-actv">8) Address*</div>
                                 <div class="select dev_req_msg left rmarg" style="width: 100%;">
                                     <input type="text" class="frm-txtbox dept-frm-input fldrequired" name="address"
-                                        maxlength="100" placeholder="Your Address*" autocomplete="off">
+                                        maxlength="100" placeholder="Your Address*" autocomplete="off"  
+                                        value="<?php echo isset($userInfo['Address']) ? htmlspecialchars($userInfo['Address']) : ''; ?>">
                                 </div>
                                 <div class="frm-er-msg"></div>
                                 <div class="clr"></div>
