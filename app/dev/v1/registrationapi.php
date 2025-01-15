@@ -14,14 +14,13 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $gender = $_POST["gender"];
         $job = $_POST["job"];
         $salary = $_POST["salary"];
-    //    echo $gender,$job,$salary;
-    //    exit();
+   
 
         $stmt = $db->prepare("SELECT * FROM lm_employees WHERE email = ?");
         $stmt->bindParam(1,$email);
         $stmt->execute();
         $check = $stmt->rowCount();
-
+       
         if($check > 0){
             http_response_code(404);
                 $server__response__error = array(
@@ -62,11 +61,13 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             $server__response__error = array(
                 "code" => http_response_code(404),
                 "status" => false,
-                "message" => "Opps!! Something Went Wrong! " . $ex->getMessage()
+                "message" => "Opps!! Something Went Wrong! " . $th->getMessage()
             );
             echo json_encode($server__response__error);
     }
-} else {
+}
+
+else {
     http_response_code(404);
     $server__response__error = array(
         "code" => http_response_code(404),
