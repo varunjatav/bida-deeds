@@ -11,7 +11,11 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $email = $_POST["email"];
         $username = $_POST["username"];
         $password = $_POST["password"];
-       
+        $gender = $_POST["gender"];
+        $job = $_POST["job"];
+        $salary = $_POST["salary"];
+    //    echo $gender,$job,$salary;
+    //    exit();
 
         $stmt = $db->prepare("SELECT * FROM lm_employees WHERE email = ?");
         $stmt->bindParam(1,$email);
@@ -33,6 +37,16 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             $insert->bindParam(2,$email);
             $insert->bindParam(3,$hash_password);
             $insert->execute();
+
+            $id = $db->lastInsertId();
+
+           
+            $insert2 = $db->prepare("INSERT INTO  lm_employee_details (employee_id,gender,job,salary) VALUES (?,?,?,?)");
+            $insert2->bindParam(1, $id);
+            $insert2->bindParam(2, $gender);
+            $insert2->bindParam(3, $job);
+            $insert2->bindParam(4, $salary);
+            $insert2->execute();
 
             http_response_code(200);
             $server__response__error = array(
