@@ -3,12 +3,15 @@ include_once '../../../config.php';
 include_once "../../../dbcon/db_connect.php";
 
 header('Content-type: application/json');
+
+
 if($_SERVER['REQUEST_METHOD']==='POST'){
    
     try {
         $email = $_POST["email"];
         $username = $_POST["username"];
         $password = $_POST["password"];
+       
 
         $stmt = $db->prepare("SELECT * FROM lm_employees WHERE email = ?");
         $stmt->bindParam(1,$email);
