@@ -35,11 +35,11 @@ if($email && $username && $password){
         $check = $stmt->rowCount();
        
         if($check > 0){
-                $server__response__error = array(
+                $data = array(
                     "status" => false,
                     "message" => "This user is already registered."
                 );
-                echo json_encode($server__response__error);
+                
         }else{
             $hash_password = password_hash($password,PASSWORD_DEFAULT);
             $insert = $db->prepare("INSERT INTO lm_employees (username, email,password) VALUES (?,?,?)");
@@ -60,11 +60,11 @@ if($email && $username && $password){
 
              // Make the changes to the database permanent
             $db->commit();
-            $server__response__success = array(
+            $data = array(
                 "status" => true,
                 "message" => "User Successfully Created"
             );
-            echo json_encode($server__response__success);
+          
             
         }
     } catch (\Throwable $e) {
@@ -74,11 +74,13 @@ if($email && $username && $password){
 }
 
 else {
-    $server__response__error = array(
-        "status"=>false,
-        "message"=>"Failed"
+    $data = array(
+        "status"=> false,
+        "message"=>"Oops.. something went wrong."
     );
-    echo json_encode($server__response__error);
+   
 }
+$data = removeEmptyValues($data);
+print(json_encode($data, JSON_ERROR_UTF8 | JSON_UNESCAPED_SLASHES));
 
 }

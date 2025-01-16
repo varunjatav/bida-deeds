@@ -35,49 +35,48 @@ if($email & $password){
                 "email" => $user_data["email"],
                 "username" => $user_data["username"]
             );
-            $user_verify_data = array(
+            $data = array(
                 "status" => true,
                 "message" => "User Verified",
                 "userData" => $user_array
             );
-            echo json_encode($user_verify_data);
+           
         }else{
           
-            $server__response__error = array(
+            $data = array(
                 "status" => false,
                 "message" => "Opps!! Incorrect Login Credentials"
             );
-            echo json_encode($server__response__error);
+           
         }
        }
        else
        {
        
-        $server__response__error = array(
-            "status" => true,
+        $data = array(
+            "status" => false,
             "message" => "User Not Registered",
             "userData" => null
         );
-        echo json_encode($server__response__error);
+       
        }
 
     } 
-    catch (\Throwable $th) 
+    catch (\Throwable $e) 
     {
-        $server__response__error = array(
-            "status" => false,
-            "message" => "Opps!! Something Went Wrong! " . $th->getMessage()
-        );
-        echo json_encode($server__response__error);
+        $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
+        rollback($db, $e->getCode(), $log_error_msg);
     }
 }
 else {
-    $server__response__error = array(
+    $data = array(
         "status"=>false,
-        "message"=>"Failed"
+        "message"=>"Opps!! Something Went Wrong! "
     );
-    echo json_encode($server__response__error);
+    
 }
 
+$data = removeEmptyValues($data);
+print(json_encode($data, JSON_ERROR_UTF8 | JSON_UNESCAPED_SLASHES));
 }
 ?>
