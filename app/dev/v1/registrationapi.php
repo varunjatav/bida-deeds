@@ -35,9 +35,7 @@ if($email && $username && $password){
         $check = $stmt->rowCount();
        
         if($check > 0){
-            http_response_code(404);
                 $server__response__error = array(
-                    "code" => http_response_code(404),
                     "status" => false,
                     "message" => "This user is already registered."
                 );
@@ -62,10 +60,7 @@ if($email && $username && $password){
 
              // Make the changes to the database permanent
             $db->commit();
-
-            http_response_code(200);
             $server__response__success = array(
-                "code" => http_response_code(200),
                 "status" => true,
                 "message" => "User Successfully Created"
             );
@@ -79,9 +74,7 @@ if($email && $username && $password){
 }
 
 else {
-    http_response_code(404);
     $server__response__error = array(
-        "code" => http_response_code(404),
         "status"=>false,
         "message"=>"Failed"
     );

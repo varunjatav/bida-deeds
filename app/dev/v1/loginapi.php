@@ -35,18 +35,15 @@ if($email & $password){
                 "email" => $user_data["email"],
                 "username" => $user_data["username"]
             );
-            http_response_code(200);
             $user_verify_data = array(
-                "code" => http_response_code(200),
                 "status" => true,
                 "message" => "User Verified",
                 "userData" => $user_array
             );
             echo json_encode($user_verify_data);
         }else{
-            http_response_code(404);
+          
             $server__response__error = array(
-                "code" => http_response_code(404),
                 "status" => false,
                 "message" => "Opps!! Incorrect Login Credentials"
             );
@@ -55,9 +52,8 @@ if($email & $password){
        }
        else
        {
-        http_response_code(404);
+       
         $server__response__error = array(
-            "code" => http_response_code(404),
             "status" => true,
             "message" => "User Not Registered",
             "userData" => null
@@ -68,9 +64,7 @@ if($email & $password){
     } 
     catch (\Throwable $th) 
     {
-        http_response_code(404);
         $server__response__error = array(
-            "code" => http_response_code(404),
             "status" => false,
             "message" => "Opps!! Something Went Wrong! " . $th->getMessage()
         );
@@ -78,9 +72,7 @@ if($email & $password){
     }
 }
 else {
-    http_response_code(404);
     $server__response__error = array(
-        "code" => http_response_code(404),
         "status"=>false,
         "message"=>"Failed"
     );
