@@ -1,15 +1,21 @@
 <?php
-include_once '../../../config.php';
-include_once "../../../dbcon/db_connect.php";
+error_reporting(0);
+$script_file_name = basename($_SERVER['SCRIPT_FILENAME']);
+include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/config.php';
+include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/vendor/autoload.php';
+include_once dirname(dirname(dirname(__FILE__))) . '/apiAccess.php';
+$api_validate = 1; //apiValidate($_REQUEST, $script_file_name);
 
-header('Content-type: application/json');
+if($api_validate == 1){
+    include_once dirname(dirname(dirname(__FILE__))) . '/get_time_zone.php';
+    include_once dirname(dirname(dirname(__FILE__))) . '/common_functions.php';
+    include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/dbcon/db_connect.php';
+    $email = __fi(validateMaxLen(validateEmail($_REQUEST["email"]), 50 , "Email"));
+    $password = __fi(validateMaxLen($_REQUEST["password"], 255 , "Password"));
 
-if($_SERVER['REQUEST_METHOD'] === "POST"){
+if($email & $password){
   
     try {
-       $email = $_POST["email"];
-       $password = $_POST["password"];
-   
 
        $find_user = $db->prepare("SELECT * FROM lm_employees WHERE email = ?");
        $find_user->bindParam(1,$email);
@@ -81,4 +87,5 @@ else {
     echo json_encode($server__response__error);
 }
 
+}
 ?>

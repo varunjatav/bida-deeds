@@ -1,24 +1,37 @@
 <?php
-include_once '../../../config.php';
-include_once "../../../dbcon/db_connect.php";
+error_reporting(0);
+$script_file_name = basename($_SERVER['SCRIPT_FILENAME']);
+include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/config.php';
+include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/vendor/autoload.php';
+include_once dirname(dirname(dirname(__FILE__))) . '/apiAccess.php';
+$api_validate = 1; //apiValidate($_REQUEST, $script_file_name);
 
-header('Content-type: application/json');
 
 
-if($_SERVER['REQUEST_METHOD']==='POST'){
+
+if($api_validate == 1){
+    include_once dirname(dirname(dirname(__FILE__))) . '/get_time_zone.php';
+    include_once dirname(dirname(dirname(__FILE__))) . '/common_functions.php';
+    include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/dbcon/db_connect.php';
+
+    $email = __fi(validateMaxLen(validateEmail($_REQUEST["email"]), 50 , "Email"));
+    $username = __fi(validateMaxLen($_REQUEST["username"], 50 , "User Name"));
+    $password = __fi(validateMaxLen($_REQUEST["password"], 255 , "Password"));
+    $gender = __fi(validateMaxLen(validateGender($_REQUEST["gender"]), 20 ,"Gender"));
+    $job = __fi(validateMaxLen($_REQUEST["job"], 50 , "Job"));
+    $salary = __fi(validateMaxLen($_REQUEST["salary"], 20 , "Salary"));
+
+if($email && $username && $password){
    
     try {
-        $email = $_POST["email"];
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        $gender = $_POST["gender"];
-        $job = $_POST["job"];
-        $salary = $_POST["salary"];
+        $db->beginTransaction();
    
 
         $stmt = $db->prepare("SELECT * FROM lm_employees WHERE email = ?");
+        
         $stmt->bindParam(1,$email);
         $stmt->execute();
+      
         $check = $stmt->rowCount();
        
         if($check > 0){
@@ -47,23 +60,21 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
             $insert2->bindParam(4, $salary);
             $insert2->execute();
 
+             // Make the changes to the database permanent
+            $db->commit();
+
             http_response_code(200);
-            $server__response__error = array(
+            $server__response__success = array(
                 "code" => http_response_code(200),
                 "status" => true,
                 "message" => "User Successfully Created"
             );
-            echo json_encode($server__response__error);
+            echo json_encode($server__response__success);
             
         }
-    } catch (\Throwable $th) {
-        http_response_code(404);
-            $server__response__error = array(
-                "code" => http_response_code(404),
-                "status" => false,
-                "message" => "Opps!! Something Went Wrong! " . $th->getMessage()
-            );
-            echo json_encode($server__response__error);
+    } catch (\Throwable $e) {
+        $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
+        rollback($db, $e->getCode(), $log_error_msg);
     }
 }
 
@@ -75,4 +86,6 @@ else {
         "message"=>"Failed"
     );
     echo json_encode($server__response__error);
+}
+
 }
