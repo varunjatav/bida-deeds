@@ -51,7 +51,7 @@ if($email && $username && $password){
             $id = $db->lastInsertId();
 
            
-            $insert2 = $db->prepare("INSERT INTO  lm_employee_details (employee_id,gender,job,salary) VALUES (?,?,?,?)");
+            $insert2 = $db->prepare("INSERT INTO lm_employee_details (employee_id,gender,job,salary) VALUES (?,?,?,?)");
             $insert2->bindParam(1, $id);
             $insert2->bindParam(2, $gender);
             $insert2->bindParam(3, $job);

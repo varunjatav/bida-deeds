@@ -37,7 +37,7 @@ if($email & $password){
             );
             $data = array(
                 "status" => true,
-                "message" => "User Verified",
+                "message" => "User Login Successfully",
                 "userData" => $user_array
             );
            

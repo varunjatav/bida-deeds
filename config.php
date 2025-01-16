@@ -33,6 +33,9 @@ $media_export = "media/excel";
 
 $url_head = 'http://';
 
+//user profile picture
+$user_profile = "media/profile";
+
 $main_path = $url_head . 'localhost/bida-deed';
 
 $media_path = 'media/uploads';
