@@ -11,14 +11,13 @@ if ($api_validate) {
     include_once dirname(dirname(dirname(__FILE__))) . '/common_functions.php';
     include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/dbcon/db_connect.php';
 
-    // print_r($_FILES['profile']);
-    // exit();
+
   
     if ($_FILES['profile']['name'] != '' && $_FILES['profile']['full_path'] != '' && $_FILES['profile']['type'] != '' && $_FILES['profile']['tmp_name'] != '' && $_FILES['profile']['error'] != '' && $_FILES['profile']['size'] !='') {
         try {
 
             $db->beginTransaction();
-            $allowed_ext = array("pdf");
+            $allowed_ext = array("png", "jpeg");
           
             $user_id = $_REQUEST['userid'];
             
