@@ -16,18 +16,33 @@ if($api_validate == 1){
  if($_SERVER['REQUEST_METHOD'] == 'GET' && $_REQUEST['userid']){
     try {
         $user_Id = $_REQUEST['userid'];
-        $fetch_data = $db->prepare("SELECT T1.ID,T1.username, T1.email, T2.gender, T2.salary, T2.job, T3.profile_pic FROM lm_employees T1 INNER JOIN lm_employee_details T2 ON T1.ID = T2.employee_id INNER JOIN lm_employee_profile T3 ON T1.ID = T3.employee_id WHERE T1.ID = ?");
-        $fetch_data->bindParam(1, $user_Id);
-        $fetch_data->execute();
+
+        $stmt = $db->prepare("SELECT * FROM lm_employee_profile WHERE employee_id = ?");
+        $stmt->bindParam(1,$user_Id);
+        $stmt->execute();
+        $check = $stmt->rowCount();
+      
+        if($check == 0){
+            $fetch_data = $db->prepare("SELECT T1.ID,T1.username, T1.email, T2.gender, T2.salary, T2.job FROM lm_employees T1 INNER JOIN lm_employee_details T2 ON T1.ID = T2.employee_id WHERE T1.ID = ?");
+            $fetch_data->bindParam(1, $user_Id);
+            $fetch_data->execute();
+        }else{
+            $fetch_data = $db->prepare("SELECT T1.ID,T1.username, T1.email, T2.gender, T2.salary, T2.job, T3.profile_pic FROM lm_employees T1 INNER JOIN lm_employee_details T2 ON T1.ID = T2.employee_id INNER JOIN lm_employee_profile T3 ON T1.ID = T3.employee_id WHERE T1.ID = ?");
+            $fetch_data->bindParam(1, $user_Id);
+            $fetch_data->execute();
+        }
+
+        
        
         
 
 
         $result = $fetch_data->fetchAll(PDO::FETCH_ASSOC);
-    
+        // echo $result;
+        // exit();
         $data = array(
             "status" => true,
-            "user_list" => $result,
+            "user_detail" => $result[0],
         );
       
     } catch (\Throwable $e) {
