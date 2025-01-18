@@ -86,13 +86,8 @@ if ($api_validate) {
 
 
             $documents_array[] = upload_attachments($_FILES['document'], $target_dir_image, 2, $allowed_doc_ext, 'document', $timestamp, 7, 1, 9);
-            // print_r($documents_array);
-            // exit();
-            if (empty($documents_array)) {
-                $data = json_encode(array('status' => false, 'message' => 'Please upload Documents'));
-                print_r($data);
-                exit();
-            }
+           
+            
             $atdata = array();
             $attcnt = 0;
             foreach ($documents_array as $imgKey => $imgValue) {
