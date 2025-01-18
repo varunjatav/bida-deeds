@@ -22,6 +22,7 @@ if ($api_validate) {
             $user_id = $_REQUEST['userid'];
 
             $target_dir_image = dirname(dirname(dirname(dirname(__FILE__)))) . "/" . $user_profile . "/";
+            $target_dir_doc = dirname(dirname(dirname(dirname(__FILE__)))) . "/" . $employee_documents . "/";
             $timestamp = time();
 
             if (is_uploaded_file($_FILES['profile']['tmp_name'])) {
@@ -83,11 +84,12 @@ if ($api_validate) {
 
             validate_attachments($_FILES['document'], $allowed_doc_ext);
             $documents_array = array();
+        
 
 
-            $documents_array[] = upload_attachments($_FILES['document'], $target_dir_image, 2, $allowed_doc_ext, 'document', $timestamp, 7, 1, 9);
+            $documents_array[] = upload_attachments($_FILES['document'], $target_dir_doc, 2, $allowed_doc_ext, 'document', $timestamp, 7, 1, 9);
            
-            
+
             $atdata = array();
             $attcnt = 0;
             foreach ($documents_array as $imgKey => $imgValue) {

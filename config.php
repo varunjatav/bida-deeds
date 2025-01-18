@@ -36,6 +36,9 @@ $url_head = 'http://';
 //user profile picture
 $user_profile = "media/profile";
 
+//employee documents 
+$employee_documents = "media/employee_documents";
+
 $main_path = $url_head . 'localhost/bida-deed';
 
 $media_path = 'media/uploads';
