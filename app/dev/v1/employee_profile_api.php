@@ -13,7 +13,7 @@ if ($api_validate) {
 
 
   
-    if ($_FILES['profile']['name'] != '' && $_FILES['profile']['full_path'] != '' && $_FILES['profile']['type'] != '' && $_FILES['profile']['tmp_name'] != '' && $_FILES['profile']['error'] != '' && $_FILES['profile']['size'] !='') {
+    if ($_FILES['profile']['name'] != '' && $_REQUEST['userid']) {
         try {
 
             $db->beginTransaction();
