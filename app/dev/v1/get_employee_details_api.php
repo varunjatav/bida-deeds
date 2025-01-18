@@ -24,15 +24,15 @@ if($api_validate == 1){
 
 
         $result = $fetch_data->fetchAll(PDO::FETCH_ASSOC);
-        // $db->commit();
+    
         $data = array(
             "status" => true,
             "user_list" => $result,
-            "total_count" => $total_count
         );
       
     } catch (\Throwable $e) {
-        //throw $th;
+        $log_error_msg = '==> [' . date('d-m-Y h:i A', time()) . '] [Error Code: ' . $e->getCode() . '] [Path: ' . $e->getFile() . '] [Line: ' . $e->getLine() . '] [Message: ' . $e->getMessage() . '] [Input: ' . json_encode($_POST) . ']';
+        rollback($db, $e->getCode(), $log_error_msg);
     }
  }else{
     $data = array(
