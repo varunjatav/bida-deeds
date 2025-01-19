@@ -14,12 +14,17 @@ if($api_validate == 1){
     include_once dirname(dirname(dirname(__FILE__))) . '/common_functions.php';
     include_once dirname(dirname(dirname(dirname(__FILE__)))) . '/dbcon/db_connect.php';
 
+    $hobbies = array();
     $email = __fi(validateMaxLen(validateEmail($_REQUEST["email"]), 50 , "Email"));
     $username = __fi(validateMaxLen($_REQUEST["username"], 50 , "User Name"));
     $password = __fi(validateMaxLen($_REQUEST["password"], 255 , "Password"));
     $gender = __fi(validateMaxLen(validateGender($_REQUEST["gender"]), 20 ,"Gender"));
     $job = __fi(validateMaxLen($_REQUEST["job"], 50 , "Job"));
     $salary = __fi(validateMaxLen($_REQUEST["salary"], 20 , "Salary"));
+    $hobbies = $_REQUEST['hobbies'];
+    $hobbies = explode(",",$hobbies[0]);
+    $hobbies = array_filter($hobbies);
+    
 
 if($email && $username && $password){
    
@@ -51,11 +56,16 @@ if($email && $username && $password){
             $id = $db->lastInsertId();
 
            
-            $insert2 = $db->prepare("INSERT INTO lm_employee_details (employee_id,gender,job,salary) VALUES (?,?,?,?)");
+            $insert2 = $db->prepare("INSERT INTO lm_employee_details (employee_id,gender,job,salary, hobbies) VALUES (?,?,?,?,?)");
             $insert2->bindParam(1, $id);
             $insert2->bindParam(2, $gender);
             $insert2->bindParam(3, $job);
             $insert2->bindParam(4, $salary);
+         
+                
+            $insert2->bindParam(5, json_encode($hobbies));
+        
+        
             $insert2->execute();
 
              // Make the changes to the database permanent
