@@ -15,7 +15,7 @@ if($api_validate){
         try {
             // $db->beginTransaction();
            
-            $fetch_data = $db->prepare("SELECT SQL_CALC_FOUND_ROWS T1.ID,t1.username, T1.email FROM lm_employees T1 WHERE 1=1 GROUP BY T1.ID ORDER BY T1.ID DESC");
+            $fetch_data = $db->prepare("SELECT SQL_CALC_FOUND_ROWS T1.ID,T1.username, T1.email FROM lm_employees T1 WHERE 1=1 GROUP BY T1.ID ORDER BY T1.ID ASC");
             $fetch_data->execute();
            
             $rs1 = $db->query('SELECT FOUND_ROWS()');

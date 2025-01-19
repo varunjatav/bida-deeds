@@ -23,11 +23,11 @@ if($api_validate == 1){
         $check = $stmt->rowCount();
       
         if($check == 0){
-            $fetch_data = $db->prepare("SELECT T1.ID,T1.username, T1.email, T2.gender, T2.salary, T2.job FROM lm_employees T1 INNER JOIN lm_employee_details T2 ON T1.ID = T2.employee_id WHERE T1.ID = ?");
+            $fetch_data = $db->prepare("SELECT T1.ID,T1.username, T1.email, T2.gender, T2.salary, T2.job, T2.hobbies FROM lm_employees T1 INNER JOIN lm_employee_details T2 ON T1.ID = T2.employee_id WHERE T1.ID = ?");
             $fetch_data->bindParam(1, $user_Id);
             $fetch_data->execute();
         }else{
-            $fetch_data = $db->prepare("SELECT T1.ID,T1.username, T1.email, T2.gender, T2.salary, T2.job, T3.profile_pic FROM lm_employees T1 INNER JOIN lm_employee_details T2 ON T1.ID = T2.employee_id INNER JOIN lm_employee_profile T3 ON T1.ID = T3.employee_id WHERE T1.ID = ?");
+            $fetch_data = $db->prepare("SELECT T1.ID,T1.username, T1.email, T2.gender, T2.salary, T2.job, T2.hobbies, T3.profile_pic, T3.documents FROM lm_employees T1 INNER JOIN lm_employee_details T2 ON T1.ID = T2.employee_id INNER JOIN lm_employee_profile T3 ON T1.ID = T3.employee_id WHERE T1.ID = ?");
             $fetch_data->bindParam(1, $user_Id);
             $fetch_data->execute();
         }
@@ -42,7 +42,7 @@ if($api_validate == 1){
         // exit();
         $data = array(
             "status" => true,
-            "user_detail" => $result[0],
+            "user_details" => $result[0],
         );
       
     } catch (\Throwable $e) {
