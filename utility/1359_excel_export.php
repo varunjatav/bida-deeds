@@ -34,8 +34,6 @@ $sql = "SELECT T1.VillageName, T1.VillageNameHi, T1.VillageCode,
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// print_r($data);
-// exit;
 
 
 // Add headers
