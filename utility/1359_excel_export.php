@@ -1,6 +1,8 @@
 <?php
 
 
+ini_set('memory_limit', '-1');
+ini_set('max_execution_time', 0);
 
 include_once '../config.php';
 include_once '../includes/checkSession.php';
